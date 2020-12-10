@@ -1,0 +1,2 @@
+1. consider the case when last image is being deleted while latest image is asynchronously being processed (and the index which is being used is no longer valid)
+2. handle and save dicom headers

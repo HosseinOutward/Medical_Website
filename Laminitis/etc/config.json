@@ -1,0 +1,6 @@
+{
+  "SECRET_KEY": "$d&yj990zy08^#i#+1*&33tuz4g_90-4@l#5p0$4@s6@9^acfb",
+  "DB_NAME": "Hossein_Laminitis",
+  "DB_USER": "postgres",
+  "DB_PASSWORD": "password"
+}

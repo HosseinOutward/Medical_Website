@@ -10,10 +10,10 @@ base_url = "http://127.0.0.1:8000"
 @login_required
 def getImage(request, patient_id, image_id):
     object=ImagePatient.objects.filter(patient_imag=patient_id)
-    if len(object)<=image_id: return True
+    if len(object)<=image_id: return HttpResponse("")
 
     object = object[image_id]
-    if object.patient_imag.doctor_pati != request.user: return True
+    if object.patient_imag.doctor_pati != request.user: return HttpResponse("")
 
     image_url=object.image_imag.url
     return redirect(base_url+image_url)

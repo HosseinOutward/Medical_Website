@@ -2,7 +2,7 @@ import os
 import torch
 import torchvision
 import torchvision.transforms as transforms
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from patient.models import ImagePatient
 from .webservice import setPoints
@@ -43,10 +43,15 @@ def nnService(image_url, patient_id, image_idx):
     my_list_9 = [round(x.item()) for x in pred9[0, :]]
     my_list_3 = [round(x.item()) for x in pred3[0, :]]
     my_list   = my_list_9[0:12] + my_list_3
-
-    
-
     points = [[my_list[2*i],my_list[2*i+1]] for i in range(int(len(my_list)/2))]
+
+    # input_image_resized = transforms.ToPILImage()(input_image_resized[0]).convert("RGB")
+    # draw = ImageDraw.Draw(input_image_resized)
+    # p=2
+    # for point in points:
+    #     draw.ellipse((point[0]-2, point[1]-2, point[0]+2, point[1]+2), fill = 'blue', outline ='black')
+    # input_image_resized.save(r"C:\Users\No1\Desktop\laminitis" + str(image_idx)+ ".png")
+
     for point in points:
         point[0]=float(img.size[0])/res_to*(point[0]+14)  
         point[1]=float(img.size[1])/res_to*(point[1]+14)
@@ -55,4 +60,5 @@ def nnService(image_url, patient_id, image_idx):
     object = ImagePatient.objects.filter(patient_imag=patient_id)[image_idx]
     object.points_imag = points
     object.save()
+
     return points

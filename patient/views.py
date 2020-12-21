@@ -80,7 +80,7 @@ class PatientDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # ********* ImagesViews bellow *********
 class ImageAddView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView):
     model = ImagePatient
-    fields = ['image_imag']
+    fields = ['image_imag', "class_type_imag"]
     success_message = "image added"
     template_name = 'patient/image_add.html'
 

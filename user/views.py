@@ -66,3 +66,5 @@ class HospitalDetailView(LoginRequiredMixin, DetailView):
         object=UserProfile.objects.filter(user_prof=self.request.user).get().hosp_prof.all()[self.kwargs["hospital_id"]]
         self.pk=object.pk
         return object
+
+

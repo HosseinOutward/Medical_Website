@@ -1,7 +1,7 @@
 import os
-import torch
-import torchvision
-import torchvision.transforms as transforms
+# import torch
+# import torchvision
+# import torchvision.transforms as transforms
 from PIL import Image, ImageDraw
 
 from patient.models import ImagePatient
@@ -11,8 +11,12 @@ from celery import shared_task
 import requests
 from io import BytesIO
 
-@shared_task
+
 def nnService(image_url, patient_id, image_idx):
+    return [[0,1],[2,3]]
+
+@shared_task
+def nnService2(image_url, patient_id, image_idx):
       
     transform = transforms.ToTensor()
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[1, 1, 1])

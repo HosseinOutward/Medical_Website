@@ -4,10 +4,11 @@ from base_app.webservice import getImage, getPoints, setPoints, getImageList, ge
 
 urlpatterns = [
     path('', home, name='base-home'),
-    path('panel/', panel, name='base-panel'),
     path('case-study/', case_study, name='base-case-study'),
     path('about/', about, name='base-about'),
     path('contact/', contact, name='base-contact'),
+
+    path('panel/', panel, name='base-panel'),
 
     # webservice
     path('webservice/getImage/<int:patient_id>/<int:image_id>/', getImage, name='webservice-getImage'),

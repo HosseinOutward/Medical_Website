@@ -3,8 +3,8 @@ from django.contrib.auth import views as auth_views
 from .views import ProfileDetailView, UserCreateView, ProfileUpdateView, UserDeleteView, HospitalDetailView
 
 urlpatterns = [
-    path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='logout'),
-    path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='base_panel/home.html'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='page-login.html'), name='login'),
 
     path('hospital/<int:hospital_id>', HospitalDetailView.as_view(), name='hospital-detail'),
 

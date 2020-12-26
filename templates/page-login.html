@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>ورود</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap-rtl.css"/>
+    <link rel="stylesheet" href="/static/vendors/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/static/assets/css/style.css"/>
+    <style>
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            z-index: -10;
+            left: 0;
+            opacity: 0.9;
+            color: #f1f1f1;
+        }
+
+    </style>
+</head>
+
+<body class="bg-dark">
+<video autoplay muted loop id="myVideo">
+    <source src="/static/video/12.mp4" type="video/mp4">
+</video>
+<div style="margin:5% auto" class="sufee-login d-flex align-content-center flex-wrap">
+    <div class="container">
+        <div class="login-content">
+
+            <div class="login-form">
+<!--                <form>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>نام کاربری</label>-->
+<!--                        <input type="email" class="loginUser form-control" placeholder="ایمیل خود را وارد کنید"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>رمز عبور</label>-->
+<!--                        <input type="password" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>-->
+<!--                    </div>-->
+<!--                    <div class="checkbox">-->
+<!--                        <label>-->
+<!--                            <input type="checkbox"/> مرا به خاطر بسپار-->
+<!--                        </label>-->
+<!--                        <label class="pull-right">-->
+<!--                            <a href="pages-forget.html">فراموشی رمز عبور؟</a>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <a style=" border-radius: 10px" type="submit"-->
+<!--                       class="loginBtn btn btn-success btn-flat m-b-30 m-t-30">-->
+<!--                        ورود-->
+<!--                    </a>-->
+
+<!--                    <a href="page-register.html" style="margin-top: 3px; border-radius: 10px" type="submit"-->
+<!--                       class="btn btn-primary btn-flat m-b-30 m-t-30">-->
+<!--                        عضویت-->
+<!--                    </a>-->
+
+<!--                </form>-->
+
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                <form method="POST" class="login100-form validate-form">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Log In</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="btn btn-primary btn-user btn-block"> Login</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-115">
+                        <span class="txt1"> Don’t have an account? </span>
+
+                        <a class="txt2" href="{% url 'profile-create' %}">
+                            Sign Up
+                        </a>
+                    </div>
+
+                    <hr>
+                    <a href="#" class="btn btn-google btn-user btn-block">
+                        <i class="fab fa-google fa-fw"></i> Login with Google
+                    </a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+<script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,444 @@
+{#{% extends "base.html" %}#}
+{#{% load crispy_forms_tags %}#}
+{#{% block content %}#}
+{#    <div class="content-section">#}
+{#        <form method="POST">#}
+{#            {% csrf_token %}#}
+{#            <article class="media content-section">#}
+{#                <div class="media-body">#}
+{#                    <img class="article-img2" src="{{imagepatient.image_imag.url}}">#}
+{#                </div>#}
+{#            </article>#}
+{#            <fieldset class="form-group">#}
+{#                <legend class="border-bottom mb-4">edit points</legend>#}
+{#                {{ form|crispy }}#}
+{#            </fieldset>#}
+{#            <div class="form-group">#}
+{#                <button class="btn btn-outline-info" id="salam1" type="submit">submit</button>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+{#{% endblock content %}#}
+{##}
+{#{% load static %}#}
+
+
+{% extends 'patient/patient_detail.html' %}
+{% block viewer %}
+<html lang="en">
+<script type="text/javascript" src="/static/js/Viewer/i18next.min.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/i18nextXHRBackend.min.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/i18nextBrowserLanguageDetector.min.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/jszip.min.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/konva.min.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/magic-wand-min.js"></script>
+<!-- Third party (viewer) -->
+<script type="text/javascript" src="/static/js/Viewer/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/nprogress.js"></script>
+
+<!-- decoders -->
+<script type="text/javascript" src="/static/js/Viewer/rle.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/jpx.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/util.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/arithmetic_decoder.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/jpg.js"></script>
+<script type="text/javascript" src="/static/js/Viewer/lossless-min.js"></script>
+<!-- dwv -->
+<script type="text/javascript" src="/static/js/Viewer/dwv.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add style Refrences -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/Viewer/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/Viewer/bootstrap-slider.css">
+    <!-- Add scripts Refrences -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"
+        integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA=="
+        crossorigin="anonymous"></script>
+    <script src="/static/js/Viewer/jquery.min.js"></script>
+    <script src="/static/js/Viewer/popper.min.js"></script>
+    <script src="/static/js/Viewer/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/static/js/Viewer/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/static/js/Viewer/script2.js"></script>
+    <title>viewer!</title>
+    <style>
+        h6{
+            display: inline;
+        }
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .range-slider {
+            margin: 60px 0 0 0%;
+        }
+
+        .range-slider {
+            width: 100%;
+        }
+
+        .range-slider__range {
+            -webkit-appearance: none;
+            width: calc(100% - (73px));
+            height: 10px;
+            border-radius: 5px;
+            background: #d7dcdf;
+            background: -webkit-gradient(linear, left top, right top, from(green), color-stop(50%, yellow), to(red));
+            background: linear-gradient(to right, green 0%, yellow 50%, red 100%);
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .range-slider__range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #2c3e50;
+            cursor: pointer;
+            -webkit-transition: background .15s ease-in-out;
+            transition: background .15s ease-in-out;
+        }
+
+        .range-slider__range::-webkit-slider-thumb:hover {
+            background: rgb(19, 109, 212);
+        }
+
+        .range-slider__range:active::-webkit-slider-thumb {
+            background: rgb(19, 109, 212);
+        }
+
+        .range-slider__range::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            border: 0;
+            border-radius: 50%;
+            background: #2c3e50;
+            cursor: pointer;
+            -webkit-transition: background .15s ease-in-out;
+            transition: background .15s ease-in-out;
+        }
+
+        .range-slider__range::-moz-range-thumb:hover {
+            background: #F0F;
+        }
+
+        .range-slider__range:active::-moz-range-thumb {
+            background: #F0F;
+        }
+
+        .range-slider__value {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 3px;
+            background: #2c3e50;
+            padding: 5px 10px;
+            margin-left: 8px;
+        }
+
+        .range-slider__value:after {
+            position: absolute;
+            top: 8px;
+            left: -7px;
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-right: 7px solid #2c3e50;
+            border-bottom: 7px solid transparent;
+            content: '';
+        }
+
+        ::-moz-range-track {
+            background: #d7dcdf;
+            background: linear-gradient(to right, green 0%, yellow 50%, red 100%);
+            border: 0;
+        }
+
+        input::-moz-focus-inner,
+        input::-moz-focus-outer {
+            border: 0;
+        }
+
+        main {
+            max-width: 80em;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body style="background-color: black">
+    <div class="container" style="margin-top:25px" id="aa">
+        <button class="btn btn-primary  getPoints-btn col-md-3 " style="margin-left: -.3rem;">Detect Landmarks</button>
+        <button class="btn btn-primary  addPoints-btn col-md-3" style="margin-left: -.5rem;">set Landmarks</button>
+        <button class="btn btn-primary   col-md-3" style="margin-left: -.5rem;" id="revert-btn">Revert Effects &nbsp;
+            <i class="fa fa-refresh"></i>
+        </button>
+        <button class="btn btn-primary   col-md-3 " style="margin-left: -.5rem;" id="download-btn">Download &nbsp;
+            <i class="fa fa-download"></i>
+        </button>
+        <br>
+        <br>
+        <div class="range-slider" style="margin-top: -1rem;">
+            <input class="range-slider__range" id="SliderRange" type="range" value="6" min="0" max="16.5">
+            <span class="range-slider__value" id="rangespan">0</span>
+        </div>
+        <script>
+            var rangeSlider = function () {
+                var slider = $('.range-slider'),
+                    range = $('.range-slider__range'),
+                    value = $('.range-slider__value');
+
+                slider.each(function () {
+
+                    value.each(function () {
+                        var value = $(this).prev().attr('value');
+                        $(this).html(value);
+                    });
+
+                    range.on('input', function () {
+                        $(this).next(value).html(this.value);
+                    });
+                });
+            };
+
+            rangeSlider();
+        </script>
+
+
+        <div>
+            
+            <h6 class="col-md-6 col-sm-6 col-xs-6"  style="font-size: 15px; font-weight: bold; margin-left: -3rem;" id="_5.5">5.5</h6>
+            <h6 class="col-md-6 col-sm-6 col-xs-6" style="font-size: 15px; direction: rtl; top: -1.5rem; font-weight: bold;"  id="_11.5">11.5</h6>
+            
+        </div>
+
+
+
+        <!-- vertical left side tab Menu Design -->
+        <div class="row" style="margin-left: 0.08rem;  ">
+            <div class="col-md-3 " id="WorkBench"
+                style="background-color: white ; border-radius: 6px; overflow-y: auto; ">
+                <div class="tab">
+                    <button class="tablinks" id="firsst" onclick="openSection(event, 'London')">
+                        <img src="/static/img/1.png.png" height="46" width="46" style="margin: 8px">
+                        <!--<i class="fa fa-desktop" style="font-size: 3.8rem"></i>-->
+                    </button>
+                    <button class="tablinks" onclick="openSection(event, 'Paris')">
+                        <img src="/static/img/2.png.png" height="46" width="46" style="margin: 8px">
+                        <!--<i class="fa fa-wrench" style="font-size: 3.8rem"></i>-->
+                    </button>
+                    <button class="tablinks" onclick="openSection(event, 'Tokyo')" style="direction: rtl; ">
+                        <img src="/static/img/3.png.png" height="46" width="46" style="margin: 8px">
+                        <!--<i class="material-icons" style="font-size: 3.6rem;">content_paste</i>-->
+                    </button>
+                </div>
+                <!-- complete div for worktable section -->
+                <div id="London" class="tabcontent">
+
+                </div>
+                <br>
+<!--                <a id="btn-Add" class="btn btn-primary" style="display: none; width: 65px; height: 50px; border-radius: 40%; margin-top: -1rem; margin-left: 1rem; border: 3px solid blue; direction: rtl;">-->
+<!--                    <i class="fa fa-plus" style="font-size:24px; margin-top: 0.5rem; color: white;"></i>-->
+<!--                </a>-->
+
+                <a id="btn-Add"> </a>
+                <!-- complete div for Tools section -->
+                <div id="Paris" class="tabcontent">
+                    <!-- Annotation Section in tools tab-->
+                    <h5>Anotations</h5>
+                    <div class="Anotation">
+                        <button class="btn  punctuation" style="margin-left: .7rem;">
+                            <i class="fa fa-circle" style="color: black; font-size: 1.2rem;"></i>
+                            <!-- <img src="/static/img/ant/dot.png" height="25" width="25" > -->
+                        </button>
+                        <button class="btn" id="ruler">
+                            <i class='fas fa-ruler-vertical' style="color: black; font-size: 1.8rem;"></i>
+                        </button>
+                        <button class="btn " onclick="set('Protractor')">
+                            <i class="fa fa-angle-up" style="color: black; font-size: 1.8rem;"></i>
+                        </button>
+                        <button class="btn " onclick="set('Rectangle')">
+                            <i class="fa fa-square" style="color: black; font-size: 1.8rem;"></i>
+                        </button>
+                        <button class="btn " onclick="set('Ellipse')" style="margin-left: 0.3rem;">
+                            <i class="fa fa-genderless " style="color: black; font-size: 2.8rem;"></i>
+                        </button>
+                        <button class="btn " onclick="set('FreeHand')">
+                            <i class="material-icons" style="font: size 2.5rem;">create</i>
+                        </button>
+                        <button class="btn " onclick="set('Arrow')">
+                            <i class="fa fa-mouse-pointer" style="color: black; font-size: 1.5rem;"></i>
+                        </button>
+                        <button class="btn " id="undo">
+                            <i class="material-icons" style="color: black; font-size: 2rem;">undo</i>
+                        </button>
+                        <button class="btn " id="redo" style="margin-left: 0.3rem;">
+                            <i class="material-icons" style="color: black; font-size: 2rem;">refresh</i>
+                        </button>
+                        <button class="btn  Erase-btn">
+                            <i class="fa fa-eraser" style="color: black; font-size: 1.7rem;"></i>
+                        </button>
+                    </div>
+
+                    <!-- Function Section in tools tab-->
+                    <h5>Functions</h5>
+                    <div class="Function">
+                        <button class="btn  Brightness-btn">
+                            <i class="material-icons" style="color: black; font-size: 2rem;">brightness_6</i>
+                        </button>
+                        <button class="btn  Contrast-btn">
+                            <i class="material-icons" style="color: black; font-size: 2rem;">tonality</i>
+                        </button>
+                        <!-- <button class="btn move-btn">
+                            <i class="fa fa-arrows" style="color: black; font-size: 2rem;"></i>
+                        </button> -->
+                    </div>
+
+                    <!-- Other Section in tools tab-->
+                    <h5>Other</h5>
+                    <div class="Other">
+
+                        <button class="btn" id="download-btn">
+                            <i class="fa fa-download" style="color: black; font-size: 1.6rem;"></i>
+                        </button>
+                        <button class="btn" id="revert-btn">
+                            <i class="fa fa-refresh" style="color: black; font-size: 1.6rem;"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- complete div for Patient information section -->
+                <div id="Tokyo" class="tabcontent">
+                    <h2>Comming soon</h2>
+                </div>
+            </div>
+
+            <!-- main canvas Container -->
+            <div class="col-md-9 " style="padding: 0;">
+                <div class="">
+                    <div id="dwv">
+                        <div class="layerContainer" id="salam">
+                            <canvas class="imageLayer" id="canvas" style="margin: 0;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- design for toggle button -->
+                <div class="col-md-1">
+                    <div id='ss_menu'>
+                        <div> <i class="fa fa-facebook-official"></i> </div>
+                        <div> <i class="fa fa-twitter"></i> </div>
+                        <div> <i class="fa fa-linkedin"></i> </div>
+                        <div> <i class="fa fa-google-plus"></i> </div>
+                        <div class='menu'>
+                            <div class='share' id='ss_toggle' data-rot='180'>
+                                <div class='circle'></div>
+                                <div class='bar'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
+        
+        <script src="/static/js/Viewer/jquery.js"></script>
+        <script>
+
+        // // base function to get elements
+        // dwv.gui.getElement = dwv.gui.base.getElement;
+        // // dwv.gui.displayProgress = function (percent) {};
+
+        // // create the dwv app
+        // var app = new dwv.App();
+        // // initialise with the id of the container div
+        // var options = {
+        //     "containerDivId": "dwv",
+
+
+        // };
+        // app.init(options);
+        // // load dicom data
+        // app.loadURLs(["http://s12.picofile.com/file/8398366550/founder_xray1.png"]);
+
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                document.getElementById("firsst").click();
+            });
+            var aa = document.getElementById("btn-Add");
+            function openSection(evt, cityName) {
+                if (cityName == 'London') {
+                    aa.style.display = 'block';
+                }
+                else {
+                    aa.style.display = 'none';
+                }
+                var i, tabcontent, tablinks;
+                WB = document.getElementById("WorkBench");
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+
+            }
+        </script>
+</body>
+{% endblock %}
+
+</html>

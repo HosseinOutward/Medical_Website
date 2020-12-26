@@ -1,0 +1,361 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>داشبورد</title>
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap-rtl.css">
+    <link rel="stylesheet" href="/static/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="./"></a>
+            <a class="navbar-brand hidden" href="./"></a>
+        </div>
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>داشبورد </a>
+                </li>
+                <li class="active">
+                    <a href="label.html"> <i class="menu-icon fa fa-edit"></i>لیبل گذاری </a>
+                </li>
+                <li class="active">
+                    <a data-toggle="modal"
+                       data-target="#largeModal"> <i class="menu-icon fa fa-upload"></i>آپلود </a>
+                </li>
+                <li class="active">
+                    <a href="index.html"> <i class="menu-icon fa fa-desktop"></i>بررسی با هوش مصنوعی </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- Sidebar -->
+
+<!-- Main-->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-12 float-right">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-caret-right"
+                                                                   style=" margin-top: 30%;"></i></a>
+                <div class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                    </a>
+
+                </div>
+
+                <div class="header-left float-right mr-3">
+                    دکتر علیرضا وجهی
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+    <!-- Header-->
+
+
+    <div class="content mt-3">
+
+        <div class="col-sm-12">
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">
+                        <i class="fa fa-quote-right" style="padding: 0.1rem;"></i> </span> به سیستم خوش آمدید
+                <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>گزارش</h4>
+                </div>
+                <div class="card-body">
+
+                    <canvas id="chartx"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <aside class="profile-nav alt">
+                <section class="card">
+                    <div class="card-header user-header alt bg-dark">
+                        <div class="media mt-3">
+
+                            <div class="media-body col-sm-12">
+                                <h6 class="text-light display-6" style="text-align: center;">علیرضا وجهی</h6>
+                                <p style="padding: 0px;text-align: center">مدیر پروژه</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#"> تصاویر آپلود شده <span
+                                    class="badge badge-primary pull-left">9</span></a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#">تصاویر لیبل گذاری شده<span
+                                    class="badge badge-danger pull-left">1</span></a>
+                        </li>
+
+                    </ul>
+
+                </section>
+            </aside>
+        </div>
+        <div class="col-xs-12">
+            <div class="card">
+                <div type="button" class="card-header">
+                    <strong class="card-title" style="text-align: center">تصاویر آپلود شده</strong>
+                    <p style="text-align: center">(آموزش مدل هوش مصنوعی)</p>
+                </div>
+                <!-- /.box-header -->
+                <div class="table-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>شماره تصویر</th>
+                            <th>کاربر</th>
+
+                            <th>وضعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                        {% for i, image in enumerate(patient_list) %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            <td>{{ image. }}</td>
+                            <td><a href="{% url 'patient-detail' patient.id %}">{{ patient.name_pati }}</a></td>
+                            <td>{{ patient.description_pati }}</td>
+                            <td>{{ patient.date_pati|date:"F d, Y" }}</td>
+                            <td>{{ request.user }}</td>
+                            <td><a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'patient-delete' patient.id %}">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                                    <path fill-rule="evenodd"
+                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                                </svg>
+                            </a></td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>1</td>
+                            <td>علیرضا وجهی</td>
+                            <td><span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success float-right"
+                                        style="font-size: 12px">شروع لیبل گذاری
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>علیرضا وجهی</td>
+                            <td><span class="badge badge-warning ml-2 mb-2 float-right">در حال بررسی</span></td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success float-right"
+                                        style="font-size: 12px" disabled>شروع لیبل گذاری
+                                </button>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>علیرضا وجهی</td>
+                            <td><span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span></td>
+                            <td>-</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example" style="padding: 10px;">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+    </div>
+
+
+</div> <!-- .content -->
+</div>
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="largeModalLabel">آپلود فایل</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body card-block">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="email-input"
+                                                             class=" form-control-label">کلاس</label></div>
+                            <div class="col-12 col-md-9"><input type="email" id="email-input"
+                                                                name="email-input" placeholder="کلاس را وارد کنید"
+                                                                class="form-control">
+                                <small class="help-block form-text">کلاس را وارد کنید</small>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="file-input"
+                                                             class=" form-control-label">ارسال فایل</label></div>
+                            <div class="col-12 col-md-9"><input type="file" id="file-input"
+                                                                name="file-input" class="form-control-file"></div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                <button type="button" class="btn btn-primary">تایید</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main-->
+
+<script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+<script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/main.js"></script>
+<script src="/static/vendors/chart.js/dist/Chart.bundle.min.js"></script>
+<script src="/static/assets/js/dashboard.js"></script>
+<script>
+    var sumOfAll = 10
+    var labeled = 1
+
+    //متد تولید رنگ برای گراف
+    function dynamicColor() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return ["rgb(" + r + "," + g + "," + b + "," + 0.5 + ")", "rgb(" + r + "," + g + "," + b + ")"];
+    }
+
+    //متد گراف
+    (function ($) {
+        var color1 = dynamicColor()
+        var color2 = dynamicColor()
+        "use strict";
+        var ctx = document.getElementById("chartx");
+        Chart.defaults.global.defaultFontFamily = 'iransans';
+        ctx.height = 123;
+        var myChart = new Chart(ctx,
+            {
+                type: 'horizontalBar',
+
+                // The data for our dataset
+                data: {
+                    labels: ['تعداد تصاویر'],
+                    datasets: [{
+                        label: 'کل',
+                        backgroundColor: color1[0],
+                        borderColor: color1[1],
+                        data: [sumOfAll]
+                    },
+                        {
+                            label: 'لیبل گذاری شده',
+                            backgroundColor: color2[0],
+                            borderColor: color2[1],
+                            data: [labeled]
+                        }]
+                },
+                options: {
+                    elements: {
+                        rectangle: {
+                            borderWidth: 1,
+                        }
+                    }
+                    ,
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            fontFamily: 'iransans',
+                            rtl: true,
+                        }
+                    }
+                    ,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+
+                            }, barPercentage: 0.6,
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                    ,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
+            }
+        );
+    })(jQuery)
+
+</script>
+
+</body>
+
+</html>

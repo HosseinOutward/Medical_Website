@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>ورود</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap-rtl.css"/>
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <style>
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            z-index: -10;
+            left: 0;
+            opacity: 0.9;
+            color: #f1f1f1;
+        }
+
+    </style>
+</head>
+
+<body class="bg-dark">
+<video autoplay muted loop id="myVideo">
+    <source src="video/12.mp4" type="video/mp4">
+</video>
+<div style="margin:5% auto" class="sufee-login d-flex align-content-center flex-wrap">
+    <div class="container">
+        <div class="login-content">
+
+            <div class="login-form">
+                <form>
+
+                    <div class="form-group">
+                        <label>ایمیل</label>
+                        <input type="email" class="form-control" placeholder="ایمیل خود را وارد کنید" />
+                    </div>
+                    <div class="form-group">
+                        <label>رمز عبور</label>
+                        <input type="password" class="form-control" placeholder="رمز عبور خود را وارد کنید" />
+                    </div>
+
+                    <a  style=" border-radius: 10px;color: white" type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">
+                        ثبت نام
+                    </a>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="vendors/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+
+</html>

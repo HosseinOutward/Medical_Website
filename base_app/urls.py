@@ -8,8 +8,6 @@ urlpatterns = [
     path('about/', about, name='base-about'),
     path('contact/', contact, name='base-contact'),
 
-    path('panel/', panel, name='base-panel'),
-
     # webservice
     path('webservice/getImage/<int:patient_id>/<int:image_id>/', getImage, name='webservice-getImage'),
     path('webservice/getImage/<int:patient_id>/', getImageList, name='webservice-getImage'),

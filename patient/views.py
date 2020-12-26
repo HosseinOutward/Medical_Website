@@ -153,8 +153,13 @@ class ImageDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 class PanelView(LoginRequiredMixin, ListView):
-    model = Patient
+    model = ImagePatient
+    template_name = 'index.html'
     paginate_by = 8
 
     def get_queryset(self):
-        return Patient.objects.filter(doctor_pati=self.request.user).order_by('-date_pati')
+        return ImagePatient.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(PanelView, self).get_context_data(**kwargs)
+        return context

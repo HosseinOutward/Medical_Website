@@ -37,3 +37,4 @@ class ImagePatient(models.Model):
 
 
 
+

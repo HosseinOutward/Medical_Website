@@ -17,7 +17,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
     form_class = UserRegisterForm
-    template_name = "user/registration.html"
+    template_name = "page-register.html"
     success_message = "patient created successfully"
 
     def form_valid(self, form):

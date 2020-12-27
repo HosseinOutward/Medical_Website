@@ -5,7 +5,6 @@ import os
 from PIL import Image, ImageDraw
 
 from patient.models import ImagePatient
-from .webservice import setPoints
 
 from celery import shared_task
 import requests

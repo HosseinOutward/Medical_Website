@@ -14,10 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>لیبل گذاری</title>
     <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap-rtl.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap-rtl.css">
+    <link rel="stylesheet" href="/static/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/style.css">
 </head>
 
 <body class="open">
@@ -37,17 +37,17 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>داشبورد </a>
+                    <a href="/panel"> <i class="menu-icon fa fa-dashboard"></i>داشبورد </a>
                 </li>
+<!--                <li class="active">-->
+<!--                    <a href="/labeling"> <i class="menu-icon fa fa-edit"></i>لیبل گذاری </a>-->
+<!--                </li>-->
+<!--                <li class="active">-->
+<!--                    <a data-toggle="modal"-->
+<!--                       data-target="#largeModal"> <i class="menu-icon fa fa-upload"></i>آپلود </a>-->
+<!--                </li>-->
                 <li class="active">
-                    <a href="label.html"> <i class="menu-icon fa fa-edit"></i>لیبل گذاری </a>
-                </li>
-                <li class="active">
-                    <a data-toggle="modal"
-                       data-target="#largeModal"> <i class="menu-icon fa fa-upload"></i>آپلود </a>
-                </li>
-                <li class="active">
-                    <a href="index.html"> <i class="menu-icon fa fa-desktop"></i>بررسی با هوش مصنوعی </a>
+                    <a href="#"> <i class="menu-icon fa fa-desktop"></i>بررسی با هوش مصنوعی </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -68,7 +68,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="{{UserProfile.image_prof.url}}" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="header-left float-right mr-3">
-                    دکتر علیرضا وجهی
+                    {{UserProfile.name_prof}}
                 </div>
 
             </div>
@@ -94,18 +94,30 @@
     <!-- Header-->
 
 
-    <div class="content mt-3">
+<!--    <div class="content mt-3">-->
 
-        <div class="col-sm-12">
-            <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    <span class="badge badge-pill badge-success">
-                        <i class="fa fa-quote-right" style="padding: 0.1rem;"></i> </span> به بخش لیبل گذاری خوش آمدید
-                <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-
+<!--        <div class="col-sm-12">-->
+<!--            <div class="alert  alert-success alert-dismissible fade show" role="alert">-->
+<!--                    <span class="badge badge-pill badge-success">-->
+<!--                        <i class="fa fa-quote-right" style="padding: 0.1rem;"></i> </span> به بخش لیبل گذاری خوش آمدید-->
+<!--                <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success'%}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'info' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'warning' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'error' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
         <div class="col-xs-12">
             <div class="card">
@@ -120,13 +132,13 @@
                     <html lang=&quot;en&quot;>
                     <head>
                       <title>Editor | Heartex</title>
-                      <link href=&quot;assets/css/main-label.css&quot; rel=&quot;stylesheet&quot;>
+                      <link href=&quot;/static/assets/css/main-label.css&quot; rel=&quot;stylesheet&quot;>
                       <script src=&quot;https://app.heartex.ai/static/js/jquery.min.js&quot;></script>
                       <!-- Editor CSS -->
-                        <link href=&quot;assets/css/main-label.css&quot; rel=&quot;stylesheet&quot;>
-                        <link href=&quot;assets/css/style-label.css&quot; rel=&quot;stylesheet&quot;>
+                        <link href=&quot;/static/assets/css/main-label.css&quot; rel=&quot;stylesheet&quot;>
+                        <link href=&quot;/static/assets/css/style-label.css&quot; rel=&quot;stylesheet&quot;>
                       <!-- Editor JS -->
-                        <script src=&quot;assets/js/main-label.js&quot;></script>
+                        <script src=&quot;/static/assets/js/main-label.js&quot;></script>
                         <script src=&quot;https://app.heartex.ai/static/sdk/htx-docker-init-v1.0.0.js&quot;></script>
                       <style>
 
@@ -170,7 +182,7 @@
 
 
                     <script id=&quot;task-data&quot; type=&quot;application/json&quot;>{
-                    &quot;id&quot;: 6077, &quot;data&quot;: {&quot;image&quot;: &quot;./images/13.png&quot;}, &quot;completions&quot;: null, &quot;predictions&quot;: null, &quot;project&quot;: 1, &quot;accuracy&quot;: 0, &quot;created_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;, &quot;updated_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;}</script>
+                    &quot;id&quot;: 6077, &quot;data&quot;: {&quot;image&quot;: &quot;{{imagepatient.image_imag.url}}&quot;}, &quot;completions&quot;: null, &quot;predictions&quot;: null, &quot;project&quot;: 1, &quot;accuracy&quot;: 0, &quot;created_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;, &quot;updated_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;}</script>
 
                     <script>
                       $(function () {
@@ -235,7 +247,7 @@
 
                     </body>
                     </html>
-                 " __idm_frm__="1184" id="render-editor" style="height: 706px;">
+                 " __idm_frm__="1184" id="render-editor" style="height: 1700px;">
                 </iframe>
                     <!-- /.box-body -->
             </div>
@@ -291,10 +303,10 @@
 </div>
 <!-- Main-->
 
-<script src="vendors/jquery/dist/jquery.min.js"></script>
-<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/dashboard.js"></script>
+<script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+<script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/main.js"></script>
+<script src="/static/assets/js/dashboard.js"></script>
 
 
 </body>

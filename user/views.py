@@ -26,11 +26,12 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('login')
+        return reverse('profile-update')
 
 
 class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = UserProfile
+    template_name = "page-register.html"
     success_message = "profile updated successfully"
     fields = ['name_prof', 'image_prof', 'hosp_prof']
 

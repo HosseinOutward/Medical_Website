@@ -83,7 +83,6 @@ class ImageAddView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     fields = ['image_imag', "class_type_imag"]
     success_message = "image added"
     template_name = 'index.html'
-    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super(ImageAddView, self).get_context_data(**kwargs)

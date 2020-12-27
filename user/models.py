@@ -9,7 +9,7 @@ class Hospital(models.Model):
 
 class UserProfile(models.Model):
     name_prof = models.CharField(max_length=200)
-    image_prof = models.ImageField(default='defaultNew.jpg', upload_to='profile_pic')
+    image_prof = models.ImageField(default=r'profile_pic/defaultNew.jpg', upload_to='profile_pic')
     hosp_prof = models.ManyToManyField(Hospital)
     # type_prof = models.??()
 

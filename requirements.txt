@@ -9,7 +9,6 @@ click-didyoumean==0.0.3
 click-plugins==1.1.1
 click-repl==0.1.6
 Django==3.1.4
-django-crispy-forms==1.10.0
 idna==2.10
 kombu==5.0.2
 numpy==1.19.4
@@ -20,7 +19,6 @@ pytz==2020.4
 requests==2.25.1
 six==1.15.0
 sqlparse==0.4.1
-torch==1.7.1
 typing-extensions==3.7.4.3
 urllib3==1.26.2
 vine==5.0.0

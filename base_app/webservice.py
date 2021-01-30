@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from patient.models import ImagePatient
 from django.shortcuts import redirect
 import json
-from patient.views import ImageAddView
 
 base_url = "http://127.0.0.1:8000"
 

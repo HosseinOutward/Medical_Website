@@ -10,11 +10,6 @@ def about(request):
     return render(request, 'base_panel/about.html', {'name': 'About'})
 
 
-@login_required(login_url='login')
-def panel(request):
-    return render(request, 'index.html')
-
-
 def contact(request):
     return render(request, 'base_panel/contact.html')
 

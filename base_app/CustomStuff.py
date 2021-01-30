@@ -5,7 +5,6 @@ def overwriteTempDicom(image_data):
     import pydicom
     import numpy as np
     import cv2
-    import io
 
     ds = pydicom.dcmread(image_data)
 

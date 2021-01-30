@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 
 from patient.models import ImagePatient
 
-from celery import shared_task
+# from celery import shared_task
 import requests
 from io import BytesIO
 
@@ -14,7 +14,7 @@ from io import BytesIO
 def nnService(image_url, patient_id, image_idx):
     return [[0,1],[2,3]]
 
-@shared_task
+# @shared_task
 def nnService2(image_url, patient_id, image_idx):
       
     transform = transforms.ToTensor()
@@ -25,8 +25,8 @@ def nnService2(image_url, patient_id, image_idx):
     image_address = "http://127.0.0.1:8000"+image_url
     response = requests.get(image_address)
 
-    model9  = torchvision.models.resnet18(num_classes=18).cpu()
-    model3  = torchvision.models.resnet18(num_classes=6).cpu()
+    model9 = torchvision.models.resnet18(num_classes=18).cpu()
+    model3 = torchvision.models.resnet18(num_classes=6).cpu()
     model9.load_state_dict(torch.load(model_path9, map_location=torch.device('cpu'))['model_state_dict'], strict='False')
     model9.eval()
     model3.load_state_dict(torch.load(model_path3, map_location=torch.device('cpu'))['model_state_dict'], strict='False')

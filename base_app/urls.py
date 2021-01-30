@@ -1,5 +1,5 @@
 from django.urls import path
-from base_app.views import home, about, panel, case_study, contact
+from base_app.views import home, about, case_study, contact
 from base_app.webservice import getImage, getPoints, setPoints, getImageList, getLabel, setLabel, getList
 
 urlpatterns = [

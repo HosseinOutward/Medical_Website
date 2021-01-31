@@ -30,8 +30,6 @@ class ImagePatient(models.Model):
 
     last_edited_imag = models.DateTimeField(default=timezone.now)
 
-    patient_imag = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
-
     def get_absolute_url(self):
         return reverse('base-panel')
 

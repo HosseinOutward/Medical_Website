@@ -29,16 +29,19 @@ SECRET_KEY = config["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "188.75.122.178"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'crispy_forms',
+    'rest_framework',
+
     'user.apps.UserConfig',
     'base_app.apps.BaseAppConfig',
     'patient.apps.PatientConfig',
+
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,6 +149,13 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 # # CELERY STUFF
 # CELERY_BROKER_URL = 'redis://localhost:6379'

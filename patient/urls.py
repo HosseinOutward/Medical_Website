@@ -1,18 +1,13 @@
-from django.urls import path
-from .views import LabelingView, PatientCreateView, PatientDetailView, PatientDeleteView, PatientUpdateView, PatientListView, ImageAddView, ImageDeleteView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import *
+
+rout=DefaultRouter()
+rout.register('image', ImageDataAPI, basename='image')
 
 urlpatterns = [
-    path('patient/', PatientListView.as_view(), name='user-patients-list'),
-    path('patient/<int:pk>/', PatientDetailView.as_view(), name='patient-detail'),
-    path('patient/<int:pk>/<int:image_id>/', PatientDetailView.as_view(), name='patient-detail-ID'),
-
-    path('patient/new/', PatientCreateView.as_view(), name='patient-create'),
-    path('patient/<int:pk>/update/', PatientUpdateView.as_view(), name='patient-update'),
-    path('patient/<int:pk>/delete/', PatientDeleteView.as_view(), name='patient-delete'),
-
-    path('patient/<int:patient_id>/imageAdd/', ImageAddView.as_view(), name='image-add'),
-    path('patient/<int:patient_id>/<int:image_id>/imageDelete/', ImageDeleteView.as_view(), name='image-delete'),
-
+    path('_api/', include(rout.urls)),
     path('labeling/<int:pk>', LabelingView.as_view(), name='labeling'),
-    path('panel/', ImageAddView.as_view(), name='base-panel'),
+    path('panel/', Panel.as_view(), name='base-panel'),
+    path('upload/', UploadView.as_view(), name='upload'),
 ]

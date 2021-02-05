@@ -1,71 +1,47 @@
-from django.urls import reverse
-from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import DeleteView, DetailView, UpdateView, CreateView
-from .models import UserProfile, Hospital
-from .forms import UserRegisterForm
+from rest_framework import generics
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
+from .serializers import *
+from .models import *
 
 
-class ProfileDetailView(LoginRequiredMixin, DetailView):
-    model = UserProfile
+class UserCreateAPIView(generics.CreateAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAdminUser]
 
-    def get_object(self, queryset=None):
-        return UserProfile.objects.filter(user_prof=self.request.user).get()
-
-
-class UserCreateView(SuccessMessageMixin, CreateView):
-    model = User
-    form_class = UserRegisterForm
-    template_name = "page-register.html"
-    success_message = "patient created successfully"
-
-    def form_valid(self, form):
-        obj = form.save()
-        UserProfile(user_prof=obj).save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('profile-update')
-
-
-class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserPassesTestMixin, UpdateView):
-    model = UserProfile
-    template_name = "page-register.html"
-    success_message = "profile updated successfully"
-    fields = ['name_prof', 'image_prof', 'hosp_prof']
-
-    def get_object(self, queryset=None):
-        return UserProfile.objects.filter(user_prof=self.request.user).get()
-
-    def get_success_url(self):
-        return reverse('profile-detail')
-
-    def test_func(self):
-        profile = self.get_object()
-        if profile.user_prof == self.request.user:
-            return True
-        return False
-
-
-class UserDeleteView(LoginRequiredMixin, DeleteView):
-    model = User
-    template_name = "user/user_confirm_delete.html"
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-    def get_success_url(self):
-        return reverse('base-home')
-
-
-# ********* ImagesViews bellow *********
-class HospitalDetailView(LoginRequiredMixin, DetailView):
-    model = Hospital
+    serializer_class = UserSerializer
 
     def get_object(self):
-        object=UserProfile.objects.filter(user_prof=self.request.user).get().hosp_prof.all()[self.kwargs["hospital_id"]]
-        self.pk=object.pk
-        return object
+        return self.request.user
 
+
+class UserUpdateAPIView(generics.UpdateAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    def get(self, request):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+class ProfileUpdateAPIView(generics.UpdateAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        return UserProfile.objects.filter(user_profile=self.request.user).get()
+
+    def get(self, request):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 

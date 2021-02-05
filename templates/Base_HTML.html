@@ -1,0 +1,207 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> {% block title %} {% endblock %} </title>
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap-rtl.css">
+    <link rel="stylesheet" href="/static/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+</head>
+
+<body class="open">
+<!-- Sidebar -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                        aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="./"></a>
+                <a class="navbar-brand hidden" href="./"></a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/panel/"> <i class="menu-icon fa fa-dashboard"></i>داشبورد </a>
+                    </li>
+<!--                    <li class="active">-->
+<!--                        <a href="/labeling/"> <i class="menu-icon fa fa-edit"></i>لیبل گذاری </a>-->
+<!--                    </li>-->
+                    <li class="active">
+                        <a href="/upload/"> <i class="menu-icon fa fa-upload"></i>آپلود </a>
+                    </li>
+                    <li class="active">
+                        <a href="/logout/"> <i class="menu-icon fa fa-desktop"></i>خروج </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- Sidebar -->
+
+    <!-- Main-->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-12 float-right">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-caret-right"
+                                                                       style=" margin-top: 30%;"></i></a>
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="{{UserProfile.image_profile.url}}" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa-user"></i> پروفایل من</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-bell"></i> اعلان ها <span
+                                class="count f-left">13</span></a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> تنظیمات</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> خروج</a>
+                        </div>
+                    </div>
+
+                    <div class="header-left float-right mr-3">
+                        {{request.user.first_name}} {{request.user.last_name}}
+                    </div>
+
+                </div>
+            </div>
+
+        </header>
+        <!-- Header-->
+
+
+        <div class="content mt-3">
+            {% if messages %}
+                {% for message in messages %}
+            <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">
+                        <i class="fa fa-quote-right" style="padding: 0.1rem;"></i>
+                    </span>
+                    message
+                    toastr.{{ message.tags }}('{{ message }}')
+                    <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block contents %} {% endblock %}
+
+        </div>
+
+
+    </div> <!-- .content -->
+
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="largeModalLabel">آپلود فایل</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body card-block">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="email-input"
+                                                                 class=" form-control-label">کلاس</label></div>
+                                <div class="col-12 col-md-9"><input type="email" id="email-input"
+                                                                    name="email-input" placeholder="کلاس را وارد کنید"
+                                                                    class="form-control">
+                                    <small class="help-block form-text">کلاس را وارد کنید</small>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="file-input"
+                                                                 class=" form-control-label">ارسال فایل</label></div>
+                                <div class="col-12 col-md-9"><input type="file" id="file-input"
+                                                                    name="file-input" class="form-control-file"></div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                    <button type="button" class="btn btn-primary">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Main-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/main.js"></script>
+    <script src="/static/assets/js/dashboard.js"></script>
+    <script>
+        var splitedURL = window.location.href.split("/")
+        const currentURL = splitedURL[2]
+        var indx=splitedURL[splitedURL["length"]-1]
+        if(indx=="") {indx=splitedURL[splitedURL["length"]-2]}
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                function csrfSafeMethod(method) {
+                    // these HTTP methods do not require CSRF protection
+                    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+                const csrftoken = getCookie('csrftoken');
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    </script>
+    {% block scripts %} {% endblock %}
+
+</body>
+
+</html>

@@ -1,155 +1,43 @@
-<!doctype html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>داشبورد</title>
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap-rtl.css">
-    <link rel="stylesheet" href="/static/vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/assets/css/style.css">
-</head>
-
-<body>
-<!-- Sidebar -->
-<aside id="left-panel" class="left-panel">
-    <nav class="navbar navbar-expand-sm navbar-default">
-        <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
-                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="./"></a>
-            <a class="navbar-brand hidden" href="./"></a>
-        </div>
-        <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="/panel"> <i class="menu-icon fa fa-dashboard"></i>داشبورد </a>
-                </li>
-<!--                <li class="active">-->
-<!--                    <a href="label.html"> <i class="menu-icon fa fa-edit"></i>لیبل گذاری </a>-->
-<!--                </li>-->
-                <li class="active">
-                    <a data-toggle="modal"
-                       data-target="#largeModal"> <i class="menu-icon fa fa-upload"></i>آپلود </a>
-                </li>
-                <li class="active">
-                    <a href="#"> <i class="menu-icon fa fa-desktop"></i>بررسی با هوش مصنوعی </a>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</aside>
-<!-- Sidebar -->
-
-<!-- Main-->
-<div id="right-panel" class="right-panel">
-    <!-- Header-->
-    <header id="header" class="header">
-
-        <div class="header-menu">
-
-            <div class="col-sm-12 float-right">
-                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-caret-right"
-                                                                   style=" margin-top: 30%;"></i></a>
-                <div class="user-area dropdown float-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src={{UserProfile.image_prof.url}} alt="User Avatar">
-                    </a>
-
-                </div>
-
-                <div class="header-left float-right mr-3">
-                    {{UserProfile.name_prof}}
-                </div>
-
+{% extends 'Base_HTML.html' %}
+{% block title %}پنل کاربری{% endblock %}
+{% block contents %}
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>گزارش</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="chartx"></canvas>
             </div>
         </div>
-
-    </header>
-    <!-- Header-->
-
-
-    <div class="content mt-3">
-        {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == 'success'%}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% elif message.tags == 'info' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% elif message.tags == 'warning' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% elif message.tags == 'error' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
-<!--        <div class="col-sm-12">-->
-<!--            <div class="alert  alert-success alert-dismissible fade show" role="alert">-->
-<!--                    <span class="badge badge-pill badge-success">-->
-<!--                        <i class="fa fa-quote-right" style="padding: 0.1rem;"></i>-->
-<!--                    </span>-->
-<!--                به سیستم خوش آمدید-->
-<!--                <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <h4>گزارش</h4>
-                </div>
-                <div class="card-body">
-
-                    <canvas id="chartx"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <aside class="profile-nav alt">
-                <section class="card">
-                    <div class="card-header user-header alt bg-dark">
-                        <div class="media mt-3">
-
-                            <div class="media-body col-sm-12">
-                                <h6 class="text-light display-6" style="text-align: center;">{{UserProfile.name_prof}}</h6>
-                                <p style="padding: 0px;text-align: center">مدیر پروژه</p>
-                            </div>
+    </div>
+    <div class="col-md-4">
+        <aside class="profile-nav alt">
+            <section class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media mt-3">
+                        <div class="media-body col-sm-12">
+                            <h6 class="text-light display-6" style="text-align: center;">
+                                {{request.user.first_name}} {{request.user.last_name}}
+                            </h6>
+                            <p style="padding: 0px;text-align: center">مدیر پروژه</p>
                         </div>
                     </div>
-
-
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <a href="#"> تصاویر آپلود شده <span
-                                    class="badge badge-primary pull-left">{{ all_images_count }}</span></a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">تصاویر لیبل گذاری شده<span
-                                    class="badge badge-danger pull-left">{{ labeled_images_count }}</span></a>
-                        </li>
-
-                    </ul>
-
-                </section>
-            </aside>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="#"> تصاویر آپلود شده <span
+                                class="badge badge-primary pull-left">{{ all_images_count }}</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">تصاویر لیبل گذاری شده<span
+                                class="badge badge-danger pull-left">{{ labeled_images_count }}</span></a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
         </div>
-        <div class="col-xs-12">
+    <div class="col-xs-12">
             <div class="card">
                 <div type="button" class="card-header">
                     <strong class="card-title" style="text-align: center">تصاویر آپلود شده</strong>
@@ -162,7 +50,6 @@
                         <tr>
                             <th>شماره تصویر</th>
                             <th>کاربر</th>
-
                             <th>وضعیت</th>
                             <th>عملیات</th>
                         </tr>
@@ -170,190 +57,104 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ image.creator_imag }}</td>
-                            {% if image.label_string_imag == "NotSetYet" %}
+                            {% if image.label_data_imag is None %}
                             <td><span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span></td>
-                            {% else %}
-                            <td><span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span></td>
-                            {% endif %}
                             <td>
                                 <a href="{% url 'labeling' image.id %}" type="button"
                                    class="btn btn-outline-success float-right" style="font-size: 12px">
                                     شروع لیبل گذاری
                                 </a>
                             </td>
-
+                            {% else %}
+                            <td><span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span></td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                         </tbody>
                     </table>
-<!--                    <nav aria-label="Page navigation example" style="padding: 10px;">-->
-<!--                        <ul class="pagination">-->
-<!--                            <li class="page-item">-->
-<!--                                <a class="page-link" href="#" aria-label="Previous">-->
-<!--                                    <span aria-hidden="true">&laquo;</span>-->
-<!--                                    <span class="sr-only">Previous</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--                            <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--                            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--                            <li class="page-item">-->
-<!--                                <a class="page-link" href="#" aria-label="Next">-->
-<!--                                    <span aria-hidden="true">&raquo;</span>-->
-<!--                                    <span class="sr-only">Next</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </nav>-->
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>
+{% endblock %}
+{% block scripts %}
+    <script src="/static/vendors/chart.js/dist/Chart.bundle.min.js"></script>
+    <script>
+        var sumOfAll = {{ all_images_count }}
+        var labeled = {{ labeled_images_count }}
 
-    </div>
+        //متد تولید رنگ برای گراف
+        function dynamicColor() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return ["rgb(" + r + "," + g + "," + b + "," + 0.5 + ")", "rgb(" + r + "," + g + "," + b + ")"];
+        }
 
+        //متد گراف
+        (function ($) {
+            var color1 = dynamicColor()
+            var color2 = dynamicColor()
+            "use strict";
+            var ctx = document.getElementById("chartx");
+            Chart.defaults.global.defaultFontFamily = 'iransans';
+            ctx.height = 123;
+            var myChart = new Chart(ctx,
+                {
+                    type: 'horizontalBar',
 
-</div> <!-- .content -->
-</div>
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="largeModalLabel">آپلود فایل</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body card-block">
-<!--                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">-->
-
-
-<!--                        <div class="row form-group">-->
-<!--                            <div class="col col-md-3"><label for="email-input"-->
-<!--                                                             class=" form-control-label">کلاس</label></div>-->
-<!--                            <div class="col-12 col-md-9"><input type="email" id="email-input"-->
-<!--                                                                name="email-input" placeholder="کلاس را وارد کنید"-->
-<!--                                                                class="form-control">-->
-<!--                                <small class="help-block form-text">کلاس را وارد کنید</small>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div class="row form-group">-->
-<!--                            <div class="col col-md-3"><label for="file-input"-->
-<!--                                                             class=" form-control-label">ارسال فایل</label></div>-->
-<!--                            <div class="col-12 col-md-9"><input type="file" id="file-input"-->
-<!--                                                                name="file-input" class="form-control-file"></div>-->
-<!--                        </div>-->
-
-<!--                    </form>-->
-                    <form method="POST" enctype="multipart/form-data">
-                        {% load crispy_forms_tags %}
-                        {% csrf_token %}
-                        <fieldset class="form-group">
-                            <legend class="border-bottom mb-4">image add</legend>
-                            {{ form|crispy }}
-                        </fieldset>
-                        <div class="form-group">
-                            <button class="btn btn-outline-info" type="submit">submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
-<!--                <button type="button" class="btn btn-primary">تایید</button>-->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Main-->
-
-<script src="/static/vendors/jquery/dist/jquery.min.js"></script>
-<script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/static/assets/js/main.js"></script>
-<script src="/static/vendors/chart.js/dist/Chart.bundle.min.js"></script>
-<script src="/static/assets/js/dashboard.js"></script>
-<script>
-    var sumOfAll = {{ all_images_count }}
-    var labeled = {{ labeled_images_count }}
-
-    //متد تولید رنگ برای گراف
-    function dynamicColor() {
-        var r = Math.floor(Math.random() * 255);
-        var g = Math.floor(Math.random() * 255);
-        var b = Math.floor(Math.random() * 255);
-        return ["rgb(" + r + "," + g + "," + b + "," + 0.5 + ")", "rgb(" + r + "," + g + "," + b + ")"];
-    }
-
-    //متد گراف
-    (function ($) {
-        var color1 = dynamicColor()
-        var color2 = dynamicColor()
-        "use strict";
-        var ctx = document.getElementById("chartx");
-        Chart.defaults.global.defaultFontFamily = 'iransans';
-        ctx.height = 123;
-        var myChart = new Chart(ctx,
-            {
-                type: 'horizontalBar',
-
-                // The data for our dataset
-                data: {
-                    labels: ['تعداد تصاویر'],
-                    datasets: [{
-                        label: 'کل',
-                        backgroundColor: color1[0],
-                        borderColor: color1[1],
-                        data: [sumOfAll]
+                    // The data for our dataset
+                    data: {
+                        labels: ['تعداد تصاویر'],
+                        datasets: [{
+                            label: 'کل',
+                            backgroundColor: color1[0],
+                            borderColor: color1[1],
+                            data: [sumOfAll]
+                        },
+                            {
+                                label: 'لیبل گذاری شده',
+                                backgroundColor: color2[0],
+                                borderColor: color2[1],
+                                data: [labeled]
+                            }]
                     },
-                        {
-                            label: 'لیبل گذاری شده',
-                            backgroundColor: color2[0],
-                            borderColor: color2[1],
-                            data: [labeled]
-                        }]
-                },
-                options: {
-                    elements: {
-                        rectangle: {
-                            borderWidth: 1,
-                        }
-                    }
-                    ,
-                    legend: {
-                        position: 'right',
-                        labels: {
-                            fontFamily: 'iransans',
-                            rtl: true,
-                        }
-                    }
-                    ,
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-
-                            }, barPercentage: 0.6,
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
+                    options: {
+                        elements: {
+                            rectangle: {
+                                borderWidth: 1,
                             }
-                        }]
+                        }
+                        ,
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                fontFamily: 'iransans',
+                                rtl: true,
+                            }
+                        }
+                        ,
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+
+                                }, barPercentage: 0.6,
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                        ,
+                        responsive: true,
+                        maintainAspectRatio: false,
                     }
-                    ,
-                    responsive: true,
-                    maintainAspectRatio: false,
                 }
-            }
-        );
-    })(jQuery)
+            );
+        })(jQuery)
 
-</script>
-
-</body>
-
-</html>
+    </script>
+{% endblock %}

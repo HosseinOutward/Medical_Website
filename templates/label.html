@@ -1,128 +1,7 @@
-<!doctype html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>لیبل گذاری</title>
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/vendors/bootstrap/dist/css/bootstrap-rtl.css">
-    <link rel="stylesheet" href="/static/vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/assets/css/style.css">
-</head>
-
-<body class="open">
-<!-- Sidebar -->
-<aside id="left-panel" class="left-panel">
-    <nav class="navbar navbar-expand-sm navbar-default">
-
-        <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
-                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="./"></a>
-            <a class="navbar-brand hidden" href="./"></a>
-        </div>
-
-        <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="/panel"> <i class="menu-icon fa fa-dashboard"></i>داشبورد </a>
-                </li>
-<!--                <li class="active">-->
-<!--                    <a href="/labeling"> <i class="menu-icon fa fa-edit"></i>لیبل گذاری </a>-->
-<!--                </li>-->
-<!--                <li class="active">-->
-<!--                    <a data-toggle="modal"-->
-<!--                       data-target="#largeModal"> <i class="menu-icon fa fa-upload"></i>آپلود </a>-->
-<!--                </li>-->
-                <li class="active">
-                    <a href="#"> <i class="menu-icon fa fa-desktop"></i>بررسی با هوش مصنوعی </a>
-                </li>
-                <li class="active">
-                    <a href="/logout/"> <i class="menu-icon fa fa-desktop"></i>exit </a>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</aside>
-<!-- Sidebar -->
-
-<!-- Main-->
-<div id="right-panel" class="right-panel">
-    <!-- Header-->
-    <header id="header" class="header">
-
-        <div class="header-menu">
-
-            <div class="col-sm-12 float-right">
-                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-caret-right"
-                                                                   style=" margin-top: 30%;"></i></a>
-                <div class="user-area dropdown float-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="{{UserProfile.image_prof.url}}" alt="User Avatar">
-                    </a>
-
-                    <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="#"><i class="fa fa-user"></i> پروفایل من</a>
-
-                        <a class="nav-link" href="#"><i class="fa fa-bell"></i> اعلان ها <span
-                            class="count f-left">13</span></a>
-
-                        <a class="nav-link" href="#"><i class="fa fa-cog"></i> تنظیمات</a>
-
-                        <a class="nav-link" href="#"><i class="fa fa-power-off"></i> خروج</a>
-                    </div>
-                </div>
-
-                <div class="header-left float-right mr-3">
-                    {{UserProfile.name_prof}}
-                </div>
-
-            </div>
-        </div>
-
-    </header>
-    <!-- Header-->
-
-
-<!--    <div class="content mt-3">-->
-
-<!--        <div class="col-sm-12">-->
-<!--            <div class="alert  alert-success alert-dismissible fade show" role="alert">-->
-<!--                    <span class="badge badge-pill badge-success">-->
-<!--                        <i class="fa fa-quote-right" style="padding: 0.1rem;"></i> </span> به بخش لیبل گذاری خوش آمدید-->
-<!--                <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-        {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == 'success'%}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% elif message.tags == 'info' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% elif message.tags == 'warning' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% elif message.tags == 'error' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
-        <div class="col-xs-12">
+{% extends 'Base_HTML.html' %}
+{% block title %}لیبل گذاری{% endblock %}
+{% block contents %}
+    <div class="col-xs-12">
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title" style="text-align: center">لیبل گذاری</strong>
@@ -131,7 +10,6 @@
                 <!-- /.box-header -->
                 <iframe srcdoc="
                  <!doctype html>
-
                     <html lang=&quot;en&quot;>
                     <head>
                       <title>Editor | Heartex</title>
@@ -184,8 +62,8 @@
 
 
 
-                    <script id=&quot;task-data&quot; type=&quot;application/json&quot;>{
-                    &quot;id&quot;: 6077, &quot;data&quot;: {&quot;image&quot;: &quot;{{imagepatient.image_imag.url}}&quot;}, &quot;completions&quot;: null, &quot;predictions&quot;: null, &quot;project&quot;: 1, &quot;accuracy&quot;: 0, &quot;created_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;, &quot;updated_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;}</script>
+                    <script id=&quot;task-data&quot; type=&quot;/static/application/json&quot;>{
+                    &quot;id&quot;: 6077, &quot;data&quot;: {&quot;image&quot;: &quot; {{object.image_imag.url}} &quot;}, &quot;completions&quot;: null, &quot;predictions&quot;: null, &quot;project&quot;: 1, &quot;accuracy&quot;: 0, &quot;created_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;, &quot;updated_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;}</script>
 
                     <script>
                       $(function () {
@@ -201,8 +79,8 @@
                                                <View style=&quot;box-shadow: 2px 2px 5px #999;
                                                     padding: 20px; margin-top: 2em;
                                                     border-radius: 5px;&quot;>
-                                                  <Header value=&quot;polygon&quot;/>
-                                                  <PolygonLabels name=&quot;tag&quot; toName=&quot;img&quot; strokewidth=&quot;2&quot; pointstyle=&quot;circle&quot; pointsize=&quot;small&quot; showInline=&quot;true&quot;>
+                                                  <Header style=&quot;text-align: center;&quot; value=&quot;لیبل&quot;/>
+                                                  <PolygonLabels  name=&quot;tag&quot; toName=&quot;img&quot; strokewidth=&quot;2&quot; pointstyle=&quot;circle&quot; pointsize=&quot;small&quot; showInline=&quot;true&quot;>
                                                       <Label value=&quot;brain&quot; background=&quot;blue&quot; />
                                                       <Label value=&quot;tumor&quot; background=&quot;green&quot; />
                                                   </PolygonLabels>
@@ -211,19 +89,14 @@
                                                       padding: 20px; margin-top: 2em;
                                                       border-radius: 5px;&quot;>
 
-                                              <Header value=&quot;is sick?&quot;/>
-                                              <Choices name=&quot;rating&quot; choice=&quot;single-radio&quot; toName=&quot;img&quot; showInline=&quot;true&quot;>
-                                                <Choice value=&quot;Yes&quot;/>
-                                                <Choice value=&quot;Neutral&quot;/>
-                                                <Choice value=&quot;No&quot;/>
+                                              <Header style=&quot;text-align: center;&quot; value=&quot;آیا کیس بیمار است&quot;/>
+                                              <Choices style=&quot;display: block; text-align: center;&quot; name=&quot;rating&quot; choice=&quot;single-radio&quot; toName=&quot;img&quot; showInline=&quot;true&quot;>
+                                                <Choice value=&quot;بله&quot;/>
+                                                <Choice value=&quot;خیر&quot;/>
+                                                <Choice value=&quot;بدون نظر&quot;/>
                                               </Choices>
                                               </View>
-                                            <View style=&quot;box-shadow: 2px 2px 5px #999;
-                                                           padding: 20px; margin-top: 2em;
-                                                           border-radius: 5px;&quot;>
-                                              <Header value=&quot;Doctor's opinion&quot;/>
-                                              <TextArea toName=&quot;img&quot; name=&quot;answer&quot;/>
-                                            </View>
+
                                            </View>
                                           </View>`,
                           user: {&quot;pk&quot;: 1, &quot;firstName&quot;: &quot;Awesome&quot;, &quot;lastName&quot;: &quot;User&quot;},
@@ -233,9 +106,6 @@
 
                         &quot;panel&quot;,
                                          &quot;panel &quot;,
-                                         &quot;controls&quot;,
-                                             &quot;update &quot;,
-                                             &quot;controls&quot;,
                                              &quot;side-column&quot;,
 
                               ],
@@ -250,69 +120,59 @@
 
                     </body>
                     </html>
-                 " __idm_frm__="1184" id="render-editor" style="height: 1700px;">
+                 " __idm_frm__="1184" id="render-editor" style="height: 1000px;">
                 </iframe>
                     <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>
-
-    </div>
-
-
-</div> <!-- .content -->
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="largeModalLabel">آپلود فایل</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+    <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>نظر متخصص</strong>
+                </div>
                 <div class="card-body card-block">
                     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-
-
                         <div class="row form-group">
-                            <div class="col col-md-3"><label for="email-input"
-                                                             class=" form-control-label">کلاس</label></div>
-                            <div class="col-12 col-md-9"><input type="email" id="email-input"
-                                                                name="email-input" placeholder="کلاس را وارد کنید"
-                                                                class="form-control">
-                                <small class="help-block form-text">کلاس را وارد کنید</small>
-                            </div>
+                            <div class="col col-md-3"><label for="textarea-input"
+                                                             class=" form-control-label">نظر</label></div>
+                            <div class="col-12 col-md-9"><textarea name="textarea-input" id="Opinion"
+                                                                   rows="5" placeholder="متن خود را وارد کنید..."
+                                                                   class="form-control"></textarea></div>
                         </div>
-
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="file-input"
-                                                             class=" form-control-label">ارسال فایل</label></div>
-                            <div class="col-12 col-md-9"><input type="file" id="file-input"
-                                                                name="file-input" class="form-control-file"></div>
-                        </div>
-
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
-                <button type="button" class="btn btn-primary">تایید</button>
+                <div class="card-footer">
+                    <div>
+                        <button id="sendButton" type="submit"
+                                class="btn btn-lg btn-info btn-block">
+
+                            <span >ارسال</span>
+
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-<!-- Main-->
+{% endblock %}
+{% block scripts %}
+    <script>
+        const apiURL='http://'+currentURL+'/_api/image/'+indx+'/'
+        const successURL='http://'+currentURL+'/panel'
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="/static/vendors/jquery/dist/jquery.min.js"></script>
-<script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/static/assets/js/main.js"></script>
-<script src="/static/assets/js/dashboard.js"></script>
-
-
-</body>
-
-</html>
+        $( "#sendButton" ).on( "click", function() {
+            let iframe = document.getElementById('render-editor');
+            let Htx = iframe.contentWindow.Htx;
+            labels=Htx.completionStore.selected.serializeCompletion();
+            labels.Opinion=$("#Opinion").val();
+            $.ajax({
+                url: apiURL,
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({"label_data_imag": JSON.stringify(labels)}),
+                type: 'PATCH',
+                success: function(result) {window.location=successURL}
+            });
+        });
+    </script>
+{% endblock %}

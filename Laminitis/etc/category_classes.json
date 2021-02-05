@@ -1,0 +1,131 @@
+{
+  "animal_type":
+    {
+      "cat": 0,
+      "dog": 1
+    },
+
+  "maturity":
+    {
+      "immature": 0,
+      "mature": 1
+    },
+
+
+  "body_type":
+    {
+      "poor": 0,
+      "normal": 1,
+      "obese": 2
+    },
+
+  "RL_graph":
+    {
+      "no": 0,
+      "RL": 1
+    },
+
+  "VD_graph":
+    {
+      "no": 0,
+      "VD": 1
+    },
+
+  "DV_graph":
+    {
+      "no": 0,
+      "DV": 1
+    },
+
+  "LL_graph":
+    {
+      "no": 0,
+      "LL": 1
+    },
+
+  "bronchial_graph":
+    {
+      "no": 0,
+      "Bronchial": 1
+    },
+
+  "interstitial_graph":
+    {
+      "no": 0,
+      "interstitial": 1
+    },
+
+  "alveolar_graph":
+    {
+      "no": 0,
+      "alveolar": 1
+    },
+
+  "cardiomegaly_graph":
+    {
+      "no": 0,
+      "cardiomegaly": 1
+    },
+
+  "bulge_graph":
+    {
+      "no": 0,
+      "bulge": 1
+    },
+
+  "trachea_deviation":
+    {
+      "no": 0,
+      "trachea": 1
+    },
+
+
+  "HIS_breed":
+    {
+      "spitz": 0,
+      "DSH": 1,
+      "persian": 2,
+      "other": 3,
+      "schitsue": 4,
+      "terrier": 5,
+      "poodle": 6
+    },
+
+
+  "HIS_gender":
+    {
+      "N": 0,
+      "F": 1,
+      "M": 2
+    },
+
+  "HIS_heart_sound":
+    {
+      "no": 0,
+      "yes": 1
+    },
+
+  "HIS_lung_sound":
+    {
+      "no": 0,
+      "yes": 1
+    },
+
+  "HIS_bronchial":
+    {
+      "no": 0,
+      "bronchial": 1
+    },
+
+  "HIS_interstitial":
+    {
+      "no": 0,
+      "interstitial": 1
+    },
+
+  "HIS_alveolar":
+    {
+      "no": 0,
+      "alveolar": 1
+    }
+}

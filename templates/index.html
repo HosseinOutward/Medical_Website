@@ -55,7 +55,7 @@
                         </tr>
                         {% for image in imagepatient_list %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
+                            <td>{{ image.pk }}</td>
                             <td>{{ image.creator_imag }}</td>
                             {% if image.label_data_imag is None %}
                             <td><span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span></td>

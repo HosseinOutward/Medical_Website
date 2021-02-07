@@ -265,7 +265,7 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        const apiURL='http://'+currentURL+'/_api/image/'+indx
+        const apiURL='http://'+currentURL+'/_api/image/'
         const successURL='http://'+currentURL+'/panel'
 
         $( "#sendButton" ).on( "click", function() {
@@ -284,7 +284,7 @@
             formData.append('cardiomegaly_graph', $("#cardiomegaly_graph").val());
             formData.append('bulge_graph', $("#bulge_graph").val());
             formData.append('trachea_deviation', $("#trachea_deviation").val());
-            formData.append('HIS_type', $("#HIS_type").val());
+            formData.append('HIS_breed', $("#HIS_type").val());
             formData.append('HIS_gender', $("#HIS_gender").val());
             formData.append('HIS_heart_sound', $("#HIS_heart_sound").val());
             formData.append('HIS_lung_sound', $("#HIS_lung_sound").val());

@@ -13,10 +13,11 @@ class ImagePatient(models.Model):
 
     # generating col according to values in json file
     for col_n in col_names:
-        exec(col_n + " = models.CharField(max_length=15, "
+        exec(col_n + " = models.IntegerField("
             "choices=[list(reversed(class_obj)) for class_obj in categ_file[col_n].items()])")
 
     label_data_imag = models.TextField(blank=True, null=True)
+    real_id_imag = models.IntegerField()
     assigned_doc_imag = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def get_absolute_url(self):

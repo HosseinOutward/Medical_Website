@@ -11,6 +11,15 @@
                         <div class="col-md-12">
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="selectSm"
+                                                                 class=" form-control-label">شماره پرونده</label></div>
+                                <div class="col-12 col-md-9">
+                                    <input type="real_id_imag" id="real_id_imag" class="form-control-sm form-control"/>
+                                </div></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="selectSm"
                                                                  class=" form-control-label">نوع حیوان بر اساس گراف</label></div>
                                 <div class="col-12 col-md-9">
                                     <select name="animal_type" id="animal_type" class="form-control-sm form-control">
@@ -270,6 +279,7 @@
 
         $( "#sendButton" ).on( "click", function() {
             var formData = new FormData();
+            formData.append('real_id_imag', $("#real_id_imag").val());
             formData.append('image_imag', $('#file-input')[0].files[0]);
             formData.append('animal_type', $("#animal_type").val());
             formData.append('maturity', $("#maturity").val());

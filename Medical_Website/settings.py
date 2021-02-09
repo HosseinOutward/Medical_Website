@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ["127.0.0.1", "188.75.122.178"]
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
     'rest_framework',
 
     'user.apps.UserConfig',

@@ -2,8 +2,13 @@ from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from django.shortcuts import render
 from .serializers import *
 from .models import *
+
+
+def registration(request):
+    return render(request, 'page-register.html')
 
 
 class UserCreateAPIView(generics.CreateAPIView):

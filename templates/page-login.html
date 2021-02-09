@@ -47,65 +47,20 @@
     {% endif %}
     <div class="container">
         <div class="login-content">
-
             <div class="login-form">
-<!--                <form>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>نام کاربری</label>-->
-<!--                        <input type="email" class="loginUser form-control" placeholder="ایمیل خود را وارد کنید"/>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>رمز عبور</label>-->
-<!--                        <input type="password" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>-->
-<!--                    </div>-->
-<!--                    <div class="checkbox">-->
-<!--                        <label>-->
-<!--                            <input type="checkbox"/> مرا به خاطر بسپار-->
-<!--                        </label>-->
-<!--                        <label class="pull-right">-->
-<!--                            <a href="pages-forget.html">فراموشی رمز عبور؟</a>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                    <a style=" border-radius: 10px" type="submit"-->
-<!--                       class="loginBtn btn btn-success btn-flat m-b-30 m-t-30">-->
-<!--                        ورود-->
-<!--                    </a>-->
 
-<!--                    <a href="page-register.html" style="margin-top: 3px; border-radius: 10px" type="submit"-->
-<!--                       class="btn btn-primary btn-flat m-b-30 m-t-30">-->
-<!--                        عضویت-->
-<!--                    </a>-->
-
-<!--                </form>-->
-
-                {% csrf_token %}
-                {% load crispy_forms_tags %}
-                <form method="POST" class="login100-form validate-form">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Log In</legend>
-                        {{ form|crispy }}
-                    </fieldset>
-
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="btn btn-primary btn-user btn-block"> Login</button>
-                        </div>
+                <form method="post", id="login-form">
+                    <div class="form-group">
+                        <label>نام کاربری</label>
+                        <input type="username" id="login-username" class="loginUser form-control" placeholder="نام کاربری خود را وارد کنید"/>
+                    </div>
+                    <div class="form-group">
+                        <label>رمز عبور</label>
+                        <input type="password" id="login-passwd" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>
                     </div>
 
-<!--                    <div class="text-center p-t-115">-->
-<!--                        <span class="txt1"> Don’t have an account? </span>-->
-
-<!--                        <a class="txt2" href="/api_/UserRegistration">-->
-<!--                            Sign Up-->
-<!--                        </a>-->
-<!--                    </div>-->
-
-<!--                    <hr>-->
-<!--                    <a href="#" class="btn btn-google btn-user btn-block">-->
-<!--                        <i class="fab fa-google fa-fw"></i> Login with Google-->
-<!--                    </a>-->
+                    <input style=" border-radius: 10px" type="submit"
+                       class="loginBtn btn btn-success btn-flat m-b-30 m-t-30" value="ورود">
                 </form>
 
             </div>
@@ -113,9 +68,36 @@
     </div>
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
 <script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/static/assets/js/main.js"></script>
+<script src="/static/js/H/ajax_setup.js"></script>
+<script>
+    const apiURL='/login/'
+    const successURL=new URL(window.location.href).searchParams.get("next");
+
+    $('#login-form').on('submit', function(event){
+        event.preventDefault();
+        console.log("login form submitted!")  // sanity check
+        $.ajax({
+            url : apiURL, // the endpoint
+            type : "POST", // http method
+            data : {
+                username : $('#login-username').val(),
+                password: $('#login-passwd').val()
+            }, // data sent with the post request
+
+            // handle a successful response
+            success : function(result) {window.location=successURL},
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

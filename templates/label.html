@@ -157,8 +157,8 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        const apiURL='http://'+currentURL+'/_api/image/'+indx+'/'
-        const successURL='http://'+currentURL+'/panel'
+        const apiURL='/_api/image/'+indx+'/'
+        const successURL='/panel'
 
         $( "#sendButton" ).on( "click", function() {
             let iframe = document.getElementById('render-editor');

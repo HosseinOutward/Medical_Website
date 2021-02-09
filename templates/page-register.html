@@ -35,41 +35,83 @@
 
     <div class="container">
         <div class="login-content">
-
             <div class="login-form">
-                <form method="POST">
-                    {% csrf_token %}
-                    {% load crispy_forms_tags %}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">User Creation</legend>
-                        {{ form|crispy }}
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-flat" type="submit">submit</button>
-                    </div>
-                </form>
-<!--                <form>-->
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label>ایمیل</label>-->
-                    <!--                        <input type="email" class="form-control" placeholder="ایمیل خود را وارد کنید" />-->
-                    <!--                    </div>-->
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label>رمز عبور</label>-->
-                    <!--                        <input type="password" class="form-control" placeholder="رمز عبور خود را وارد کنید" />-->
-                    <!--                    </div>-->
 
-                    <!--                    <a  style=" border-radius: 10px;color: white" type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">-->
-                    <!--                        ثبت نام-->
-                    <!--                    </a>-->
-<!--                </form>-->
+                <form method="post", id="login-form">
+                    <div class="form-group">
+                        <label>نام</label>
+                        <input type="first_name" id="reg-first-name" class="form-control" placeholder="نام خود را وارد کنید"/>
+                    </div>
+                    <div class="form-group">
+                        <label>نام خوانوادگی</label>
+                        <input type="last_name" id="reg-last-name" class="form-control" placeholder="نام خوانوادگی خود را وارد کنید"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>نام کاربری</label>
+                        <input type="username" id="reg-username" class="loginUser form-control" placeholder="نام کاربری خود را وارد کنید"/>
+                    </div>
+                    <div class="form-group">
+                        <label>ایمیل</label>
+                        <input type="email" id="reg-email" class="loginEmail form-control" placeholder="ایمیل خود را وارد کنید"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>رمز عبور</label>
+                        <input type="password" id="reg-password" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>
+                    </div>
+                    <div class="form-group">
+                        <label>تکرار رمز عبور</label>
+                        <input type="password2" id="reg-password2" class="loginPass form-control" placeholder="رمز عبور خود تکرار کنید"/>
+                    </div>
+
+                    <input  style=" border-radius: 10px;color: white" value = "ثبت نام"
+                            type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">
+                </form>
+
             </div>
         </div>
     </div>
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
 <script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/static/assets/js/main.js"></script>
+<script src="/static/js/H/ajax_setup.js"></script>
+<script>
+    const apiURL='/api_/UserRegistration/'
+    const successURL='/registration/'
+
+    $('#registration-form').on('submit', function(event){
+        event.preventDefault();
+        console.log("login form submitted!")  // sanity check
+        $.ajax({
+            url : apiURL, // the endpoint
+            type : "POST", // http method
+            data : {
+                username : $('#reg-username').val(),
+                password: $('#reg-password').val(),
+                password2: $('#reg-password2').val(),
+                email: $('#reg-email').val(),
+                first_name: $('#reg-first-name').val(),
+                last_name: $('#reg-last-name').val()
+            }, // data sent with the post request
+
+            // handle a successful response
+            success : function(result) {window.location=successURL},
+
+            fail: function(xhr, textStatus, errorThrown){
+                   alert('request failed');
+                },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

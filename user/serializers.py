@@ -21,11 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name': {'required': True}
         }
 
-    def save(self, **kwargs):
-        obj = super(UserSerializer,self).save(**kwargs)
-        UserProfile.objects.create(user_profile=obj)
-        return obj
-
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password2": "Password fields didn't match."})

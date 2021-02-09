@@ -20,8 +20,8 @@ def nnService2(image_url, patient_id, image_idx):
     transform = transforms.ToTensor()
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[1, 1, 1])
     res_to = 256
-    model_path9 = "./Laminitis/etc/tarFiles/best_250_256_0_9.pth.tar"
-    model_path3 = "./Laminitis/etc/tarFiles/best_250_256_6_9.pth.tar"
+    model_path9 = "./Medical_Website/etc/tarFiles/best_250_256_0_9.pth.tar"
+    model_path3 = "./Medical_Website/etc/tarFiles/best_250_256_6_9.pth.tar"
     image_address = "http://127.0.0.1:8000"+image_url
     response = requests.get(image_address)
 

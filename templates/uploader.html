@@ -265,8 +265,8 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        const apiURL='http://'+currentURL+'/_api/image/'
-        const successURL='http://'+currentURL+'/panel'
+        const apiURL='/_api/image/'
+        const successURL='/panel'
 
         $( "#sendButton" ).on( "click", function() {
             var formData = new FormData();

@@ -12,7 +12,9 @@ from rest_framework.permissions import IsAuthenticated
 class ImageDataAPI(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = ImagePatient.objects.all()
+
+    def get_queryset(self):
+        return sorted(ImagePatient.objects.all(), key=lambda t: t.label_data_imag is None, reverse=True)
 
     def get_serializer_class(self):
         serializer_class = ImageSerializer

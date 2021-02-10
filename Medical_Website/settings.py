@@ -148,12 +148,14 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]
+    ],
+
+    'DEFAULT_PAGINATION_CLASS': 'base_app.CustomStuff.CustomPagination',
+    'PAGE_SIZE': 10
 }
 
 # # CELERY STUFF

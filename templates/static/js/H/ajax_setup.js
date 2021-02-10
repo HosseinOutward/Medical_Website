@@ -1,5 +1,5 @@
+const currentURL = new URL(window.location.href)
 var splitedURL = window.location.href.split("/")
-const currentURL = splitedURL[2]
 var indx=splitedURL[splitedURL["length"]-1]
 if(indx=="") {indx=splitedURL[splitedURL["length"]-2]}
 

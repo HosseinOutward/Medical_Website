@@ -128,9 +128,7 @@
         </div>
     <div class="col-xs-12">
             <div class="card">
-                <div class="card-header">
-                    <strong>نظر متخصص</strong>
-                </div>
+                <div class="card-header"> <strong>نظر متخصص</strong> </div>
                 <div class="card-body card-block">
                     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                         <div class="row form-group">
@@ -142,6 +140,83 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="selectSm" class=" form-control-label">وضعیت بالا رفتن نای</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="trachea_deviation" id="trachea_deviation" class="form-control-sm form-control">
+                                <option value="1">trachea</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="selectSm" class=" form-control-label">bulge غیر طبیعی در سایه قلب</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="bulge_graph" id="bulge_graph" class="form-control-sm form-control">
+                                <option value="1">bulge</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="selectSm"
+                                                                 class=" form-control-label">کاردیومگالی بر اساس گراف</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="cardiomegaly_graph" id="cardiomegaly_graph" class="form-control-sm form-control">
+                                        <option value="1">cardiomegaly</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="selectSm"class=" form-control-label">الگوی ریه alveolar بر اساس گراف</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="alveolar_graph" id="alveolar_graph" class="form-control-sm form-control">
+                                <option value="1">alveolar</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="selectSm"
+                                                                 class=" form-control-label">الگوی ریه bronchial بر اساس گراف</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="bronchial_graph" id="bronchial_graph" class="form-control-sm form-control">
+                                        <option value="1">bronchial</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="selectSm"
+                                                                 class=" form-control-label">الگوی ریه intrestitial بر اساس گراف</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="interstitial_graph" id="interstitial_graph" class="form-control-sm form-control">
+                                        <option value="1">intrestitial</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                 <div class="card-footer">
                     <div>
                         <button id="sendButton" type="submit"
@@ -169,10 +244,54 @@
                 url: apiURL,
                 contentType: 'application/json',
                 dataType: 'json',
-                data: JSON.stringify({"label_data_imag": JSON.stringify(labels)}),
+                data: JSON.stringify({
+                    "bronchial_graph": $("#bronchial_graph").val(),
+                    "interstitial_graph": $("#interstitial_graph").val(),
+                    "alveolar_graph": $("#alveolar_graph").val(),
+                    "cardiomegaly_graph": $("#cardiomegaly_graph").val(),
+                    "bulge_graph": $("#bulge_graph").val(),
+                    "trachea_deviation": $("#trachea_deviation").val(),
+                    "label_data_imag": JSON.stringify(labels)
+                }),
                 type: 'PATCH',
                 success: function(result) {window.location=successURL}
             });
         });
+    </script>
+    <script>
+        function initLabels(label) {
+            $('#trachea_deviation').val(label.trachea_deviation)
+    	    $('#bulge_graph').val(label.bulge_graph)
+    	    $('#cardiomegaly_graph').val(label.cardiomegaly_graph)
+    	    $('#alveolar_graph').val(label.alveolar_graph)
+    	    $('#bronchial_graph').val(label.bronchial_graph)
+    	    $('#interstitial_graph').val(label.interstitial_graph)
+
+            var iframex = $('iframe');
+            canvas_height = $('canvas', iframex.contents()).height();
+            canvas_width = $('canvas', iframex.contents()).width();
+            var label = JSON.parse(label.label_data_imag)
+    	    $('#Opinion').val(label.Opinion)
+
+            for (i = 0; i < label.length-1; i++) {
+                if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}
+                for (j = 0; j < label[i].value.points.length; j++) {
+                    label[i].value.points[j][0] = label[i].value.points[j][0] * canvas_width / 100;
+                    label[i].value.points[j][1] = label[i].value.points[j][1] * canvas_height / 100;
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            const apiURL = '/_api/image/' + indx + '/'
+            var response = $.ajax({
+                url: apiURL,
+                dataType: 'json',
+                async: false,
+                type: 'GET',
+            });
+            initLabels(response.responseJSON)
+        });
+
     </script>
 {% endblock %}

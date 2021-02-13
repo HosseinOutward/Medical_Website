@@ -14,7 +14,9 @@ class ImageDataAPI(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return sorted(ImagePatient.objects.all(), key=lambda t: t.label_data_imag is None, reverse=True)
+        if self.request.method == 'GET':
+            return ImagePatient.objects.all().order_by('-label_data_imag')
+        return ImagePatient.objects.all()
 
     def get_serializer_class(self):
         serializer_class = ImageSerializer

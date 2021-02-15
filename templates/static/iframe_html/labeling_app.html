@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <title>Editor | Heartex</title>
+    <link href='/static/assets/css/main-label.css' rel='stylesheet'>
+    <script src='https://app.heartex.ai/static/js/jquery.min.js'></script>
+    <!-- Editor CSS -->
+    <link href='/static/assets/css/main-label.css' rel='stylesheet'>
+    <link href='/static/assets/css/style-label.css' rel='stylesheet'>
+    <!-- Editor JS -->
+    <script src='/static/assets/js/main-label.js'></script>
+    <script src='https://app.heartex.ai/static/sdk/htx-docker-init-v1.0.0.js'></script>
+    <style>
+
+        body, html {
+            background: none !important;
+        }
+
+        body::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 2px rgba(178, 178, 178, 0.3) !important;
+            background-color: #F5F5F5 !important;
+        }
+
+        body::-webkit-scrollbar {
+            width: 2px !important;
+            height: 2px !important;
+            background-color: #F5F5F5 !important;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #c3c3c3 !important;
+            border: 2px solid #b4b4b4 !important;
+        }
+
+        #label-studio div[class^='App_editor'],
+        div[class*='App_editor'] {
+            width: 95% !important;
+            min-width: 95% !important;
+            max-width: 95% !important;
+        }
+
+        #label-studio .ls-segment {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id='label-studio'><div class='ui loader active inline centered'></div></div>
+    <script>
+        $(function () {
+            window.USE_DRAFTS = false;
+
+            var Htx = new HeartexSDK({
+                elid: 'label-studio',
+                config: `
+                    <View style='display: flex'>
+                        <View>
+                            <Image style='width: 100%' name='img' value='$image' showMousePos='true' brightness='true'     	zoom='true' showlabels='true' contrast='true' FloodFill ='true'  zoomControl='true' brightnessControl='true' contrastControl='true' />
+                            <View style='box-shadow: 2px 2px 5px #999;
+                                 padding: 20px; margin-top: 2em;
+                                 border-radius: 5px;'>
+                               <Header style='text-align: center;' value='لیبل'/>
+                               <PolygonLabels  name='tag' toName='img' strokewidth='2' pointstyle='circle' pointsize='small' showInline='true'>
+                                   <Label value='brain' background='blue' />
+                                   <Label value='tumor' background='green' />
+                               </PolygonLabels>
+                            </View>
+                            <View style='box-shadow: 2px 2px 5px #999;padding: 20px; margin-top: 2em;border-radius: 5px;'>
+                                <Header style='text-align: center;' value='آیا کیس بیمار است'/>
+                                <Choices style='display: block; text-align: center;' name='rating' choice='single-radio' toName='img' showInline='true'>
+                                    <Choice value='بله'/>
+                                    <Choice value='خیر'/>
+                                    <Choice value='بدون نظر'/>
+                                </Choices>
+                            </View>
+                        </View>
+                    </View>
+                `,
+                user: {'pk': 1, 'firstName': 'Awesome', 'lastName': 'User'},
+                project: 1,
+                options: {secureMode: false},
+                interfaces: ['panel', 'panel ', 'side-column'],
+            });
+
+            function getParamValue(paramName) {
+                var url = window.location.search.substring(1); //get rid of "?" in querystring
+                var qArray = url.split('&'); //get key-value pairs
+                for (var i = 0; i < qArray.length; i++) {
+                    var pArr = qArray[i].split('='); //split key and value
+                    if (pArr[0] == paramName) {return pArr[1];}
+                }
+            }
+            Htx.showTask(
+                {
+                    "id": 6077,
+                    "data": {"image": getParamValue('image_URL')},
+                    "completions": null,
+                    "predictions": null,
+                    "project": 1,
+                    "accuracy": 0,
+                    "created_at": "2020-12-23T17:48:46.000000Z",
+                    "updated_at": "2020-12-23T17:48:46.000000Z"
+                },
+                {
+                    addInitial: true,
+                    loadCompletionIfExists: true
+                }
+            );
+        });
+    </script>
+
+</body>
+</html>

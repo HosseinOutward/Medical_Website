@@ -5,126 +5,11 @@
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title" style="text-align: center">لیبل گذاری</strong>
-
                 </div>
-                <!-- /.box-header -->
-                <iframe srcdoc="
-                 <!doctype html>
-                    <html lang=&quot;en&quot;>
-                    <head>
-                      <title>Editor | Heartex</title>
-                      <link href=&quot;/static/assets/css/main-label.css&quot; rel=&quot;stylesheet&quot;>
-                      <script src=&quot;https://app.heartex.ai/static/js/jquery.min.js&quot;></script>
-                      <!-- Editor CSS -->
-                        <link href=&quot;/static/assets/css/main-label.css&quot; rel=&quot;stylesheet&quot;>
-                        <link href=&quot;/static/assets/css/style-label.css&quot; rel=&quot;stylesheet&quot;>
-                      <!-- Editor JS -->
-                        <script src=&quot;/static/assets/js/main-label.js&quot;></script>
-                        <script src=&quot;https://app.heartex.ai/static/sdk/htx-docker-init-v1.0.0.js&quot;></script>
-                      <style>
-
-                        body, html {
-                          background: none !important;
-                        }
-
-                        body::-webkit-scrollbar-track {
-                          -webkit-box-shadow: inset 0 0 2px rgba(178, 178, 178, 0.3) !important;
-                          background-color: #F5F5F5 !important;
-                        }
-
-                        body::-webkit-scrollbar {
-                          width: 2px !important;
-                          height: 2px !important;
-                          background-color: #F5F5F5 !important;
-                        }
-
-                        body::-webkit-scrollbar-thumb {
-                          background-color: #c3c3c3 !important;
-                          border: 2px solid #b4b4b4 !important;
-                        }
-
-                        #label-studio div[class^=&quot;App_editor&quot;],
-                        div[class*=&quot;App_editor&quot;] {
-                          width: 95% !important;
-                          min-width: 95% !important;
-                          max-width: 95% !important;
-                        }
-                        #label-studio .ls-segment {
-                          top: 0;
-                        }
-                      </style>
-                    </head>
-                    <body>
-
-                    <div id=&quot;label-studio&quot;>
-                      <div class=&quot;ui loader active inline centered&quot;></div>
-                    </div>
-
-
-
-                    <script id=&quot;task-data&quot; type=&quot;/static/application/json&quot;>{
-                    &quot;id&quot;: 6077, &quot;data&quot;: {&quot;image&quot;: &quot; {{object.image_imag.url}} &quot;}, &quot;completions&quot;: null, &quot;predictions&quot;: null, &quot;project&quot;: 1, &quot;accuracy&quot;: 0, &quot;created_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;, &quot;updated_at&quot;: &quot;2020-12-23T17:48:46.000000Z&quot;}</script>
-
-                    <script>
-                      $(function () {
-                        window.USE_DRAFTS = false;
-
-                        // New Label Studio instance with integrated task data
-                        var Htx = new HeartexSDK({
-                          elid: &quot;label-studio&quot;,
-                          config: `<View style=&quot;display: flex&quot;>
-
-                                           <View >
-                                               <Image style=&quot;width: 100%&quot; name=&quot;img&quot; value=&quot;$image&quot; showMousePos=&quot;true&quot; brightness=&quot;true&quot;     	zoom=&quot;true&quot; showlabels=&quot;true&quot; contrast=&quot;true&quot; FloodFill =&quot;true&quot;  zoomControl=&quot;true&quot; brightnessControl=&quot;true&quot; contrastControl=&quot;true&quot; />
-                                               <View style=&quot;box-shadow: 2px 2px 5px #999;
-                                                    padding: 20px; margin-top: 2em;
-                                                    border-radius: 5px;&quot;>
-                                                  <Header style=&quot;text-align: center;&quot; value=&quot;لیبل&quot;/>
-                                                  <PolygonLabels  name=&quot;tag&quot; toName=&quot;img&quot; strokewidth=&quot;2&quot; pointstyle=&quot;circle&quot; pointsize=&quot;small&quot; showInline=&quot;true&quot;>
-                                                      <Label value=&quot;brain&quot; background=&quot;blue&quot; />
-                                                      <Label value=&quot;tumor&quot; background=&quot;green&quot; />
-                                                  </PolygonLabels>
-                                               </View>
-                                                <View style=&quot;box-shadow: 2px 2px 5px #999;
-                                                      padding: 20px; margin-top: 2em;
-                                                      border-radius: 5px;&quot;>
-
-                                              <Header style=&quot;text-align: center;&quot; value=&quot;آیا کیس بیمار است&quot;/>
-                                              <Choices style=&quot;display: block; text-align: center;&quot; name=&quot;rating&quot; choice=&quot;single-radio&quot; toName=&quot;img&quot; showInline=&quot;true&quot;>
-                                                <Choice value=&quot;بله&quot;/>
-                                                <Choice value=&quot;خیر&quot;/>
-                                                <Choice value=&quot;بدون نظر&quot;/>
-                                              </Choices>
-                                              </View>
-
-                                           </View>
-                                          </View>`,
-                          user: {&quot;pk&quot;: 1, &quot;firstName&quot;: &quot;Awesome&quot;, &quot;lastName&quot;: &quot;User&quot;},
-                          project: 1,
-                          options: { secureMode: false },
-                          interfaces: [
-
-                        &quot;panel&quot;,
-                                         &quot;panel &quot;,
-                                             &quot;side-column&quot;,
-
-                              ],
-                            });
-
-                        Htx.showTask(JSON.parse(document.getElementById('task-data').textContent),
-                          {addInitial: true, loadCompletionIfExists: true});
-                      });
-                    </script>
-
-
-
-                    </body>
-                    </html>
-                 " __idm_frm__="1184" id="render-editor" style="height: 1000px;">
-                </iframe>
-                    <!-- /.box-body -->
+                {% load static %}
+                <iframe src="/static/iframe_html/labeling_app.html?image_URL={{object.image_imag.url}}"
+                        __idm_frm__="1184" id="render-editor" style="height: 1300px;"></iframe>
             </div>
-            <!-- /.box -->
         </div>
     <div class="col-xs-12">
             <div class="card">
@@ -232,6 +117,9 @@
 {% endblock %}
 {% block scripts %}
     <script>
+        $('#myIframe').attr('src', "{% static 'iframe_html/labeling_app.html' %}?param1='{{object.image_imag.url}}'");
+    </script>
+    <script>
         const apiURL='/_api/image/'+indx+'/'
         const successURL='/panel'
 
@@ -239,7 +127,7 @@
             let iframe = document.getElementById('render-editor');
             let Htx = iframe.contentWindow.Htx;
             labels=Htx.completionStore.selected.serializeCompletion();
-            labels.Opinion=$("#Opinion").val();
+            labels.push($("#Opinion").val());
             $.ajax({
                 url: apiURL,
                 contentType: 'application/json',
@@ -267,11 +155,12 @@
     	    $('#bronchial_graph').val(label.bronchial_graph)
     	    $('#interstitial_graph').val(label.interstitial_graph)
 
+            var label = JSON.parse(label.label_data_imag)
+    	    $('#Opinion').val(label[label.length-1])
+
             var iframex = $('iframe');
             canvas_height = $('canvas', iframex.contents()).height();
             canvas_width = $('canvas', iframex.contents()).width();
-            var label = JSON.parse(label.label_data_imag)
-    	    $('#Opinion').val(label.Opinion)
 
             for (i = 0; i < label.length-1; i++) {
                 if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}

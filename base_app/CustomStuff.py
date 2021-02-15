@@ -24,18 +24,18 @@ def overwriteTempDicom(image_data):
     ds = pydicom.dcmread(image_data)
 
     # get header data
-    fieldnames = ['SpecificCharacterSet', 'SOPClassUID', 'SOPInstanceUID', 'StudyDate', 'StudyTime', 'AccessionNumber',
-                  'Modality', 'ConversionType', 'ReferringPhysicianName', 'SeriesDescription', 'PatientName', 'PatientID',
-                  'PatientBirthDate', 'PatientSex', 'PatientAge', 'BodyPartExamined', 'ViewPosition', 'StudyInstanceUID',
-                  'SeriesInstanceUID', 'StudyID', 'SeriesNumber', 'InstanceNumber', 'PatientOrientation', 'SamplesperPixel',
-                  'PhotometricInterpretation', 'Rows', 'Columns', 'PixelSpacing', 'BitsAllocated', 'BitsStored', 'HighBit',
-                  'PixelRepresentation', 'LossyImageCompression', 'LossyImageCompressionMethod', 'PixelData']
-    header_data = []
-    for field in fieldnames:
-        try:
-            header_data.append(ds.data_element(field))
-        except KeyError:
-            header_data.append(None)
+    # fieldnames = ['SpecificCharacterSet', 'SOPClassUID', 'SOPInstanceUID', 'StudyDate', 'StudyTime', 'AccessionNumber',
+    #               'Modality', 'ConversionType', 'ReferringPhysicianName', 'SeriesDescription', 'PatientName', 'PatientID',
+    #               'PatientBirthDate', 'PatientSex', 'PatientAge', 'BodyPartExamined', 'ViewPosition', 'StudyInstanceUID',
+    #               'SeriesInstanceUID', 'StudyID', 'SeriesNumber', 'InstanceNumber', 'PatientOrientation', 'SamplesperPixel',
+    #               'PhotometricInterpretation', 'Rows', 'Columns', 'PixelSpacing', 'BitsAllocated', 'BitsStored', 'HighBit',
+    #               'PixelRepresentation', 'LossyImageCompression', 'LossyImageCompressionMethod', 'PixelData']
+    # header_data = []
+    # for field in fieldnames:
+    #     try:
+    #         header_data.append(ds.data_element(field))
+    #     except KeyError:
+    #         header_data.append(None)
 
     # fix DICOM data
     image_2d = ds.pixel_array.astype(float)

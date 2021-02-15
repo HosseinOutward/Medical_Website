@@ -157,29 +157,34 @@
 
             var label = JSON.parse(label.label_data_imag)
     	    $('#Opinion').val(label[label.length-1])
+            label.splice(-1,1)
 
-            var iframex = $('iframe');
-            canvas_height = $('canvas', iframex.contents()).height();
-            canvas_width = $('canvas', iframex.contents()).width();
+            let iframe = document.getElementById('render-editor');
+            var canvas = iframe.contentDocument.getElementsByTagName("canvas").item(0);
 
+            //scale points to correct pos.
             for (i = 0; i < label.length-1; i++) {
                 if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}
                 for (j = 0; j < label[i].value.points.length; j++) {
-                    label[i].value.points[j][0] = label[i].value.points[j][0] * canvas_width / 100;
-                    label[i].value.points[j][1] = label[i].value.points[j][1] * canvas_height / 100;
+                    label[i].value.points[j][0] = label[i].value.points[j][0] * canvas.offsetWidth / 100;
+                    label[i].value.points[j][1] = label[i].value.points[j][1] * canvas.offsetHeight / 100;
                 }
             }
+            // place data onto iframe
+            let Htx = iframe.contentWindow.Htx;
+            labels=Htx.completionStore.selected.deserializeCompletion(label);
         }
-
-        $(document).ready(function() {
-            const apiURL = '/_api/image/' + indx + '/'
-            var response = $.ajax({
-                url: apiURL,
-                dataType: 'json',
-                async: false,
-                type: 'GET',
+        $(window).bind("load", function () {
+            $(document).ready(function() {
+                const apiURL = '/_api/image/' + indx + '/'
+                var response = $.ajax({
+                    url: apiURL,
+                    dataType: 'json',
+                    async: false,
+                    type: 'GET',
+                });
+                initLabels(response.responseJSON)
             });
-            initLabels(response.responseJSON)
         });
 
     </script>

@@ -174,7 +174,8 @@
             let Htx = iframe.contentWindow.Htx;
             labels=Htx.completionStore.selected.deserializeCompletion(label);
         }
-        $(window).bind("load", function () {
+
+        $('#render-editor').on("load", function () {
             $(document).ready(function() {
                 const apiURL = '/_api/image/' + indx + '/'
                 var response = $.ajax({

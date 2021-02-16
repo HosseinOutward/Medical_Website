@@ -49,7 +49,7 @@
         <div class="login-content">
             <div class="login-form">
 
-                <form method="post", id="login-form">
+                <form action="/panel" method="post", id="login-form"> {% csrf_token %}
                     <div class="form-group">
                         <label>نام کاربری</label>
                         <input type="username" id="login-username" class="loginUser form-control" placeholder="نام کاربری خود را وارد کنید"/>
@@ -58,9 +58,9 @@
                         <label>رمز عبور</label>
                         <input type="password" id="login-passwd" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>
                     </div>
+                    <input style=" border-radius: 10px" type="submit"
+                           class="loginBtn btn btn-success btn-flat m-b-30 m-t-30" value="ورود">
                 </form>
-                <input style=" border-radius: 10px" type="submit"
-                       class="loginBtn btn btn-success btn-flat m-b-30 m-t-30" value="ورود">
 
 
             </div>
@@ -72,31 +72,31 @@
 <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
 <script src="/static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/static/assets/js/main.js"></script>
-<script src="/static/js/H/ajax_setup.js"></script>
-<script>
-    const apiURL='/login/'
-    const successURL=new URL(window.location.href).searchParams.get("next");
+<!--<script src="/static/js/H/ajax_setup.js"></script>-->
+<!--<script>-->
+<!--    const apiURL='/login/'-->
+<!--    const successURL=new URL(window.location.href).searchParams.get("next");-->
 
-    $('#login-form').on('submit', function(event){
-        event.preventDefault();
-        console.log("login form submitted!")  // sanity check
-        $.ajax({
-            url : apiURL, // the endpoint
-            type : "POST", // http method
-            data : {
-                username : $('#login-username').val(),
-                password: $('#login-passwd').val()
-            }, // data sent with the post request
+<!--    $('#login-form').on('submit', function(event){-->
+<!--        event.preventDefault();-->
+<!--        console.log("login form submitted!")  // sanity check-->
+<!--        $.ajax({-->
+<!--            url : apiURL, // the endpoint-->
+<!--            type : "POST", // http method-->
+<!--            data : {-->
+<!--                username : $('#login-username').val(),-->
+<!--                password: $('#login-passwd').val()-->
+<!--            }, // data sent with the post request-->
 
-            // handle a successful response
-            success : function(result) {window.location=successURL},
+<!--            // handle a successful response-->
+<!--            success : function(result) {window.location=successURL},-->
 
-            // handle a non-successful response
-            error : function(xhr,errmsg,err) {
-            }
-        });
-    });
-</script>
+<!--            // handle a non-successful response-->
+<!--            error : function(xhr,errmsg,err) {-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
 </body>
 

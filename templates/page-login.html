@@ -49,14 +49,14 @@
         <div class="login-content">
             <div class="login-form">
 
-                <form action="/panel" method="post", id="login-form"> {% csrf_token %}
+                <form method="post", id="login-form"> {% csrf_token %}
                     <div class="form-group">
                         <label>نام کاربری</label>
-                        <input type="username" id="login-username" class="loginUser form-control" placeholder="نام کاربری خود را وارد کنید"/>
+                        <input type="username" name="username" id="login-username" class="loginUser form-control" placeholder="نام کاربری خود را وارد کنید"/>
                     </div>
                     <div class="form-group">
                         <label>رمز عبور</label>
-                        <input type="password" id="login-passwd" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>
+                        <input type="password" name="password" id="login-passwd" class="loginPass form-control" placeholder="رمز عبور خود را وارد کنید"/>
                     </div>
                     <input style=" border-radius: 10px" type="submit"
                            class="loginBtn btn btn-success btn-flat m-b-30 m-t-30" value="ورود">

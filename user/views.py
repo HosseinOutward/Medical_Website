@@ -1,49 +1,53 @@
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.response import Response
+from rest_framework import viewsets
 from django.shortcuts import render
 from .serializers import *
-from .models import *
+from base_app.permissions import *
+from django.contrib.auth.models import User
+from rest_framework import status
+from rest_framework.response import Response
 
 
 def registration(request):
     return render(request, 'page-register.html')
 
 
-class UserCreateAPIView(generics.CreateAPIView):
+class UserAPIView(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated&IsBoss]
+    queryset=User.objects.all()
 
-    serializer_class = UserSerializer
+    def get_serializer_class(self):
+        serializer_class = ProfileSerializer
+        if self.request.method == 'POST':
+            serializer_class = CreateUserSerializer
+        elif self.request.method == 'PUT' or self.request.method == 'PATCH':
+            serializer_class = RoleEditSerializer
+        return serializer_class
+
+    def destroy(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
 
-class UserUpdateAPIView(generics.UpdateAPIView):
+class PasswordChangeAPIView(generics.UpdateAPIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
-    serializer_class = UserSerializer
+    serializer_class = PasswordSerializer
 
     def get_object(self):
         return self.request.user
 
-    def get(self, request):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
 
-
-class ProfileUpdateAPIView(generics.UpdateAPIView):
+class ProfileUpdateAPIView(generics.RetrieveUpdateAPIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     serializer_class = ProfileSerializer
 
     def get_object(self):
-        return UserProfile.objects.filter(user_profile=self.request.user).get()
+        return self.request.user
 
-    def get(self, request):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
 

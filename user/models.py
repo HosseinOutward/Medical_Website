@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     image_profile = models.ImageField(default=r'profile_pic/default.jpg', upload_to='profile_pic')
-    # hosp_prof = models.ManyToManyField(Hospital)
-    # type_prof = models.CharField()
+
+    # role_profile = models.OneToOneField()
 
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE)
 

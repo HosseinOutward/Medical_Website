@@ -44,8 +44,18 @@
                     <li class="active">
                         <a href="/upload/"> <i class="menu-icon fa fa-upload"></i>آپلود </a>
                     </li>
+                    {% if isBoss or isLabeler %}
+                        <li class="active">
+                            <a href="/image_list/"> <i class="menu-icon fa fa-list"></i>لیست </a>
+                        </li>
+                    {% endif %}
+                    {% if isBoss %}
+                        <li class="active">
+                            <a href="/user_assignment/"> <i class="menu-icon fa fa-user"></i>تنظیمات کاربرها </a>
+                        </li>
+                    {% endif %}
                     <li class="active">
-                        <a href="/logout/"> <i class="menu-icon fa fa-desktop"></i>خروج </a>
+                        <a href="/logout/"> <i class="menu-icon fa fa-power-off"></i>خروج </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -78,6 +88,8 @@
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> تنظیمات</a>
 
                             <a class="nav-link" href="#"><i class="fa fa-power-off"></i> خروج</a>
+
+
                         </div>
                     </div>
 

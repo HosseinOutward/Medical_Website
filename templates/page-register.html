@@ -79,7 +79,7 @@
 <script src="/static/assets/js/main.js"></script>
 <script src="/static/js/H/ajax_setup.js"></script>
 <script>
-    const apiURL='/api_/UserRegistration/'
+    const apiURL='/_api/UserRegistration/'
     const successURL='/registration/'
 
     $('#registration-form').on('submit', function(event){
@@ -101,8 +101,8 @@
             success : function(result) {window.location=successURL},
 
             fail: function(xhr, textStatus, errorThrown){
-                   alert('request failed');
-                },
+                alert('request failed');
+            },
 
             // handle a non-successful response
             error : function(xhr,errmsg,err) {

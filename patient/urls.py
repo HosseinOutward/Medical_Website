@@ -10,4 +10,6 @@ urlpatterns = [
     path('labeling/<int:pk>', LabelingView.as_view(), name='labeling'),
     path('panel/', Panel.as_view(), name='base-panel'),
     path('upload/', UploadView.as_view(), name='upload'),
+
+    path('roundRobin/', round_robin, name='upload'),
 ]

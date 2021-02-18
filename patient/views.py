@@ -5,13 +5,14 @@ from base_app.CustomStuff import overwriteTempDicom
 from user.models import UserProfile
 from .serializers import *
 from rest_framework import viewsets
+from base_app.permissions import *
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
 
 
 class ImageDataAPI(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         if self.request.method == 'GET':
@@ -23,6 +24,14 @@ class ImageDataAPI(viewsets.ModelViewSet):
         if self.request.method == 'PUT' or self.request.method == 'PATCH':
             serializer_class = ImageSerializerUpdate
         return serializer_class
+
+    def get_permissions(self):
+        permission_classes = [IsAuthenticated & (IsLabeler | IsUploader)]
+        if self.action == 'GET':
+            permission_classes = [IsAuthenticated]
+        if self.request.method == 'PUT' or self.request.method == 'PATCH':
+            permission_classes = [IsAuthenticated & IsLabeler]
+        return [permission() for permission in permission_classes]
 
     def create(self, request):
         if request.FILES['image_imag'].name.lower().endswith('.dcm'):
@@ -47,6 +56,11 @@ class Panel(LoginRequiredMixin, CreateView):
         context["all_images_count"]=len(context["imagepatient_list"])
         context["labeled_images_count"]=len([0 for a in context["imagepatient_list"] if a.label_data_imag is not None])
         context["UserProfile"] = UserProfile.objects.filter(user_profile=self.request.user).get()
+
+        context["isBoss"]=self.request.user.groups.filter(name='boss').exists()
+        context["isUploader"]=self.request.user.groups.filter(name='uploader').exists()
+        context["isLabeler"]=self.request.user.groups.filter(name='labeler').exists()
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -67,6 +81,26 @@ class Panel(LoginRequiredMixin, CreateView):
         # nnService(self.object.image_imag.url, self.kwargs['patient_id'], len(ImagePatient.objects.filter(patient_imag=self.kwargs["patient_id"]))-1)
         # nnService.delay(self.object.image_imag.url, self.kwargs['patient_id'], len(ImagePatient.objects.filter(patient_imag=self.kwargs["patient_id"]))-1)
         return a
+
+
+@login_required
+def round_robin(request):
+    from django.http import HttpResponse, HttpResponseForbidden
+    from math import ceil
+
+    if not(request.user and request.user.groups.filter(name='boss')):
+        return HttpResponseForbidden()
+
+    all_obj=[img.pk for img in
+             ImagePatient.objects.filter(label_data_imag=None)]
+    all_labeler=User.objects.filter(groups__name='labeler')
+    count=ceil(len(all_obj)/len(all_labeler))
+    count=[[j for j in all_obj[i*count:(i+1)*count]]
+           for i in range(len(all_labeler))]
+    for pk_list, labeler in zip(count,all_labeler):
+        ImagePatient.objects.filter(pk__in=pk_list).update(assigned_doc_imag=labeler)
+
+    return HttpResponse()
 
 
 class ImageDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

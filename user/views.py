@@ -8,10 +8,15 @@ from base_app.permissions import *
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
+from patient.views import gen_context
 
 
 def registration(request):
     return render(request, 'page-register.html')
+
+
+def edit_role(request, *args, **kwargs):
+    return render(request, 'edit_role.html', gen_context(request))
 
 
 class UserAPIView(viewsets.ModelViewSet):

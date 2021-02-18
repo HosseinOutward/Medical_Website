@@ -1,0 +1,47 @@
+{% extends 'Base_HTML.html' %}
+{% block title %}نقش {% endblock %}
+{% block contents %}
+    <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>نقش را تعیین کنید</strong>
+                </div>
+                <div class="card-body card-block">
+                    <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <select id="role_assigned" multiple="" class="form-control" name="groups">
+                            <option value="1">boss</option>
+                            <option value="2">uploader</option>
+                            <option value="3" selected="">labeler</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <button id="sendButton" type="submit" class="btn btn-lg btn-info btn-block">
+                            <span >ارسال</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        const apiURL='/_api/user/'+indx+'/'
+        const successURL='/user_assignment'
+
+        $( "#sendButton" ).on( "click", function() {
+            var formData = new FormData();
+            formData.append('groups', $("#role_assigned").val());
+            $.ajax({
+                url: apiURL,
+                processData: false,
+                contentType: false,
+                data:formData,
+                type: 'PUT',
+                success: function(result) {window.location=successURL}
+            });
+
+        });
+    </script>
+{% endblock %}

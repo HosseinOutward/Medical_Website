@@ -6,10 +6,14 @@ rout=DefaultRouter()
 rout.register('image', ImageDataAPI, basename='image')
 
 urlpatterns = [
-    path('_api/', include(rout.urls)),
-    path('labeling/<int:pk>', LabelingView.as_view(), name='labeling'),
+    path('labeling/<int:pk>', labeling_view, name='labeling'),
+    path('upload/', upload_view, name='upload'),
+    path('image_list/', list_all_view, name='listing'),
+    path('user_assignment/', user_assignment_view, name='user-assignment'),
     path('panel/', Panel.as_view(), name='base-panel'),
-    path('upload/', UploadView.as_view(), name='upload'),
 
-    path('roundRobin/', round_robin, name='upload'),
+    path('roundRobin/', round_robin, name='roundRobin'),
+
+    path('_api/', include(rout.urls)),
+    path('_api/image_list/', ImageListAPI.as_view({"get":"list"}), name='ImageListAPI'),
 ]

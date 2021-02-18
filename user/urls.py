@@ -11,6 +11,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='base_panel/home.html'), name='logout'),
     path('login/', auth_views.LoginView.as_view(template_name='page-login.html'), name='login'),
     path('registration/', registration, name='User-create'),
+    path('edit_role/<int:pk>', edit_role, name='User-role'),
 
     path('_api/', include(rout.urls)),
 

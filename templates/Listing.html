@@ -1,0 +1,111 @@
+{% extends 'Base_HTML.html' %}
+{% block title %}پنل کاربری{% endblock %}
+{% block contents %}
+    <div class="col-xs-12">
+            <div class="card">
+                <div type="button" class="card-header">
+                    <strong class="card-title" style="text-align: center">تصاویر آپلود شده</strong>
+                    <p style="text-align: center">(آموزش مدل هوش مصنوعی)</p>
+                </div>
+                <!-- /.box-header -->
+                <div class="table-body table-responsive no-padding">
+                    <table id="Image_List" class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>شماره پرونده</th>
+                            <th>عکس</th>
+                            <th>وضعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                        <!-- /.in js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul id="pagination-nav" class="pagination">
+                    <!-- /.in js -->
+                </ul>
+            </nav>
+            <!-- /.box -->
+        </div>
+{% endblock %}
+{% block scripts %}
+    <script src="/static/vendors/chart.js/dist/Chart.bundle.min.js"></script>
+    <script>
+        var current_page = currentURL.searchParams.get("page")
+        if(current_page==null) {current_page=1}
+        else {current_page=+current_page}
+
+        const apiURL='/_api/image_list/?page='+current_page
+        const response = $.ajax({
+                url: apiURL,
+                dataType: 'json',
+                async: false,
+                type: 'GET',
+        });
+
+        var page_count = response.responseJSON.page_count
+    </script>
+    <script>
+        var image_list = response.responseJSON.results;
+
+        for(i=0; i<image_list.length; i++) {
+            var html = "<tr>";// real_id_imag
+            html += '<td>'+image_list[i].real_id_imag+'</td>';
+            html += '<td>'+image_list[i].image+'</td>';
+            if(image_list[i].label_data_imag != null){
+                html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span> </td>';
+                html += '<td> <a href=/labeling/'+image_list[i].pk+' type="button"\n' +
+                    'class="btn btn-outline-primary float-right"\n' +
+                    'style="font-size: 12px"> تغییر </a> </td>';
+            } else {
+                html += '<td> <span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span> </td>';
+                html += '<td> <a href=/labeling/'+image_list[i].pk+' type="button"\n' +
+                    'class="btn btn-outline-success float-right"\n' +
+                    'style="font-size: 12px"> شروع لیبل گذاری </a> </td>';
+            }
+            html += '</tr>';
+
+            $('#Image_List').find('tbody').append(html);
+        }
+    </script>
+    <script>
+        function make_html(link, sym)
+            {return '<li class="page-item"><a class="page-link" href="'+link+'">'+sym+'</a></li>'}
+
+        function make_link(page_num){
+            if(page_num<1){page_num=1}
+            if(page_num>page_count){page_num=page_count}
+            var url = currentURL
+            url.searchParams.set("page", page_num)
+            return url
+        }
+
+        var html=""
+
+        html += '<li class="page-item"> <a class="page-link" href="'+make_link(current_page-1)+'" aria-label="Previous">'+
+                    '<span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>'+
+                '</a> </li>'
+
+        html += make_html(make_link(1), 1)
+
+        if(current_page>=4 && page_count>=7){html += make_html("#", "…")}
+        if(current_page>=3 && page_count>=7){html += make_html(make_link(current_page-1), current_page-1)}
+
+        if(current_page!=1){html += make_html(make_link(current_page), current_page)}
+
+        if(current_page<=page_count-1 && page_count>=7){html += make_html(make_link(current_page+1), current_page+1)}
+        if(current_page<=page_count-1 && page_count>=7){html += make_html("#", "…")}
+
+        if(current_page!=page_count){html += make_html(make_link(page_count), page_count)}
+
+        html += '<li class="page-item"> <a class="page-link" href="'+make_link(current_page+1)+'" aria-label="Next">'+
+                    '<span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>'+
+                '</a> </li>'
+
+        $('#pagination-nav').append(html);
+    </script>
+{% endblock %}

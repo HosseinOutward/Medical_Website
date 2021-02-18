@@ -20,7 +20,23 @@
                             <h6 class="text-light display-6" style="text-align: center;">
                                 {{request.user.first_name}} {{request.user.last_name}}
                             </h6>
-                            <p style="padding: 0px;text-align: center">مدیر پروژه</p>
+                            {% if isBoss%}
+                            <li class="active">
+                                <p style="padding: 0px;text-align: center">مدیر پروژه</p>
+                            </li>
+                            {%elif isLabeler%}
+                            <li class="active">
+                                <p style="padding: 0px;text-align: center">لیبل گذار</p>
+                            </li>
+                            {%elif isUploader%}
+                            <li class="active">
+                                <p style="padding: 0px;text-align: center">آپلود گر</p>
+                            </li>
+                            {%else%}
+                            <li class="active">
+                                <p style="padding: 0px;text-align: center">no role</p>
+                            </li>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -48,7 +64,7 @@
                     <table id="Image_List" class="table table-hover">
                         <tbody>
                         <tr>
-                            <th>شماره تصویر</th>
+                            <th>شماره پرونده</th>
                             <th>عکس</th>
                             <th>وضعیت</th>
                             <th>عملیات</th>
@@ -90,7 +106,7 @@
 
         for(i=0; i<image_list.length; i++) {
             var html = "<tr>";// real_id_imag
-            html += '<td>'+image_list[i].pk+'</td>';
+            html += '<td>'+image_list[i].real_id_imag+'</td>';
             html += '<td>'+image_list[i].image+'</td>';
             if(image_list[i].label_data_imag != null){
                 html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span> </td>';

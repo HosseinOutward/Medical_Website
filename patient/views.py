@@ -1,6 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import CreateView, DeleteView, DetailView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
 from base_app.CustomStuff import overwriteTempDicom
 from user.models import UserProfile
 from .serializers import *
@@ -9,15 +8,20 @@ from base_app.permissions import *
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from rest_framework import mixins
 
 
 class ImageDataAPI(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get_queryset(self):
-        if self.request.method == 'GET':
-            return ImagePatient.objects.all().order_by('-label_data_imag')
-        return ImagePatient.objects.all()
+        queryset=ImagePatient.objects.all().order_by('-label_data_imag')
+        if not (IsLabeler().has_permission(self.request, None) or IsBoss().has_permission(self.request, None)):
+            queryset = queryset.filter(label_data_imag=None)
+        elif IsLabeler().has_permission(self.request, None):
+            queryset = queryset.filter(assigned_doc_imag=self.request.user)
+        return queryset
 
     def get_serializer_class(self):
         serializer_class = ImageSerializer
@@ -26,11 +30,13 @@ class ImageDataAPI(viewsets.ModelViewSet):
         return serializer_class
 
     def get_permissions(self):
-        permission_classes = [IsAuthenticated & (IsLabeler | IsUploader)]
-        if self.action == 'GET':
+        permission_classes = [IsAuthenticated & (IsBoss | IsLabeler | IsUploader)]
+        try: action=self.action.upper()
+        except AttributeError: action=None
+        if action == 'LIST':
             permission_classes = [IsAuthenticated]
-        if self.request.method == 'PUT' or self.request.method == 'PATCH':
-            permission_classes = [IsAuthenticated & IsLabeler]
+        elif action == 'PUT' or action == 'PATCH':
+            permission_classes = [IsAuthenticated & (IsLabeler| IsLabeler)]
         return [permission() for permission in permission_classes]
 
     def create(self, request):
@@ -41,6 +47,13 @@ class ImageDataAPI(viewsets.ModelViewSet):
             request.FILES['image_imag'].name = pngTempFile.name + ".png"
             request.FILES['image_imag'].size = getsizeof(pngTempFile)
         return super(ImageDataAPI, self).create(request)
+
+
+class ImageListAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated & (IsBoss | IsLabeler)]
+    serializer_class = ImageSerializer
+    queryset=ImagePatient.objects.all().order_by('-label_data_imag')
 
 
 class Panel(LoginRequiredMixin, CreateView):
@@ -103,45 +116,25 @@ def round_robin(request):
     return HttpResponse()
 
 
-class ImageDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = ImagePatient
-    template_name = 'patient/image_confirm_delete.html'
-
-    def get_object(self):
-        object=ImagePatient.objects.filter(patient_imag=self.kwargs["patient_id"])[self.kwargs["image_id"]]
-        self.pk=object.pk
-        return object
-
-    def get_success_url(self):
-        return reverse('patient-detail', kwargs={'pk': self.kwargs["patient_id"]})
-
-    def test_func(self):
-        patient = self.get_object().patient_imag
-        if patient.doctor_pati == self.request.user:
-            return True
-        return False
+def gen_context(request):
+    userP = UserProfile.objects.filter(user_profile=request.user).get()
+    isBoss=request.user.groups.filter(name='boss').exists()
+    isUploader=request.user.groups.filter(name='uploader').exists()
+    isLabeler=request.user.groups.filter(name='labeler').exists()
+    return {"UserProfile": userP, "isBoss":isBoss, "isUploader":isUploader, "isLabeler":isLabeler}
 
 
-class LabelingView(LoginRequiredMixin, SuccessMessageMixin, DetailView):
-    model = ImagePatient
-    template_name = 'label.html'
-    success_message = "label has been set"
-
-    def get_queryset(self):
-        return ImagePatient.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(LabelingView, self).get_context_data(**kwargs)
-        context["UserProfile"] = UserProfile.objects.filter(user_profile=self.request.user).get()
-        return context
+def user_assignment_view(request, *args, **kwargs):
+    return render(request, 'user_assignment.html', gen_context(request))
 
 
-class UploadView(LoginRequiredMixin, SuccessMessageMixin, ListView):
-    model = ImagePatient
-    template_name = 'uploader.html'
-    success_message = "Image has been added"
+def labeling_view(request, *args, **kwargs):
+    return render(request, 'label.html', gen_context(request))
 
-    def get_context_data(self, **kwargs):
-        context = super(UploadView, self).get_context_data(**kwargs)
-        context["UserProfile"] = UserProfile.objects.filter(user_profile=self.request.user).get()
-        return context
+
+def list_all_view(request, *args, **kwargs):
+    return render(request, 'listing.html', gen_context(request))
+
+
+def upload_view(request, *args, **kwargs):
+    return render(request, 'uploader.html', gen_context(request))

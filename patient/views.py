@@ -128,8 +128,10 @@ def user_assignment_view(request, *args, **kwargs):
     return render(request, 'user_assignment.html', gen_context(request))
 
 
-def labeling_view(request, *args, **kwargs):
-    return render(request, 'label.html', gen_context(request))
+def labeling_view(request, pk, *args, **kwargs):
+    context=gen_context(request)
+    context["object"]=ImagePatient.objects.filter(pk=pk).get()
+    return render(request, 'label.html', context)
 
 
 def list_all_view(request, *args, **kwargs):

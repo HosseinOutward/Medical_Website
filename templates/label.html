@@ -155,8 +155,8 @@
     	    $('#bronchial_graph').val(label.bronchial_graph)
     	    $('#interstitial_graph').val(label.interstitial_graph)
 
-            var label = JSON.parse(label.label_data_imag)
     	    $('#Opinion').val(label[label.length-1])
+            var label = JSON.parse(label.label_data_imag)
             label.splice(-1,1)
 
             let iframe = document.getElementById('render-editor');

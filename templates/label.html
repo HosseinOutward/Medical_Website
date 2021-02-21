@@ -156,7 +156,9 @@
     	    $('#interstitial_graph').val(label.interstitial_graph)
 
     	    $('#Opinion').val(label[label.length-1])
+
             var label = JSON.parse(label.label_data_imag)
+            if(label==null){ return null }
             label.splice(-1,1)
 
             let iframe = document.getElementById('render-editor');

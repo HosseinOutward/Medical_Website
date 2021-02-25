@@ -17,10 +17,13 @@ class ImageDataAPI(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset=ImagePatient.objects.all().order_by('-label_data_imag')
-        if not (IsLabeler().has_permission(self.request, None) or IsBoss().has_permission(self.request, None)):
-            queryset = queryset.filter(label_data_imag=None)
+        
+        if IsBoss().has_permission(self.request, None):
+            pass
         elif IsLabeler().has_permission(self.request, None):
             queryset = queryset.filter(assigned_doc_imag=self.request.user)
+        elif IsUploader().has_permission(self.request, None):
+            queryset = queryset.filter(label_data_imag=None)
         return queryset
 
     def get_serializer_class(self):

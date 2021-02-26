@@ -202,7 +202,7 @@
                         <div class="row form-group">
                             <div class="col col-md-3">
                                 <div id="img-container" style="width: 400px">
-                                    <img src={%  static "1.jpg" %} />
+                                    <img src={{object.image_imag.url}} />
                                 </div>
                             </div>
                         </div>
@@ -222,32 +222,32 @@
     <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
     <script>
         const apiURL='/_api/image/'
-        const successURL='/panel'
+        const successURL='/labeling/'+indx+'/'
 
         $( "#sendButton" ).on( "click", function() {
             var formData = new FormData();
             formData.append('real_id_imag', $("#real_id_imag").val());
             formData.append('image_imag', $('#file-input')[0].files[0]);
             formData.append('animal_type', $("#animal_type").val());
-            formData.append('maturity', $("#maturity").val());
+            formData.append('maturity',  $("#maturity").val());
             formData.append('body_type', $("#body_type").val());
-            formData.append('RL_graph', $("#RL_graph").val());
-            formData.append('VD_graph', $("#VD_graph").val());
-            formData.append('DV_graph', $("#DV_graph").val());
-            formData.append('LL_graph', $("#LL_graph").val());
+            formData.append('RL_graph',  $("#RL_graph").val());
+            formData.append('VD_graph',  $("#VD_graph").val());
+            formData.append('DV_graph',  $("#DV_graph").val());
+            formData.append('LL_graph',  $("#LL_graph").val());
             formData.append('HIS_breed', $("#HIS_type").val());
             formData.append('HIS_gender', $("#HIS_gender").val());
             formData.append('HIS_heart_sound', $("#HIS_heart_sound").val());
             formData.append('HIS_lung_sound', $("#HIS_lung_sound").val());
             formData.append('HIS_bronchial', $("#HIS_bronchial").val());
-            formData.append('HIS_interstitial',$("#HIS_interstitial").val());
+            formData.append('HIS_interstitial', $("#HIS_interstitial").val());
             formData.append('HIS_alveolar', $("#HIS_alveolar").val());
             $.ajax({
                 url: apiURL,
                 processData: false,
                 contentType: false,
                 data:formData,
-                type: 'POST',
+                type: 'PATCH',
                 success: function(result) {window.location=successURL}
             });
 
@@ -259,5 +259,35 @@
             offset: {vertical: 0, horizontal: -810}
         };
         new ImageZoom(document.getElementById("img-container"), options);
+    </script>
+    <script>
+        function initLabels(label) {
+            $("#real_id_imag").val(label.real_id_imag)
+            $("#animal_type").val(label.animal_type)
+            $("#maturity").val(label.maturity)
+            $("#body_type").val(label.body_type)
+            $("#RL_graph").val(label.RL_graph)
+            $("#VD_graph").val(label.VD_graph)
+            $("#DV_graph").val(label.DV_graph)
+            $("#LL_graph").val(label.LL_graph)
+            $("#HIS_type").val(label.HIS_type)
+            $("#HIS_gender").val(label.HIS_gender)
+            $("#HIS_heart_sound").val(label.HIS_heart_sound)
+            $("#HIS_lung_sound").val(label.HIS_lung_sound)
+            $("#HIS_bronchial").val(label.HIS_bronchial)
+            $("#HIS_interstitial").val(label.HIS_interstitial)
+            $("#HIS_alveolar").val(label.HIS_alveolar)
+        }
+
+        $(document).ready(function() {
+            const apiURL = '/_api/image/' + indx + '/'
+            var response = $.ajax({
+                url: apiURL,
+                dataType: 'json',
+                async: false,
+                type: 'GET',
+            });
+            initLabels(response.responseJSON)
+        });
     </script>
 {% endblock %}

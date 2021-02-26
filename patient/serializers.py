@@ -5,7 +5,10 @@ from rest_framework import serializers
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImagePatient
-        fields = ["pk", "assigned_doc_imag", "image_imag", "real_id_imag"]+col_names+["label_data_imag"]
+        fields = ["pk", "image_imag", "thumbnail_imag", "owner_name_imag",
+                  "label_data_imag", "pet_name_imag", "real_id_imag",
+                  "real_id_count_imag", "real_time_imag", "label_data_imag",
+                  "assigned_doc_imag", "last_edited_imag", "last_edited_by_imag", ]+col_names
         extra_kwargs = {
             'pk': {'read_only': True},
             'label_data_imag': {'read_only': True},
@@ -16,4 +19,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class ImageSerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = ImagePatient
-        fields = col_names+["label_data_imag"]
+        fields = ["pk", "image_imag", "thumbnail_imag", "owner_name_imag",
+                  "label_data_imag", "pet_name_imag", "real_id_imag",
+                  "real_id_count_imag", "real_time_imag", "label_data_imag",
+                  "assigned_doc_imag", "last_edited_imag", "last_edited_by_imag", ]+col_names

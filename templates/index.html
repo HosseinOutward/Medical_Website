@@ -67,6 +67,7 @@
                             <th>شماره پرونده</th>
                             <th>عکس</th>
                             <th>وضعیت</th>
+                            <th>لیبلینگ</th>
                             <th>عملیات</th>
                         </tr>
                         <!-- /.in js -->
@@ -119,6 +120,8 @@
                     'class="btn btn-outline-success float-right"\n' +
                     'style="font-size: 12px"> شروع لیبل گذاری </a> </td>';
             }
+            html += '<td> <a href="/edit_image/'+image_list[i].pk+'/" type="submit" class="btn btn-info ">\n' +
+                '            <span >تغییر اطلاعات ورودی</span></a></td>';
             html += '</tr>';
 
             $('#Image_List').find('tbody').append(html);

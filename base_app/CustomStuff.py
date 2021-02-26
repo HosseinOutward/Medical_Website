@@ -13,8 +13,8 @@ class CustomPagination(pagination.PageNumberPagination):
             ('results', data)
         ]))
 
-def overwriteTempDicom(image_data):
 
+def overwriteTempDicom(image_data):
     # *************
     from django.core.files.temp import NamedTemporaryFile
     import pydicom
@@ -49,3 +49,36 @@ def overwriteTempDicom(image_data):
     png_file.write(image_2d)
 
     return png_file
+
+
+def load_images(initial_path):
+    from os import listdir
+    from os.path import isfile, join
+    from PIL.Image import open as open_image
+    from patient.models import ImagePatient
+
+    list_files = [f for f in listdir(initial_path)
+                  if isfile(join(initial_path, f))]
+
+    for file_name in list_files:
+        image_file = open_image(initial_path+file_name)
+
+        file_name=file_name.split(".")[0]
+        if file_name.count("^")==1:
+            file_name=file_name.split("^")
+            owner_name=file_name[0]
+            if owner_name.count("_")==1:
+                pet_name=owner_name.split("_")[1]
+                owner_name=owner_name.split("_")[0]
+            else: pet_name=None
+            file_name=file_name[1]
+        file_name=file_name.split("_")
+        animal_type= file_name[0]
+        real_id=file_name[1]
+        real_time=file_name[2]
+        real_counter=file_name[3]
+
+        ImagePatient.objects.create()
+
+
+# load_images(r"C:\Users\No1\Desktop\asd")

@@ -104,6 +104,9 @@ def round_robin(request):
     from django.http import HttpResponse, HttpResponseForbidden
     from math import ceil
 
+    from os import getcwd
+    return HttpResponseForbidden(getcwd())
+
     if not(request.user and request.user.groups.filter(name='boss')):
         return HttpResponseForbidden()
 
@@ -129,6 +132,12 @@ def gen_context(request):
 
 def user_assignment_view(request, *args, **kwargs):
     return render(request, 'user_assignment.html', gen_context(request))
+
+
+def edit_image_data_view(request, pk, *args, **kwargs):
+    context=gen_context(request)
+    context["object"]=ImagePatient.objects.filter(pk=pk).get()
+    return render(request, 'edit_initial_image_data.html', context)
 
 
 def labeling_view(request, pk, *args, **kwargs):

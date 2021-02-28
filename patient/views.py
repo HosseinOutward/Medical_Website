@@ -51,6 +51,12 @@ class ImageDataAPI(viewsets.ModelViewSet):
             request.FILES['image_imag'].size = getsizeof(pngTempFile)
         return super(ImageDataAPI, self).create(request)
 
+    def update(self, request, pk, *args, **kwargs):
+        object = ImagePatient.objects.filter(pk=pk).get()
+        object.last_edited_by_imag = request.user
+        object.save()
+        return super(ImageDataAPI, self).update(request, *args, **kwargs)
+
 
 class ImageListAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]

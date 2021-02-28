@@ -173,8 +173,9 @@
             var canvas = iframe.contentDocument.getElementsByTagName("canvas").item(0);
 
             //scale points to correct pos.
-            for (i = 0; i < label.length-1; i++) {
+            for (i = 0; i < label.length; i++) {
                 if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}
+
                 for (j = 0; j < label[i].value.points.length; j++) {
                     label[i].value.points[j][0] = label[i].value.points[j][0] * canvas.offsetWidth / 100;
                     label[i].value.points[j][1] = label[i].value.points[j][1] * canvas.offsetHeight / 100;

@@ -56,12 +56,15 @@ def load_images(initial_path):
     from os.path import isfile, join
     from PIL.Image import open as open_image
     from patient.models import ImagePatient
+    from Medical_Website.settings import MEDIA_ROOT
 
     list_files = [f for f in listdir(initial_path)
                   if isfile(join(initial_path, f))]
 
     for file_name in list_files:
-        image_file = open_image(initial_path+file_name)
+        upload_to_path = ImagePatient.image_imag.field.upload_to
+        path_to_save = MEDIA_ROOT + "\\" + upload_to_path + self.image_imag.name
+        image_file = open_image(initial_path+"\\"+file_name)
 
         file_name=file_name.split(".")[0]
         if file_name.count("^")==1:
@@ -78,7 +81,11 @@ def load_images(initial_path):
         real_time=file_name[2]
         real_counter=file_name[3]
 
-        ImagePatient.objects.create()
+        ImagePatient.objects.create(
+            image_imag=image_file,
+            owner_name_imag=owner_name, pet_name_imag=pet_name,
+            animal_type=animal_type, real_id_imag=real_id,
+            real_time_imag=real_time, real_id_count_imag=real_counter)
 
 
 # load_images(r"C:\Users\No1\Desktop\asd")

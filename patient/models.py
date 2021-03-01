@@ -41,13 +41,13 @@ class ImagePatient(models.Model):
         from PIL.Image import open as open_image
         from Medical_Website.settings import MEDIA_ROOT
         if self.thumbnail_imag.name == "":
-            upload_to_path=ImagePatient.thumbnail_imag.field.upload_to
-            path_to_save=MEDIA_ROOT+"\\"+upload_to_path+r"\thumbnail"+self.image_imag.name
+            upload_to_path=ImagePatient.thumbnail_imag.field.upload_to\
+                           +r"\thumbnail"+self.image_imag.name.split("\\")[-1]
 
             img = open_image(self.image_imag.file)
             img.thumbnail((64, 64))
-            img.save(path_to_save)
-            self.thumbnail_imag=path_to_save
+            img.save(MEDIA_ROOT+"\\"+upload_to_path)
+            self.thumbnail_imag=upload_to_path
 
         # last edited time
         last_edited_time_imag = timezone.now()

@@ -1,6 +1,10 @@
 {% extends 'Base_HTML.html' %}
 {% block title %}لیبل گذاری{% endblock %}
 {% block contents %}
+    <div class="card-footer">
+        <button id="edit_initial_data" type="submit" class="btn btn-info ">
+            <span >تغییر اطلاعات ورودی</span></button>
+    </div>
     <div class="col-xs-12">
             <div class="card">
                 <div class="card-header">
@@ -45,112 +49,116 @@
             </div>
     </div>
     <div class="col-xs-12">
-            <div class="card">
-                <div class="card-header"> <strong>نظر متخصص</strong> </div>
-                <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="textarea-input"
-                                                             class=" form-control-label">نظر</label></div>
-                            <div class="col-12 col-md-9"><textarea name="textarea-input" id="Opinion"
-                                                                   rows="5" placeholder="متن خود را وارد کنید..."
-                                                                   class="form-control"></textarea></div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"> <strong>نظر متخصص</strong> </div>
+            <div class="card-body card-block">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="selectSm" class=" form-control-label">وضعیت بالا رفتن نای</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="trachea_deviation" id="trachea_deviation" class="form-control-sm form-control">
-                                <option value="1">trachea</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
+                        <div class="col col-md-3"><label for="textarea-input"
+                             class=" form-control-label">نظر</label></div>
+                        <div class="col-12 col-md-9"><textarea name="textarea-input" id="Opinion"
+                             rows="5" placeholder="متن خود را وارد کنید..." class="form-control"></textarea></div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="selectSm" class=" form-control-label">bulge غیر طبیعی در سایه قلب</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="bulge_graph" id="bulge_graph" class="form-control-sm form-control">
-                                <option value="1">bulge</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
+                </form>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="selectSm" class=" form-control-label">وضعیت بالا رفتن نای</label>
                     </div>
-                </div>
-                <div class="col-md-12">
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="selectSm"
-                                                                 class=" form-control-label">کاردیومگالی بر اساس گراف</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="cardiomegaly_graph" id="cardiomegaly_graph" class="form-control-sm form-control">
-                                        <option value="1">cardiomegaly</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                            </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="selectSm"class=" form-control-label">الگوی ریه alveolar بر اساس گراف</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="alveolar_graph" id="alveolar_graph" class="form-control-sm form-control">
-                                <option value="1">alveolar</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="selectSm"
-                                                                 class=" form-control-label">الگوی ریه bronchial بر اساس گراف</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="bronchial_graph" id="bronchial_graph" class="form-control-sm form-control">
-                                        <option value="1">bronchial</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                <div class="col-md-12">
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="selectSm"
-                                                                 class=" form-control-label">الگوی ریه intrestitial بر اساس گراف</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="interstitial_graph" id="interstitial_graph" class="form-control-sm form-control">
-                                        <option value="1">intrestitial</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                <div class="card-footer">
-                    <div>
-                        <button id="sendButton" type="submit"
-                                class="btn btn-lg btn-info btn-block">
-
-                            <span >ارسال</span>
-
-                        </button>
+                    <div class="col-12 col-md-9">
+                        <select name="trachea_deviation" id="trachea_deviation" class="form-control-sm form-control">
+                            <option value="1">trachea</option>
+                            <option value="0">No</option>
+                        </select>
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="selectSm" class=" form-control-label">bulge غیر طبیعی در سایه قلب</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select name="bulge_graph" id="bulge_graph" class="form-control-sm form-control">
+                            <option value="1">bulge</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="selectSm"
+                                                             class=" form-control-label">کاردیومگالی بر اساس گراف</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="cardiomegaly_graph" id="cardiomegaly_graph" class="form-control-sm form-control">
+                                    <option value="1">cardiomegaly</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="selectSm"class=" form-control-label">الگوی ریه alveolar بر اساس گراف</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select name="alveolar_graph" id="alveolar_graph" class="form-control-sm form-control">
+                            <option value="1">alveolar</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="selectSm"
+                                                             class=" form-control-label">الگوی ریه bronchial بر اساس گراف</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="bronchial_graph" id="bronchial_graph" class="form-control-sm form-control">
+                                    <option value="1">bronchial</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="col-md-12">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="selectSm"
+                                                             class=" form-control-label">الگوی ریه intrestitial بر اساس گراف</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="interstitial_graph" id="interstitial_graph" class="form-control-sm form-control">
+                                    <option value="1">intrestitial</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            <div class="card-footer">
+                <div>
+                    <button id="sendButton" type="submit"
+                            class="btn btn-lg btn-info btn-block">
+
+                        <span >ارسال</span>
+
+                    </button>
+                </div>
+            </div>
         </div>
+    </div>
 {% endblock %}
 {% block scripts %}
     <script>
         $('#myIframe').attr('src', "{% static 'iframe_html/labeling_app.html' %}?param1='{{object.image_imag.url}}'");
+    </script>
+    <script>
+        $( "#edit_initial_data" ).on( "click", function() {
+            window.location.replace("/edit_image/"+indx+'/');
+        });
     </script>
     <script>
         const apiURL='/_api/image/'+indx+'/'
@@ -206,8 +214,9 @@
             var canvas = iframe.contentDocument.getElementsByTagName("canvas").item(0);
 
             //scale points to correct pos.
-            for (i = 0; i < label.length-1; i++) {
+            for (i = 0; i < label.length; i++) {
                 if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}
+
                 for (j = 0; j < label[i].value.points.length; j++) {
                     label[i].value.points[j][0] = label[i].value.points[j][0] * canvas.offsetWidth / 100;
                     label[i].value.points[j][1] = label[i].value.points[j][1] * canvas.offsetHeight / 100;

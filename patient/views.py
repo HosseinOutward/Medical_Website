@@ -17,10 +17,13 @@ class ImageDataAPI(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset=ImagePatient.objects.all().order_by('-label_data_imag')
-        if not (IsLabeler().has_permission(self.request, None) or IsBoss().has_permission(self.request, None)):
-            queryset = queryset.filter(label_data_imag=None)
+        
+        if IsBoss().has_permission(self.request, None):
+            pass
         elif IsLabeler().has_permission(self.request, None):
             queryset = queryset.filter(assigned_doc_imag=self.request.user)
+        elif IsUploader().has_permission(self.request, None):
+            queryset = queryset.filter(label_data_imag=None)
         return queryset
 
     def get_serializer_class(self):
@@ -47,6 +50,12 @@ class ImageDataAPI(viewsets.ModelViewSet):
             request.FILES['image_imag'].name = pngTempFile.name + ".png"
             request.FILES['image_imag'].size = getsizeof(pngTempFile)
         return super(ImageDataAPI, self).create(request)
+
+    def update(self, request, pk, *args, **kwargs):
+        object = ImagePatient.objects.filter(pk=pk).get()
+        object.last_edited_by_imag = request.user
+        object.save()
+        return super(ImageDataAPI, self).update(request, *args, **kwargs)
 
 
 class ImageListAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -101,6 +110,9 @@ def round_robin(request):
     from django.http import HttpResponse, HttpResponseForbidden
     from math import ceil
 
+    from os import getcwd
+    return HttpResponseForbidden(getcwd())
+
     if not(request.user and request.user.groups.filter(name='boss')):
         return HttpResponseForbidden()
 
@@ -126,6 +138,12 @@ def gen_context(request):
 
 def user_assignment_view(request, *args, **kwargs):
     return render(request, 'user_assignment.html', gen_context(request))
+
+
+def edit_image_data_view(request, pk, *args, **kwargs):
+    context=gen_context(request)
+    context["object"]=ImagePatient.objects.filter(pk=pk).get()
+    return render(request, 'edit_initial_image_data.html', context)
 
 
 def labeling_view(request, pk, *args, **kwargs):

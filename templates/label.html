@@ -10,7 +10,40 @@
                 <iframe src="/static/iframe_html/labeling_app.html?image_URL={{object.image_imag.url}}"
                         __idm_frm__="1184" id="render-editor" style="height: 1300px;"></iframe>
             </div>
-        </div>
+    </div>
+    <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title" style="text-align: center">check box</strong>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">mill</th>
+                          <th scope="col">matemte</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <th scope="row">Brondnial</th>
+                            <td><input id="Brondinial_mill" type="checkbox"></td>
+                            <td><input id="Brondinial_matemte" type="checkbox"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Alveolar</th>
+                            <td><input type="checkbox" id="Alveolar_mill" ></td>
+                            <td><input type="checkbox" id="Alveolar_matemte"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Intrestitial</th>
+                            <td><input type="checkbox" id="Intrestitial_mill"></td>
+                            <td><input type="checkbox" id="Intrestitial_matemte"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
     <div class="col-xs-12">
             <div class="card">
                 <div class="card-header"> <strong>نظر متخصص</strong> </div>
@@ -139,7 +172,15 @@
                     "cardiomegaly_graph": $("#cardiomegaly_graph").val(),
                     "bulge_graph": $("#bulge_graph").val(),
                     "trachea_deviation": $("#trachea_deviation").val(),
-                    "label_data_imag": JSON.stringify(labels)
+
+                    "Brondinial_mill": $("#Brondinial_mill").is(":checked"),
+                    "Brondinial_matemte": $("#Brondinial_matemte").is(":checked"),
+                    "Alveolar_mill": $("#Alveolar_mill").is(":checked"),
+                    "Alveolar_matemte": $("#Alveolar_matemte").is(":checked"),
+                    "Intrestitial_mill": $("#Intrestitial_mill").is(":checked"),
+                    "Intrestitial_matemte": $("#Intrestitial_matemte").is(":checked"),
+
+                    "label_data_imag": JSON.stringify(labels),
                 }),
                 type: 'PATCH',
                 success: function(result) {window.location=successURL}

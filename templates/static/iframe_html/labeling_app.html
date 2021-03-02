@@ -60,18 +60,45 @@
                                  padding: 20px; margin-top: 2em;
                                  border-radius: 5px;'>
                                <Header style='text-align: center;' value='لیبل'/>
-                               <PolygonLabels  name='tag' toName='img' strokewidth='2' pointstyle='circle' pointsize='small' showInline='true'>
-                                   <Label value='brain' background='blue' />
-                                   <Label value='tumor' background='green' />
+                               <PolygonLabels  name='polygons' toName='img' strokewidth='2' pointstyle='circle' pointsize='small' showInline='true'>
+                                   <Label value='Heart' background='#A30505' />
+                                   <Label value='CVC' background= '#071852' />
+                                   <label value = 'Aorta' background='#520233'/>
                                </PolygonLabels>
                             </View>
                             <View style='box-shadow: 2px 2px 5px #999;padding: 20px; margin-top: 2em;border-radius: 5px;'>
-                                <Header style='text-align: center;' value='آیا کیس بیمار است'/>
-                                <Choices style='display: block; text-align: center;' name='rating' choice='single-radio' toName='img' showInline='true'>
-                                    <Choice value='بله'/>
-                                    <Choice value='خیر'/>
-                                    <Choice value='بدون نظر'/>
-                                </Choices>
+                                <Header style='text-align: center;' value='نقاط'/>
+                              <KeyPointLabels name="points1" toName="img" strokewidth="5">
+                                <Label value="T1" background="yellow"></Label>
+                                <Label value="T2" background="yellow"></Label>
+                                <Label value="T3" background="yellow"></Label>
+                                <Label value="T4" background="yellow"></Label>
+                                <Label value="T5" background="yellow"></Label>
+                                <Label value="T6" background="yellow"></Label>
+                                <Label value="T7" background="yellow"></Label>
+                                <Label value="T8" background="yellow"></Label>
+                                <Label value="T9" background="yellow"></Label>
+                                <Label value="T10" background="yellow"></Label>
+                                <Label value="T11" background="yellow"></Label>
+                                <Label value="T12" background="yellow"></Label>
+                                <Label value="T13" background="yellow"></Label>
+                              </KeyPointLabels>
+                            <KeyPointLabels name="points2" toName="img" strokewidth="5">
+                                <Label value="Max Aortic diameter" background="#520233"></Label>
+                              </KeyPointLabels>
+                            <KeyPointLabels name="points3" toName="img" strokewidth="5">
+                                <Label value="Cranial" background="red"></Label>
+                                <Label value="Cardio-mediastinal contact" background="red"></Label>
+                                <Label value="carina" background="red"></Label>
+                                <Label value="cranial cardiostenral contact" background="red"></Label>
+                                <Label value="Apex" background="red"></Label>
+                                <Label value="Caudal" background="red"></Label>
+                                <Label value="LA caudal border" background="red"></Label>
+                              </KeyPointLabels>
+                            <KeyPointLabels name="points4" toName="img" strokewidth="5">
+                                <Label value="ventral CVC" background="#071852"></Label>
+                                <Label value="Dorsal border of CVC" background="#071852"></Label>
+                              </KeyPointLabels>
                             </View>
                         </View>
                     </View>

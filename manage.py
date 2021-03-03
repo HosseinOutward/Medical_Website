@@ -19,5 +19,5 @@ def main():
 
 if __name__ == '__main__':
     import os
-    print(os.getcwd())
+    # os.chdir("/var/www/html/")
     main()

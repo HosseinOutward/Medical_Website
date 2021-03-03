@@ -38,15 +38,16 @@ class ImagePatient(models.Model):
 
     def save(self, *args, **kwargs):
         # thumbnail
+        import os
         from PIL.Image import open as open_image
         from Medical_Website.settings import MEDIA_ROOT
         if self.thumbnail_imag.name == "":
-            upload_to_path=ImagePatient.thumbnail_imag.field.upload_to\
-                           +r"\thumbnail"+self.image_imag.name.split("\\")[-1]
+            upload_to_path=os.path.join(ImagePatient.thumbnail_imag.field.upload_to,
+                                        "thumbnail",self.image_imag.name.split("\\")[-1])
 
             img = open_image(self.image_imag.file)
             img.thumbnail((64, 64))
-            img.save(MEDIA_ROOT.replace("/","\\")+"\\"+upload_to_path)
+            img.save(os.path.join(MEDIA_ROOT,upload_to_path))
             self.thumbnail_imag=upload_to_path
 
         # last edited time

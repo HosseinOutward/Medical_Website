@@ -72,7 +72,7 @@ def load_images(initial_path, name_ext):
             print(file_name)
             upload_to_path = path_join(
                 ImagePatient.image_imag.field.upload_to.replace("\\\\", "/"),
-                name_ext, file_name)
+                name_ext+file_name)
             path_to_save = path_join(MEDIA_ROOT, upload_to_path)
             open_image(path_join(initial_path,file_name)).save(path_to_save)
 

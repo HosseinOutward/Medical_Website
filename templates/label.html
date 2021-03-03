@@ -212,9 +212,14 @@
 
             let iframe = document.getElementById('render-editor');
             var canvas = iframe.contentDocument.getElementsByTagName("canvas").item(0);
-
             //scale points to correct pos.
             for (i = 0; i < label.length; i++) {
+
+                if (label[i].value.hasOwnProperty('keypointlabels')) {
+                    label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
+                    label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
+                    label[i].value.y = label[i].value.y * canvas.offsetWidth / 100
+                }
                 if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}
 
                 for (j = 0; j < label[i].value.points.length; j++) {

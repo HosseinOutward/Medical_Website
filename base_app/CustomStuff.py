@@ -59,6 +59,8 @@ def load_images(initial_path, name_ext):
     from Medical_Website.settings import MEDIA_ROOT
     from datetime import datetime
     from django.utils.timezone import make_aware
+    from Medical_Website.settings import BASE_DIR
+    from os.path import join as path_join
 
     list_files = [f for f in listdir(initial_path)
                   if isfile(join(initial_path, f))]
@@ -67,9 +69,11 @@ def load_images(initial_path, name_ext):
     print("starting to load images one by one")
     for file_name in list_files:
         print(file_name)
-        upload_to_path = ImagePatient.image_imag.field.upload_to + "\\" + name_ext + file_name
-        path_to_save = MEDIA_ROOT + "\\" + upload_to_path
-        open_image(initial_path+"\\"+file_name).save(path_to_save)
+        upload_to_path = path_join(
+            ImagePatient.image_imag.field.upload_to.replace("\\\\", "/"),
+            name_ext, file_name)
+        path_to_save = path_join(MEDIA_ROOT, upload_to_path)
+        open_image(path_join(initial_path,file_name)).save(path_to_save)
 
         name_parsed=file_name.split(".")[0]
         if name_parsed.count("^")==1:

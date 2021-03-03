@@ -18,6 +18,6 @@ def main():
 
 
 if __name__ == '__main__':
-    import os
-    # os.chdir("/var/www/html/")
+    import sys
+    # sys.path.append('/var/www/html/')
     main()

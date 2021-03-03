@@ -101,6 +101,8 @@ def load_images(initial_path, name_ext):
                 animal_type=animal_type_choices[animal_type.lower()],
                 real_time_imag=real_time, real_id_count_imag=real_counter)
         except Exception as e:
-            print(e)
             print("***error processing this file***:" + file_name)
+            print(repr(e))
+            print(e)
+            print(e.args)
 

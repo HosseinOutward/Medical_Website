@@ -43,7 +43,7 @@ class ImagePatient(models.Model):
         from Medical_Website.settings import MEDIA_ROOT
         if self.thumbnail_imag.name == "":
             upload_to_path=os.path.join(ImagePatient.thumbnail_imag.field.upload_to,
-                                        "thumbnail",self.image_imag.name.split("\\")[-1])
+                                        "thumbnail"+self.image_imag.name.split("\\")[-1])
 
             img = open_image(self.image_imag.file)
             img.thumbnail((64, 64))

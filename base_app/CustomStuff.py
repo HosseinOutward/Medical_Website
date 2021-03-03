@@ -68,35 +68,38 @@ def load_images(initial_path, name_ext):
 
     print("starting to load images one by one")
     for file_name in list_files:
-        print(file_name)
-        upload_to_path = path_join(
-            ImagePatient.image_imag.field.upload_to.replace("\\\\", "/"),
-            name_ext, file_name)
-        path_to_save = path_join(MEDIA_ROOT, upload_to_path)
-        open_image(path_join(initial_path,file_name)).save(path_to_save)
+        try:
+            print(file_name)
+            upload_to_path = path_join(
+                ImagePatient.image_imag.field.upload_to.replace("\\\\", "/"),
+                name_ext, file_name)
+            path_to_save = path_join(MEDIA_ROOT, upload_to_path)
+            open_image(path_join(initial_path,file_name)).save(path_to_save)
 
-        name_parsed=file_name.split(".")[0]
-        if name_parsed.count("^")==1:
-            name_parsed=name_parsed.split("^")
-            owner_name=name_parsed[0]
-            if owner_name.count("_")==1:
-                pet_name=owner_name.split("_")[1]
-                owner_name=owner_name.split("_")[0]
-            else: pet_name=None
-            name_parsed=name_parsed[1]
-        name_parsed=name_parsed.split("_")
-        animal_type= name_parsed[0]
-        real_id=name_parsed[1]
+            name_parsed=file_name.split(".")[0]
+            if name_parsed.count("^")==1:
+                name_parsed=name_parsed.split("^")
+                owner_name=name_parsed[0]
+                if owner_name.count("_")==1:
+                    pet_name=owner_name.split("_")[1]
+                    owner_name=owner_name.split("_")[0]
+                else: pet_name=None
+                name_parsed=name_parsed[1]
+            name_parsed=name_parsed.split("_")
+            animal_type= name_parsed[0]
+            real_id=name_parsed[1]
 
-        real_time=name_parsed[2].split("-")
-        real_time=[int(a) for a in real_time]
-        real_time=make_aware(datetime(real_time[0],real_time[1],real_time[2]))
+            real_time=name_parsed[2].split("-")
+            real_time=[int(a) for a in real_time]
+            real_time=make_aware(datetime(real_time[0],real_time[1],real_time[2]))
 
-        real_counter=name_parsed[3]
+            real_counter=name_parsed[3]
 
-        ImagePatient.objects.create(
-            image_imag=upload_to_path, owner_name_imag=owner_name,
-            pet_name_imag=pet_name, real_id_imag=real_id,
-            animal_type=animal_type_choices[animal_type.lower()],
-            real_time_imag=real_time, real_id_count_imag=real_counter)
+            ImagePatient.objects.create(
+                image_imag=upload_to_path, owner_name_imag=owner_name,
+                pet_name_imag=pet_name, real_id_imag=real_id,
+                animal_type=animal_type_choices[animal_type.lower()],
+                real_time_imag=real_time, real_id_count_imag=real_counter)
+        except:
+            print(file_name)
 

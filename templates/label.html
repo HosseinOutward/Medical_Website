@@ -181,12 +181,12 @@
                     "bulge_graph": $("#bulge_graph").val(),
                     "trachea_deviation": $("#trachea_deviation").val(),
 
-                    "Brondinial_mill": $("#Brondinial_mill").is(":checked"),
-                    "Brondinial_matemte": $("#Brondinial_matemte").is(":checked"),
-                    "Alveolar_mill": $("#Alveolar_mill").is(":checked"),
-                    "Alveolar_matemte": $("#Alveolar_matemte").is(":checked"),
-                    "Intrestitial_mill": $("#Intrestitial_mill").is(":checked"),
-                    "Intrestitial_matemte": $("#Intrestitial_matemte").is(":checked"),
+                    "Brondinial_mill": $("#Brondinial_mill").is(":checked") ? 1 : 0,
+                    "Brondinial_matemte": $("#Brondinial_matemte").is(":checked") ? 1 : 0,
+                    "Alveolar_mill": $("#Alveolar_mill").is(":checked") ? 1 : 0,
+                    "Alveolar_matemte": $("#Alveolar_matemte").is(":checked") ? 1 : 0,
+                    "Intrestitial_mill": $("#Intrestitial_mill").is(":checked") ? 1 : 0,
+                    "Intrestitial_matemte": $("#Intrestitial_matemte").is(":checked") ? 1 : 0,
 
                     "label_data_imag": JSON.stringify(labels),
                 }),
@@ -204,24 +204,27 @@
     	    $('#bronchial_graph').val(label.bronchial_graph)
     	    $('#interstitial_graph').val(label.interstitial_graph)
 
-    	    $('#Opinion').val(label[label.length-1])
+            $("#Brondinial_mill").prop("checked", label.Brondinial_mill)
+            $("#Brondinial_matemte").prop("checked", label.Brondinial_matemte)
+            $("#Alveolar_mill").prop("checked", label.Alveolar_mill)
+            $("#Alveolar_matemte").prop("checked", label.Alveolar_matemte)
+            $("#Intrestitial_mill").prop("checked", label.Intrestitial_mill)
+            $("#Intrestitial_matemte").prop("checked", label.Intrestitial_matemte)
 
             var label = JSON.parse(label.label_data_imag)
             if(label==null){ return null }
-            label.splice(-1,1)
+    	    $('#Opinion').val(label.splice(-1,1))
 
             let iframe = document.getElementById('render-editor');
             var canvas = iframe.contentDocument.getElementsByTagName("canvas").item(0);
-            //scale points to correct pos.
+            // scale points to correct pos.
             for (i = 0; i < label.length; i++) {
-
                 if (label[i].value.hasOwnProperty('keypointlabels')) {
                     label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
                     label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
-                    label[i].value.y = label[i].value.y * canvas.offsetWidth / 100
+                    label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
                 }
-                if (!label[i].value.hasOwnProperty('polygonlabels')){continue;}
-
+                if ( ! label[i].value.hasOwnProperty('polygonlabels') ){continue;}
                 for (j = 0; j < label[i].value.points.length; j++) {
                     label[i].value.points[j][0] = label[i].value.points[j][0] * canvas.offsetWidth / 100;
                     label[i].value.points[j][1] = label[i].value.points[j][1] * canvas.offsetHeight / 100;

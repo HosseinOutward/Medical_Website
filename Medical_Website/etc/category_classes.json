@@ -127,5 +127,41 @@
     {
       "no": 0,
       "alveolar": 1
+    },
+
+  "Brondinial_mill":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Brondinial_matemte":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Alveolar_mill":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Alveolar_matemte":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Intrestitial_mill":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Intrestitial_matemte":
+    {
+      "false": 0,
+      "true": 1
     }
 }

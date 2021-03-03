@@ -100,6 +100,7 @@ def load_images(initial_path, name_ext):
                 pet_name_imag=pet_name, real_id_imag=real_id,
                 animal_type=animal_type_choices[animal_type.lower()],
                 real_time_imag=real_time, real_id_count_imag=real_counter)
-        except:
+        except Exception as e:
+            print(e)
             print("***error processing this file***:" + file_name)
 

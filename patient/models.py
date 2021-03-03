@@ -46,7 +46,7 @@ class ImagePatient(models.Model):
 
             img = open_image(self.image_imag.file)
             img.thumbnail((64, 64))
-            img.save(MEDIA_ROOT+"\\"+upload_to_path)
+            img.save(MEDIA_ROOT.replace("/","\\")+"\\"+upload_to_path)
             self.thumbnail_imag=upload_to_path
 
         # last edited time

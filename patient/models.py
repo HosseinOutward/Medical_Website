@@ -3,15 +3,17 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
 import json
+from Medical_Website.settings import BASE_DIR
+from os.path import join as path_join
 
 
-categ_file=json.load(open(r"Medical_Website/etc/category_classes.json"))
+categ_file=json.load(open(path_join(BASE_DIR,"Medical_Website","etc","category_classes.json")))
 col_names=[col_n for col_n in categ_file]
 
 
 class ImagePatient(models.Model):
     image_imag = models.FileField(upload_to='patient_images')
-    thumbnail_imag = models.FileField(upload_to=r'patient_images\thumbnail')
+    thumbnail_imag = models.FileField(upload_to=path_join('patient_images','thumbnail'))
     owner_name_imag = models.CharField(max_length=20, blank=True, null=True)
     pet_name_imag = models.CharField(max_length=20, blank=True, null=True)
     animal_type = models.IntegerField(blank=True, null=True)
@@ -38,16 +40,15 @@ class ImagePatient(models.Model):
 
     def save(self, *args, **kwargs):
         # thumbnail
-        import os
         from PIL.Image import open as open_image
         from Medical_Website.settings import MEDIA_ROOT
         if self.thumbnail_imag.name == "":
-            upload_to_path=os.path.join(ImagePatient.thumbnail_imag.field.upload_to,
+            upload_to_path=path_join(ImagePatient.thumbnail_imag.field.upload_to,
                                         "thumbnail"+self.image_imag.name.split("\\")[-1])
 
             img = open_image(self.image_imag.file)
             img.thumbnail((64, 64))
-            img.save(os.path.join(MEDIA_ROOT,upload_to_path))
+            img.save(path_join(MEDIA_ROOT,upload_to_path))
             self.thumbnail_imag=upload_to_path
 
         # last edited time

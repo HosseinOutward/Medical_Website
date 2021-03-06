@@ -110,9 +110,6 @@ def round_robin(request):
     from django.http import HttpResponse, HttpResponseForbidden
     from math import ceil
 
-    from os import getcwd
-    return HttpResponseForbidden(getcwd())
-
     if not(request.user and request.user.groups.filter(name='boss')):
         return HttpResponseForbidden()
 

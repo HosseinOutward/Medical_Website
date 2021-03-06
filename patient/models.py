@@ -24,7 +24,7 @@ class ImagePatient(models.Model):
 
     # generating col according to values in json file
     for col_n in col_names:
-        exec(col_n + " = models.IntegerField(null=True, "
+        exec(col_n + " = models.IntegerField(null=True, blank=True,"
                 "choices=[list(reversed(class_obj)) "
                 "for class_obj in categ_file[col_n].items()])")
 

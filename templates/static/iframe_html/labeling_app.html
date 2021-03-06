@@ -55,20 +55,9 @@
                 config: `
                     <View style='display: flex'>
                         <View>
-                            <Image style='width: 100%' name='img' value='$image' showMousePos='true' brightness='true'     	zoom='true' showlabels='true' contrast='true' FloodFill ='true'  zoomControl='true' brightnessControl='true' contrastControl='true' />
-                            <View style='box-shadow: 2px 2px 5px #999;
-                                 padding: 20px; margin-top: 2em;
-                                 border-radius: 5px;'>
-                               <Header style='text-align: center;' value='لیبل'/>
-                               <PolygonLabels  name='polygons' toName='img' strokewidth='2' pointstyle='circle' pointsize='small' showInline='true'>
-                                   <Label value='Heart' background='#A30505' />
-                                   <Label value='CVC' background= '#071852' />
-                                   <label value = 'Aorta' background='#520233'/>
-                               </PolygonLabels>
-                            </View>
                             <View style='box-shadow: 2px 2px 5px #999;padding: 20px; margin-top: 2em;border-radius: 5px;'>
                                 <Header style='text-align: center;' value='نقاط'/>
-                              <KeyPointLabels name="points1" toName="img" strokewidth="5">
+                              <KeyPointLabels name="points1" toName="img" strokewidth="3">
                                 <Label value="T1" background="yellow"></Label>
                                 <Label value="T2" background="yellow"></Label>
                                 <Label value="T3" background="yellow"></Label>
@@ -82,6 +71,7 @@
                                 <Label value="T11" background="yellow"></Label>
                                 <Label value="T12" background="yellow"></Label>
                                 <Label value="T13" background="yellow"></Label>
+
                                 <Label value="Max Aortic diameter" background="#520233"></Label>
                                 <Label value="Cranial" background="red"></Label>
                                 <Label value="Cardio-mediastinal contact" background="red"></Label>
@@ -93,6 +83,19 @@
                                 <Label value="ventral CVC" background="#071852"></Label>
                                 <Label value="Dorsal border of CVC" background="#071852"></Label>
                               </KeyPointLabels>
+                            </View>
+
+                            <Image style='width: 100%' name='img' value='$image' showMousePos='true' brightness='true'     	zoom='true' showlabels='true' contrast='true' FloodFill ='true'  zoomControl='true' brightnessControl='true' contrastControl='true' />
+
+                            <View style='box-shadow: 2px 2px 5px #999;
+                                 padding: 20px; margin-top: 2em;
+                                 border-radius: 5px;'>
+                               <Header style='text-align: center;' value='لیبل'/>
+                               <PolygonLabels  name='polygons' toName='img' strokewidth='2' pointstyle='circle' pointsize='small' showInline='true'>
+                                   <Label value='Heart' background='#A30505' />
+                                   <Label value='CVC' background= '#071852' />
+                                   <label value = 'Aorta' background='#520233'/>
+                               </PolygonLabels>
                             </View>
                         </View>
                     </View>

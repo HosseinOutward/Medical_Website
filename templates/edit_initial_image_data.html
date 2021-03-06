@@ -19,13 +19,10 @@
                                 </div>
 
                                 <div class="col col-md-3">
-                                    <label for="selectSm" class=" form-control-label">نوع حیوان بر اساس گراف</label>
+                                    <label for="selectSm" class=" form-control-label">زمان پرونده</label>
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <select name="animal_type" id="animal_type" class="form-control-sm form-control">
-                                        <option value="0">Cat</option>
-                                        <option value="1">Dog</option>
-                                    </select>
+                                    <input type="real_id_imag" id="real_time_imag" class="form-control-sm form-control" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -197,6 +194,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="selectSm" class=" form-control-label">نوع حیوان بر اساس گراف</label>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <select name="animal_type" id="animal_type" class="form-control-sm form-control">
+                                        <option value="0">Cat</option>
+                                        <option value="1">Dog</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                     <div class="col-md-12">
                         <div class="row form-group">
@@ -263,6 +273,7 @@
     <script>
         function initLabels(label) {
             $("#real_id_imag").val(label.real_id_imag)
+            $("#real_time_imag").val(label.real_time_imag)
             $("#animal_type").val(label.animal_type)
             $("#maturity").val(label.maturity)
             $("#body_type").val(label.body_type)

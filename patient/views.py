@@ -110,8 +110,8 @@ def round_robin(request):
     from django.http import HttpResponse, HttpResponseForbidden
     from math import ceil
 
-    # if not(request.user and request.user.groups.filter(name='boss')):
-    #     return HttpResponseForbidden()
+    if not(request.user and request.user.groups.filter(name='boss')):
+        return HttpResponseForbidden()
 
     all_obj=[img.pk for img in
              ImagePatient.objects.filter(label_data_imag=None)]

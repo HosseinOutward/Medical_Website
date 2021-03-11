@@ -230,6 +230,7 @@
 {% endblock %}
 {% block scripts %}
     <script src="https://unpkg.com/js-image-zoom@0.4.1/js-image-zoom.js" type="application/javascript"></script>
+    <script src="https://unpkg.com/jalaali-js/dist/jalaali.js"></script>
     <script>
         const apiURL='/_api/image/'+indx+'/'
         const successURL='/labeling/'+indx+'/'
@@ -272,7 +273,7 @@
     </script>
     <script>
         function initLabels(label) {
-            $("#real_id_imag").val(label.real_id_imag)
+            $("#real_id_imag").val(toJalaliDate(label.real_id_imag))
             $("#real_time_imag").val(label.real_time_imag)
             $("#animal_type").val(label.animal_type)
             $("#maturity").val(label.maturity)
@@ -300,5 +301,13 @@
             });
             initLabels(response.responseJSON)
         });
+
+        function toJalaliDate(georgian) {
+            let year = parseInt(georgian.substring(0,4))
+            let month = parseInt(georgian.substring(5,7))
+            let day = parseInt(georgian.substring(8,10))
+            let date = jalaali.toJalaali(year,month,day)
+            return '' + date.jy + "/" + date.jm+ "/" + date.jd
+        }
     </script>
 {% endblock %}

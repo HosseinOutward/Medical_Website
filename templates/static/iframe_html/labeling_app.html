@@ -71,7 +71,6 @@
                                 <Label value="T11" background="yellow"></Label>
                                 <Label value="T12" background="yellow"></Label>
                                 <Label value="T13" background="yellow"></Label>
-
                                 <Label value="Max Aortic diameter ventral" background="#520233"></Label>
                                 <Label value="Max Aortic diameter dorsal" background="#520233"></Label>
                                 <Label value="Cranial" background="red"></Label>
@@ -93,6 +92,17 @@
                                    <Label value='CVC' background= '#071852' />
                                    <label value = 'Aorta' background='#520233'/>
                                </PolygonLabels>
+                            </View>
+
+                            <View style='box-shadow: 2px 2px 5px #999;
+                                 padding: 20px; margin-top: 2em;
+                                 border-radius: 5px;'>
+                               <Header style='text-align: center;' value='وضعیت ریه'/>
+                                <RectangleLabels name="box" toName="img">
+                                   <Label value='region 1' background='#A30505' />
+                                   <Label value='region 2' background= '#071852' />
+                                   <label value = 'region 3' background='#520233'/>
+                                </RectangleLabels>
                             </View>
                         </View>
                     </View>
@@ -129,6 +139,25 @@
             );
         });
     </script>
+
+<script>
+document.onkeydown = checkKey;
+var tempLen=document.getElementsByClassName("ant-tag").length;
+var tempI=-1;
+function checkKey(e) {
+    if (e.keyCode == "39") {
+
+			tempI=tempI+1;
+        document.getElementsByClassName("ant-tag")[tempI].click();
+
+    }
+else if (e.keyCode == "37") {
+
+	    tempI=tempI-1;
+		document.getElementsByClassName("ant-tag")[tempI].click();
+}
+    }
+</script>
 
 </body>
 </html>

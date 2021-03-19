@@ -15,10 +15,10 @@
                         __idm_frm__="1184" id="render-editor" style="height: 1500px;"></iframe>
             </div>
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-4">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title" style="text-align: center">check box</strong>
+                    <strong class="card-title" style="text-align: center">region 1</strong>
                     <table class="table">
                       <thead>
                         <tr>
@@ -30,18 +30,84 @@
                       <tbody>
                         <tr>
                             <th scope="row">Brondnial</th>
-                            <td><input id="Brondinial_mill" type="checkbox"></td>
-                            <td><input id="Brondinial_matemte" type="checkbox"></td>
+                            <td><input id="Brondinial_mild_1" type="checkbox"></td>
+                            <td><input id="Brondinial_moderate_1" type="checkbox"></td>
                         </tr>
                         <tr>
                           <th scope="row">Alveolar</th>
-                            <td><input type="checkbox" id="Alveolar_mill" ></td>
-                            <td><input type="checkbox" id="Alveolar_matemte"></td>
+                            <td><input type="checkbox" id="Alveolar_mild_1" ></td>
+                            <td><input type="checkbox" id="Alveolar_moderate_1"></td>
                         </tr>
                         <tr>
                           <th scope="row">Intrestitial</th>
-                            <td><input type="checkbox" id="Intrestitial_mill"></td>
-                            <td><input type="checkbox" id="Intrestitial_matemte"></td>
+                            <td><input type="checkbox" id="Intrestitial_mild_1"></td>
+                            <td><input type="checkbox" id="Intrestitial_moderate_1"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+        <div class="col-xs-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title" style="text-align: center">region 2</strong>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">mild</th>
+                          <th scope="col">moderate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <th scope="row">Brondnial</th>
+                            <td><input id="Brondinial_mild_2" type="checkbox"></td>
+                            <td><input id="Brondinial_moderate_2" type="checkbox"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Alveolar</th>
+                            <td><input type="checkbox" id="Alveolar_mild_2" ></td>
+                            <td><input type="checkbox" id="Alveolar_moderate_2"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Intrestitial</th>
+                            <td><input type="checkbox" id="Intrestitial_mild_2"></td>
+                            <td><input type="checkbox" id="Intrestitial_moderate_2"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+        <div class="col-xs-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title" style="text-align: center">region 3</strong>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">mild</th>
+                          <th scope="col">moderate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <th scope="row">Brondnial</th>
+                            <td><input id="Brondinial_mild_3" type="checkbox"></td>
+                            <td><input id="Brondinial_moderate_3" type="checkbox"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Alveolar</th>
+                            <td><input type="checkbox" id="Alveolar_mild_3" ></td>
+                            <td><input type="checkbox" id="Alveolar_moderate_3"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Intrestitial</th>
+                            <td><input type="checkbox" id="Intrestitial_mild_3"></td>
+                            <td><input type="checkbox" id="Intrestitial_moderate_3"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -70,7 +136,7 @@
                     <div class="col-12 col-md-9">
                         <select name="trachea_deviation" id="trachea_deviation" class="form-control-sm form-control">
                             <option value="1">trachea</option>
-                            <option value="0">No</option>
+                            <option value="0" selected>No</option>
                         </select>
                     </div>
                 </div>
@@ -83,7 +149,7 @@
                     <div class="col-12 col-md-9">
                         <select name="bulge_graph" id="bulge_graph" class="form-control-sm form-control">
                             <option value="1">bulge</option>
-                            <option value="0">No</option>
+                            <option value="0" selected>No</option>
                         </select>
                     </div>
                 </div>
@@ -95,7 +161,7 @@
                             <div class="col-12 col-md-9">
                                 <select name="cardiomegaly_graph" id="cardiomegaly_graph" class="form-control-sm form-control">
                                     <option value="1">cardiomegaly</option>
-                                    <option value="0">No</option>
+                                    <option value="0" selected>No</option>
                                 </select>
                             </div>
                         </div>
@@ -108,7 +174,7 @@
                     <div class="col-12 col-md-9">
                         <select name="alveolar_graph" id="alveolar_graph" class="form-control-sm form-control">
                             <option value="1">alveolar</option>
-                            <option value="0">No</option>
+                            <option value="0" selected>No</option>
                         </select>
                     </div>
                 </div>
@@ -120,7 +186,7 @@
                             <div class="col-12 col-md-9">
                                 <select name="bronchial_graph" id="bronchial_graph" class="form-control-sm form-control">
                                     <option value="1">bronchial</option>
-                                    <option value="0">No</option>
+                                    <option value="0" selected>No</option>
                                 </select>
                             </div>
                         </div>
@@ -133,7 +199,7 @@
                             <div class="col-12 col-md-9">
                                 <select name="interstitial_graph" id="interstitial_graph" class="form-control-sm form-control">
                                     <option value="1">intrestitial</option>
-                                    <option value="0">No</option>
+                                    <option value="0" selected>No</option>
                                 </select>
                             </div>
                         </div>
@@ -144,6 +210,16 @@
                             class="btn btn-lg btn-info btn-block">
 
                         <span >ارسال</span>
+
+                    </button>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div>
+                    <button id="nextButton" type="submit"
+                            class="btn btn-success btn-lg  btn-block">
+
+                        <span >عکس بعد</span>
 
                     </button>
                 </div>
@@ -181,12 +257,27 @@
                     "bulge_graph": $("#bulge_graph").val(),
                     "trachea_deviation": $("#trachea_deviation").val(),
 
-                    "Brondinial_mill": $("#Brondinial_mill").is(":checked") ? 1 : 0,
-                    "Brondinial_matemte": $("#Brondinial_matemte").is(":checked") ? 1 : 0,
-                    "Alveolar_mill": $("#Alveolar_mill").is(":checked") ? 1 : 0,
-                    "Alveolar_matemte": $("#Alveolar_matemte").is(":checked") ? 1 : 0,
-                    "Intrestitial_mill": $("#Intrestitial_mill").is(":checked") ? 1 : 0,
-                    "Intrestitial_matemte": $("#Intrestitial_matemte").is(":checked") ? 1 : 0,
+                    "Brondinial_mild_1": $("#Brondinial_mild_1").is(":checked") ? 1 : 0,
+                    "Brondinial_moderate_1": $("#Brondinial_moderate_1").is(":checked") ? 1 : 0,
+                    "Alveolar_mild_1": $("#Alveolar_mild_1").is(":checked") ? 1 : 0,
+                    "Alveolar_moderate_1": $("#Alveolar_moderate_1").is(":checked") ? 1 : 0,
+                    "Intrestitial_mild_1": $("#Intrestitial_mild_1").is(":checked") ? 1 : 0,
+                    "Intrestitial_moderate_1": $("#Intrestitial_moderate_1").is(":checked") ? 1 : 0,
+
+                    "Brondinial_mild_2": $("#Brondinial_mild_2").is(":checked") ? 1 : 0,
+                    "Brondinial_moderate_2": $("#Brondinial_moderate_2").is(":checked") ? 1 : 0,
+                    "Alveolar_mild_2": $("#Alveolar_mild_2").is(":checked") ? 1 : 0,
+                    "Alveolar_moderate_2": $("#Alveolar_moderate_2").is(":checked") ? 1 : 0,
+                    "Intrestitial_mild_2": $("#Intrestitial_mild_2").is(":checked") ? 1 : 0,
+                    "Intrestitial_moderate_2": $("#Intrestitial_moderate_2").is(":checked") ? 1 : 0,
+
+                    "Brondinial_mild_3": $("#Brondinial_mild_3").is(":checked") ? 1 : 0,
+                    "Brondinial_moderate_3": $("#Brondinial_moderate_3").is(":checked") ? 1 : 0,
+                    "Alveolar_mild_3": $("#Alveolar_mild_3").is(":checked") ? 1 : 0,
+                    "Alveolar_moderate_3": $("#Alveolar_moderate_3").is(":checked") ? 1 : 0,
+                    "Intrestitial_mild_3": $("#Intrestitial_mild_3").is(":checked") ? 1 : 0,
+                    "Intrestitial_moderate_3": $("#Intrestitial_moderate_3").is(":checked") ? 1 : 0,
+
 
                     "label_data_imag": JSON.stringify(labels),
                 }),
@@ -196,20 +287,40 @@
         });
     </script>
     <script>
+        function defaultVal(b) {
+            let a = b
+            if (a == null) a = 0
+            return a
+        }
         function initLabels(label) {
-            $('#trachea_deviation').val(label.trachea_deviation)
-    	    $('#bulge_graph').val(label.bulge_graph)
-    	    $('#cardiomegaly_graph').val(label.cardiomegaly_graph)
-    	    $('#alveolar_graph').val(label.alveolar_graph)
-    	    $('#bronchial_graph').val(label.bronchial_graph)
-    	    $('#interstitial_graph').val(label.interstitial_graph)
 
-            $("#Brondinial_mill").prop("checked", label.Brondinial_mill)
-            $("#Brondinial_matemte").prop("checked", label.Brondinial_matemte)
-            $("#Alveolar_mill").prop("checked", label.Alveolar_mill)
-            $("#Alveolar_matemte").prop("checked", label.Alveolar_matemte)
-            $("#Intrestitial_mill").prop("checked", label.Intrestitial_mill)
-            $("#Intrestitial_matemte").prop("checked", label.Intrestitial_matemte)
+            $('#trachea_deviation').val(defaultVal(label.trachea_deviation))
+    	    $('#bulge_graph').val(defaultVal(label.bulge_graph))
+    	    $('#cardiomegaly_graph').val(defaultVal(label.cardiomegaly_graph))
+    	    $('#alveolar_graph').val(defaultVal(label.alveolar_graph))
+    	    $('#bronchial_graph').val(defaultVal(label.bronchial_graph))
+    	    $('#interstitial_graph').val(defaultVal(label.interstitial_graph))
+
+            $("#Brondinial_mild_1").prop("checked", label.Brondinial_mild_1)
+            $("#Brondinial_moderate_1").prop("checked", label.Brondinial_moderate_1)
+            $("#Alveolar_mild_1").prop("checked", label.Alveolar_mild_1)
+            $("#Alveolar_moderate_1").prop("checked", label.Alveolar_moderate_1)
+            $("#Intrestitial_mild_1").prop("checked", label.Intrestitial_mild_1)
+            $("#Intrestitial_moderate_1").prop("checked", label.Intrestitial_moderate_1)
+
+            $("#Brondinial_mild_2").prop("checked", label.Brondinial_mild_2)
+            $("#Brondinial_moderate_2").prop("checked", label.Brondinial_moderate_2)
+            $("#Alveolar_mild_2").prop("checked", label.Alveolar_mild_2)
+            $("#Alveolar_moderate_2").prop("checked", label.Alveolar_moderate_2)
+            $("#Intrestitial_mild_2").prop("checked", label.Intrestitial_mild_2)
+            $("#Intrestitial_moderate_2").prop("checked", label.Intrestitial_moderate_2)
+
+            $("#Brondinial_mild_3").prop("checked", label.Brondinial_mild_3)
+            $("#Brondinial_moderate_3").prop("checked", label.Brondinial_moderate_3)
+            $("#Alveolar_mild_3").prop("checked", label.Alveolar_mild_3)
+            $("#Alveolar_moderate_3").prop("checked", label.Alveolar_moderate_3)
+            $("#Intrestitial_mild_3").prop("checked", label.Intrestitial_mild_3)
+            $("#Intrestitial_moderate_3").prop("checked", label.Intrestitial_moderate_3)
 
             var label = JSON.parse(label.label_data_imag)
             if(label==null){ return null }
@@ -221,6 +332,13 @@
             for (i = 0; i < label.length; i++) {
                 if (label[i].value.hasOwnProperty('keypointlabels')) {
                     label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
+                    label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
+                    label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
+                }
+
+                if (label[i].value.hasOwnProperty('rectangleLabels')) {
+                    label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
+                    label[i].value.height = label[i].value.height * canvas.offsetHeight / 100
                     label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
                     label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
                 }
@@ -237,6 +355,14 @@
 
         $('#render-editor').on("load", function () {
             $(document).ready(function() {
+
+                window.onload = function() {
+                    if(!window.location.hash) {
+                        window.location = window.location + '#loaded/' + indx + '/';
+                        window.location.reload();
+                    }
+                }
+
                 const apiURL = '/_api/image/' + indx + '/'
                 var response = $.ajax({
                     url: apiURL,
@@ -244,6 +370,7 @@
                     async: false,
                     type: 'GET',
                 });
+                {#setTimeout(initLabels(response.responseJSON), 400)#}
                 initLabels(response.responseJSON)
             });
         });

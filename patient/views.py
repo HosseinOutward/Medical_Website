@@ -10,6 +10,9 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from rest_framework import mixins
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
 
 
 class ImageDataAPI(viewsets.ModelViewSet):
@@ -106,12 +109,27 @@ class Panel(LoginRequiredMixin, CreateView):
 
 
 @login_required
+@api_view(['GET'])
+def next_to_label(request):
+    queryset=ImagePatient.objects.all().order_by('-label_data_imag')
+    if IsBoss().has_permission(request, None):
+        pass
+    elif IsLabeler().has_permission(request, None):
+        queryset = queryset.filter(assigned_doc_imag=request.user)
+    else: return Response(status=status.HTTP_403_FORBIDDEN)
+
+    next_url=queryset[0].get_absolute_url()
+
+    return Response({"next_url": next_url}, status=status.HTTP_200_OK)
+
+
+@login_required
+@api_view(['GET'])
 def round_robin(request):
-    from django.http import HttpResponse, HttpResponseForbidden
     from math import ceil
 
     if not(request.user and request.user.groups.filter(name='boss')):
-        return HttpResponseForbidden()
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
     all_obj=[img.pk for img in
              ImagePatient.objects.filter(label_data_imag=None)]
@@ -122,7 +140,7 @@ def round_robin(request):
     for pk_list, labeler in zip(count,all_labeler):
         ImagePatient.objects.filter(pk__in=pk_list).update(assigned_doc_imag=labeler)
 
-    return HttpResponse()
+    return Response(status=status.HTTP_200_OK)
 
 
 def gen_context(request):

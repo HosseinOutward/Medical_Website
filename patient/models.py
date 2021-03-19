@@ -36,7 +36,7 @@ class ImagePatient(models.Model):
                             blank=True, null=True, related_name='last_edited_by_imag')
 
     def get_absolute_url(self):
-        return reverse('labeling', kwargs={'pk': self.pk, 'slug': self.slug})
+        return reverse('labeling', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         # thumbnail

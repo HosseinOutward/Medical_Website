@@ -68,7 +68,7 @@
                                 <div class="col-12 col-md-3">
                                     <select name="VD_graph" id="VD_graph" class="form-control-sm form-control">
                                         <option value="1">VD</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                     </select>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                 <div class="col-12 col-md-3">
                                     <select name="DV_graph" id="DV_graph" class="form-control-sm form-control">
                                         <option value="1">DV</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                     </select>
                                 </div>
 
@@ -91,22 +91,13 @@
                                 <div class="col-12 col-md-3">
                                     <select name="LL_graph" id="LL_graph" class="form-control-sm form-control">
                                         <option value="1">LL</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="selectSm" class=" form-control-label">وضعیت بالا رفتن نای</label>
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <select name="trachea_deviation" id="trachea_deviation" class="form-control-sm form-control">
-                                        <option value="1">Trachea</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
 
                                 <div class="col col-md-3">
                                     <label for="selectSm" class=" form-control-label">نژاد بر اساس HIS</label>
@@ -144,7 +135,7 @@
                                 <div class="col-12 col-md-3">
                                     <select name="HIS_heart_sound" id="HIS_heart_sound" class="form-control-sm form-control">
                                         <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                         <option value="2">نامشخص</option>
                                     </select>
                                 </div>
@@ -169,7 +160,7 @@
                                 <div class="col-12 col-md-3">
                                     <select name="HIS_bronchial" id="HIS_bronchial" class="form-control-sm form-control">
                                         <option value="1">bronchial</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                     </select>
                                 </div>
                             </div>
@@ -182,7 +173,7 @@
                                 <div class="col-12 col-md-3">
                                     <select name="HIS_interstitial" id="HIS_interstitial" class="form-control-sm form-control">
                                         <option value="1">intrestitial</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                     </select>
                                 </div>
 
@@ -192,7 +183,7 @@
                                 <div class="col-12 col-md-3">
                                     <select name="HIS_alveolar" id="HIS_alveolar" class="form-control-sm form-control">
                                         <option value="1">alveolar</option>
-                                        <option value="0">No</option>
+                                        <option value="0" selected>No</option>
                                     </select>
                                 </div>
                             </div>
@@ -276,8 +267,8 @@
     </script>
     <script>
         function initLabels(label) {
-            $("#real_id_imag").val(toJalaliDate(label.real_id_imag))
-            $("#real_time_imag").val(label.real_time_imag)
+            $("#real_id_imag").val(label.real_id_imag)
+            $("#real_time_imag").val(toJalaliDate(label.real_time_imag))
             $("#animal_type").val(label.animal_type)
             $("#maturity").val(label.maturity)
             $("#body_type").val(label.body_type)

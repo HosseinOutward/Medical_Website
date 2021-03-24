@@ -137,6 +137,7 @@
                         <select name="trachea_deviation" id="trachea_deviation" class="form-control-sm form-control">
                             <option value="1">trachea</option>
                             <option value="0" selected>No</option>
+                            <option value="2">نامشخص</option>
                         </select>
                     </div>
                 </div>
@@ -150,6 +151,7 @@
                         <select name="bulge_graph" id="bulge_graph" class="form-control-sm form-control">
                             <option value="1">bulge</option>
                             <option value="0" selected>No</option>
+                            <option value="2">نامشخص</option>
                         </select>
                     </div>
                 </div>
@@ -162,6 +164,7 @@
                                 <select name="cardiomegaly_graph" id="cardiomegaly_graph" class="form-control-sm form-control">
                                     <option value="1">cardiomegaly</option>
                                     <option value="0" selected>No</option>
+                                    <option value="2">نامشخص</option>
                                 </select>
                             </div>
                         </div>
@@ -203,7 +206,20 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+            </div>
+
+            <div class="col-md-12">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="selectSm"
+                                                             class=" form-control-label">عارضه غیر طبیعی در قفسه سینه</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="chest_abnormality" id="chest_abnormality" class="form-control-sm form-control">
+                                    <option value="1">yes</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                            </div>
+                        </div>
+            </div>
             <div class="card-footer">
                 <div>
                     <button id="sendButton" type="submit"
@@ -224,6 +240,16 @@
                     </button>
                 </div>
             </div>
+             <div class="card-footer">
+                <div>
+                    <button id="deleteButton" type="submit"
+                            class="btn btn-danger btn-lg  btn-block">
+
+                        <span >حذف</span>
+
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -235,6 +261,24 @@
         $( "#edit_initial_data" ).on( "click", function() {
             window.location.replace("/edit_image/"+indx+'/');
         });
+    </script>
+    <script>
+        const apiURL='/_api/image/'+indx+'/'
+        const successURL='/panel'
+
+        $('#deleteButton').on("click", function () {
+            $(document).ready(function() {
+                const apiURL = '/_api/image/' + indx + '/'
+                $.ajax({
+                    url: apiURL,
+                    dataType: 'json',
+                    async: false,
+                    type: 'DELETE',
+                    success: function(result) {window.location=successURL}
+                });
+            });
+        });
+
     </script>
     <script>
         const apiURL='/_api/image/'+indx+'/'
@@ -256,6 +300,7 @@
                     "cardiomegaly_graph": $("#cardiomegaly_graph").val(),
                     "bulge_graph": $("#bulge_graph").val(),
                     "trachea_deviation": $("#trachea_deviation").val(),
+                    "chest_abnormality":  $("#chest_abnormality").val(),
 
                     "Brondinial_mild_1": $("#Brondinial_mild_1").is(":checked") ? 1 : 0,
                     "Brondinial_moderate_1": $("#Brondinial_moderate_1").is(":checked") ? 1 : 0,
@@ -300,6 +345,7 @@
     	    $('#alveolar_graph').val(defaultVal(label.alveolar_graph))
     	    $('#bronchial_graph').val(defaultVal(label.bronchial_graph))
     	    $('#interstitial_graph').val(defaultVal(label.interstitial_graph))
+            $('#chest_abnormality').val(defaultVal(label.chest_abnormality))
 
             $("#Brondinial_mild_1").prop("checked", label.Brondinial_mild_1)
             $("#Brondinial_moderate_1").prop("checked", label.Brondinial_moderate_1)

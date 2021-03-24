@@ -64,19 +64,22 @@
   "cardiomegaly_graph":
     {
       "no": 0,
-      "cardiomegaly": 1
+      "cardiomegaly": 1,
+      "N/A": 2
     },
 
   "bulge_graph":
     {
       "no": 0,
-      "bulge": 1
+      "bulge": 1,
+      "N/A": 2
     },
 
   "trachea_deviation":
     {
       "no": 0,
-      "trachea": 1
+      "trachea": 1,
+      "N/A": 2
     },
 
 
@@ -88,7 +91,8 @@
       "other": 3,
       "schitsue": 4,
       "terrier": 5,
-      "poodle": 6
+      "poodle": 6,
+      "N/A": 7
     },
 
 
@@ -102,13 +106,15 @@
   "HIS_heart_sound":
     {
       "no": 0,
-      "yes": 1
+      "yes": 1,
+      "N/A": 2
     },
 
   "HIS_lung_sound":
     {
       "no": 0,
-      "yes": 1
+      "yes": 1,
+      "N/A": 2
     },
 
   "HIS_bronchial":
@@ -129,37 +135,123 @@
       "alveolar": 1
     },
 
-  "Brondinial_mill":
+  "chest_abnormality":
+    {
+      "no": 0,
+      "yes": 1
+    },
+
+
+
+
+  "Brondinial_mild_1":
     {
       "false": 0,
       "true": 1
     },
 
-  "Brondinial_matemte":
+  "Brondinial_moderate_1":
     {
       "false": 0,
       "true": 1
     },
 
-  "Alveolar_mill":
+  "Alveolar_mild_1":
     {
       "false": 0,
       "true": 1
     },
 
-  "Alveolar_matemte":
+  "Alveolar_moderate_1":
     {
       "false": 0,
       "true": 1
     },
 
-  "Intrestitial_mill":
+  "Intrestitial_mild_1":
     {
       "false": 0,
       "true": 1
     },
 
-  "Intrestitial_matemte":
+  "Intrestitial_moderate_1":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+
+
+
+  "Brondinial_mild_2":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Brondinial_moderate_2":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Alveolar_mild_2":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Alveolar_moderate_2":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Intrestitial_mild_2":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Intrestitial_moderate_2":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+
+
+  "Brondinial_mild_3":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Brondinial_moderate_3":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Alveolar_mild_3":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Alveolar_moderate_3":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Intrestitial_mild_3":
+    {
+      "false": 0,
+      "true": 1
+    },
+
+  "Intrestitial_moderate_3":
     {
       "false": 0,
       "true": 1

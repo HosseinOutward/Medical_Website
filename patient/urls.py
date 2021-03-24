@@ -14,7 +14,7 @@ urlpatterns = [
     path('panel/', Panel.as_view(), name='base-panel'),
 
     path('roundRobin/', round_robin, name='roundRobin'),
-    path('next_to_label/', next_to_label, name='next_to_label'),
+    path('_api/next_to_label/', next_to_label, name='next_to_label'),
 
     path('_api/', include(rout.urls)),
     path('_api/image_list/', ImageListAPI.as_view({"get":"list"}), name='ImageListAPI'),

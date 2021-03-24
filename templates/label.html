@@ -3,7 +3,10 @@
 {% block contents %}
     <div class="card-footer">
         <button id="edit_initial_data" type="submit" class="btn btn-info ">
-            <span >تغییر اطلاعات ورودی</span></button>
+            <span >تغییر اطلاعات ورودی</span> </button>
+        <a>______</a>
+        <button id="deleteButton" type="submit" class="btn btn-danger">
+            <span >حذف</span> </button>
     </div>
     <div class="col-xs-12">
             <div class="card">
@@ -240,16 +243,6 @@
                     </button>
                 </div>
             </div>
-             <div class="card-footer">
-                <div>
-                    <button id="deleteButton" type="submit"
-                            class="btn btn-danger btn-lg  btn-block">
-
-                        <span >حذف</span>
-
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}
@@ -263,12 +256,11 @@
         });
     </script>
     <script>
-        const apiURL='/_api/image/'+indx+'/'
-        const successURL='/panel'
 
         $('#deleteButton').on("click", function () {
             $(document).ready(function() {
-                const apiURL = '/_api/image/' + indx + '/'
+                var apiURL='/_api/image/'+indx+'/'
+                var successURL='/panel'
                 $.ajax({
                     url: apiURL,
                     dataType: 'json',
@@ -281,14 +273,26 @@
 
     </script>
     <script>
-        const apiURL='/_api/image/'+indx+'/'
-        const successURL='/panel'
+        $('#nextButton').on("click", function () {
+            const apiURL = '/_api/next_to_label/'
+            var response = $.ajax({
+                url: apiURL,
+                dataType: 'json',
+                async: false,
+                type: 'get'
+            });
+            window.location=response.responseJSON.next_url
+        });
 
+    </script>
+    <script>
         $( "#sendButton" ).on( "click", function() {
             let iframe = document.getElementById('render-editor');
             let Htx = iframe.contentWindow.Htx;
             labels=Htx.completionStore.selected.serializeCompletion();
             labels.push($("#Opinion").val());
+            var apiURL='/_api/image/'+indx+'/'
+            var successURL='/panel'
             $.ajax({
                 url: apiURL,
                 contentType: 'application/json',
@@ -409,14 +413,14 @@
                     }
                 }
 
-                const apiURL = '/_api/image/' + indx + '/'
+                var apiURL='/_api/image/'+indx+'/'
                 var response = $.ajax({
                     url: apiURL,
                     dataType: 'json',
                     async: false,
                     type: 'GET',
                 });
-                {#setTimeout(initLabels(response.responseJSON), 400)#}
+                // {#setTimeout(initLabels(response.responseJSON), 400)#}
                 initLabels(response.responseJSON)
             });
         });

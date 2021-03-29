@@ -131,7 +131,7 @@ def aasdasd(request):
 #     # obj=ImagePatient.objects.first()
 #     # obj.thumbnail_imag = ""
 #     # obj.save()
-    load_images(r"/root/96_res", "")
+    load_images(r"/root/97_res", "")
 #
 #     from timeit import default_timer as timer
 #     start = timer()

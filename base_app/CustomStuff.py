@@ -118,23 +118,21 @@ def load_images(initial_path, name_ext):
             print(e.args)
 
 
-# from base_app.CustomStuff import aasdasd
-# path('_DEV/load_new_images/', aasdasd, name='load_new_images'),
-# from rest_framework.decorators import api_view
-# @api_view(['GET'])
-# def aasdasd(request):
-#     from rest_framework.response import Response
-#     from rest_framework import status
+from rest_framework.decorators import api_view
+@api_view(['GET'])
+def aasdasd(request):
+    from rest_framework.response import Response
+    from rest_framework import status
 #
 #     # from patient.models import ImagePatient
 #     # obj=ImagePatient.objects.first()
 #     # obj.thumbnail_imag = ""
 #     # obj.save()
-#     # load_images(r"C:\Users\No1\Desktop\a", "")
+    load_images(r"/root/95_res", "")
 #
 #     from timeit import default_timer as timer
 #     start = timer()
 #     load_images(r"C:\Users\No1\Desktop\a", "")
 #     print(timer() - start)
 #
-#     return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)

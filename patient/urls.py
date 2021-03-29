@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import *
+from base_app.CustomStuff import aasdasd
 
 rout=DefaultRouter()
 rout.register('image', ImageDataAPI, basename='image')
@@ -13,6 +14,7 @@ urlpatterns = [
     path('user_assignment/', user_assignment_view, name='user-assignment'),
     path('panel/', Panel.as_view(), name='base-panel'),
 
+    path('_DEV/load_new_images/', aasdasd, name='load_new_images'),
     path('_api/roundRobin/', round_robin, name='roundRobin'),
     path('_api/next_to_label/', next_to_label, name='next_to_label'),
 

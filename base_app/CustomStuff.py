@@ -74,6 +74,9 @@ def load_images(initial_path, name_ext):
         print()
         print(file_name)
 
+        if file_name.endswith('.dcm'):
+            print("is DCM file")
+            continue
         if len([e for e in current_objects if file_name in e])!=0:
             print("already in db")
             continue
@@ -128,7 +131,7 @@ def aasdasd(request):
 #     # obj=ImagePatient.objects.first()
 #     # obj.thumbnail_imag = ""
 #     # obj.save()
-    load_images(r"/root/95_res", "")
+    load_images(r"/root/96_res", "")
 #
 #     from timeit import default_timer as timer
 #     start = timer()

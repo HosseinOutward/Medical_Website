@@ -13,7 +13,7 @@ urlpatterns = [
     path('user_assignment/', user_assignment_view, name='user-assignment'),
     path('panel/', Panel.as_view(), name='base-panel'),
 
-    path('roundRobin/', round_robin, name='roundRobin'),
+    path('_api/roundRobin/', round_robin, name='roundRobin'),
     path('_api/next_to_label/', next_to_label, name='next_to_label'),
 
     path('_api/', include(rout.urls)),

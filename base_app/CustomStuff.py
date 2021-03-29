@@ -59,8 +59,11 @@ def load_images(initial_path, name_ext):
     from Medical_Website.settings import MEDIA_ROOT
     from datetime import datetime
     from django.utils.timezone import make_aware
-    from Medical_Website.settings import BASE_DIR
+    from shutil import copyfile
     from os.path import join as path_join
+
+    current_objects = ImagePatient.objects.all()
+    current_objects = [e.image_imag.name for e in current_objects]
 
     list_files = [f for f in listdir(initial_path)
                   if isfile(join(initial_path, f))]
@@ -68,13 +71,21 @@ def load_images(initial_path, name_ext):
 
     print("starting to load images one by one")
     for file_name in list_files:
+        print()
+        print(file_name)
+
+        if len([e for e in current_objects if file_name in e])!=0:
+            print("already in db")
+            continue
+
         try:
-            print(file_name)
             upload_to_path = path_join(
                 ImagePatient.image_imag.field.upload_to.replace("\\\\", "/"),
                 name_ext+file_name)
             path_to_save = path_join(MEDIA_ROOT, upload_to_path)
-            open_image(path_join(initial_path,file_name)).save(path_to_save)
+
+            open_image(path_join(initial_path, file_name))
+            copyfile(path_join(initial_path, file_name), path_to_save)
 
             name_parsed=file_name.split(".")[0]
             if name_parsed.count("^")==1:
@@ -106,3 +117,24 @@ def load_images(initial_path, name_ext):
             print(e)
             print(e.args)
 
+
+# from base_app.CustomStuff import aasdasd
+# path('_DEV/load_new_images/', aasdasd, name='load_new_images'),
+# from rest_framework.decorators import api_view
+# @api_view(['GET'])
+# def aasdasd(request):
+#     from rest_framework.response import Response
+#     from rest_framework import status
+#
+#     # from patient.models import ImagePatient
+#     # obj=ImagePatient.objects.first()
+#     # obj.thumbnail_imag = ""
+#     # obj.save()
+#     # load_images(r"C:\Users\No1\Desktop\a", "")
+#
+#     from timeit import default_timer as timer
+#     start = timer()
+#     load_images(r"C:\Users\No1\Desktop\a", "")
+#     print(timer() - start)
+#
+#     return Response(status=status.HTTP_200_OK)

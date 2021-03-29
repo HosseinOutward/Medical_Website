@@ -13,7 +13,8 @@ col_names=[col_n for col_n in categ_file]
 
 class ImagePatient(models.Model):
     image_imag = models.FileField(upload_to='patient_images')
-    thumbnail_imag = models.FileField(upload_to=path_join('patient_images','thumbnail'))
+    thumbnail_imag = models.FileField(upload_to=path_join('patient_images','thumbnail'),
+                                      default=path_join('patient_images','thumbnail','thumbnail_default.jpg'))
     owner_name_imag = models.CharField(max_length=20, blank=True, null=True)
     pet_name_imag = models.CharField(max_length=20, blank=True, null=True)
     animal_type = models.IntegerField(blank=True, null=True)

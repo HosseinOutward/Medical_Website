@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
 from patient.views import gen_context
+from patient.models import ImagePatient
 
 
 def registration(request):
@@ -31,6 +32,19 @@ class UserAPIView(viewsets.ModelViewSet):
         elif self.request.method == 'PUT' or self.request.method == 'PATCH':
             serializer_class = RoleEditSerializer
         return serializer_class
+
+    def list(self, request, *args, **kwargs):
+        ret=super(UserAPIView, self).list(request, *args, **kwargs)
+
+        user_list = User.objects.filter(
+            pk__in=[user_data["pk"] for user_data in ret.data['results']])
+        for i, u in enumerate(user_list):
+            img_list = ImagePatient.objects.filter(assigned_doc_imag=u)
+            all_count = len(img_list)
+            unlabeled_count = len(img_list.filter(label_data_imag=None))
+            ret.data['results'][i]["img_count"] = (all_count, unlabeled_count)
+
+        return ret
 
     def destroy(self, request, *args, **kwargs):
         return Response(status=status.HTTP_403_FORBIDDEN)

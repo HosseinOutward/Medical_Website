@@ -4,6 +4,9 @@
     <div class="col-xs-12">
             <div class="active">
                 <a href="/_api/roundRobin/"> <i class="btn menu-icon btn-info fa fa-sort"> RoundRobin</i> </a>
+                <a><span class="badge badge-info mr-1 float-right"> <label>1 boss</label> </span></a>
+                <a><span class="badge badge-info mr-1 float-right"> <label>2 labeler</label> </span></a>
+                <a><span class="badge badge-info mr-1 float-right"> <label>3 uploader</label> </span></a>
             </div>
             <div class="card">
                 <div type="button" class="card-header">
@@ -18,6 +21,7 @@
                             <th>شماره ردیف</th>
                             <th>اسم</th>
                             <th>نقش</th>
+                            <th>تعداد عکس (done/all)</th>
                             <th>عملیات</th>
                         </tr>
                         <!-- /.in js -->
@@ -59,7 +63,9 @@
             var html = "<tr>";// real_id_imag
             html += '<td>'+i+'</td>';
             html += '<td>'+user_list[i].first_name+" "+user_list[i].last_name+'</td>';
-            html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">1 for boss, 2 for uploader 3 for labeler</span> </td>';
+            html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">'+user_list[i].groups+'</span> </td>';
+            all_c=user_list[i].img_count[0]; unlabeled_c=user_list[i].img_count[1]
+            html += '<td>'+ (all_c-unlabeled_c) +'/'+ all_c +'</td>';
             html += '<td> <a href=/edit_role/'+user_list[i].pk+' type="button"\n' +
                 'class="btn btn-outline-primary float-right"\n' +
                 'style="font-size: 12px"> تغییر نقش </a> </td>';

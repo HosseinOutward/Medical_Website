@@ -58,26 +58,26 @@
                             <View style='box-shadow: 2px 2px 5px #999;padding: 20px; margin-top: 2em;border-radius: 5px;'>
                                 <Header style='text-align: center;' value='نقاط'/>
                               <KeyPointLabels name="points1" toName="img" strokewidth="3">
-                                <Label value="T1" background="yellow"></Label>
-                                <Label value="T2" background="yellow"></Label>
-                                <Label value="T3" background="yellow"></Label>
-                                <Label value="T4" background="yellow"></Label>
-                                <Label value="T5" background="yellow"></Label>
-                                <Label value="T6" background="yellow"></Label>
-                                <Label value="T7" background="yellow"></Label>
-                                <Label value="T8" background="yellow"></Label>
-                                <Label value="T9" background="yellow"></Label>
-                                <Label value="T10" background="yellow"></Label>
-                                <Label value="T11" background="yellow"></Label>
-                                <Label value="T12" background="yellow"></Label>
-                                <Label value="T13" background="yellow"></Label>
-                                <Label value="Max Aortic diameter dorsal" background="#520233"></Label>
-                                <Label value="Max Aortic diameter ventral" background="#520233"></Label>
-                                <Label value="carina" background="red"></Label>
-                                <Label value="Apex" background="red"></Label>
-                                <Label value="Dorsal border of CVC" background="#071852"></Label>
-                                <Label value="ventral CVC" background="#071852"></Label>
-                                <Label value="Cranial" background="red"></Label>
+                                <Label value="T1" background="yellow" maxUsages="1"></Label>
+                                <Label value="T2" background="yellow" maxUsages="1"></Label>
+                                <Label value="T3" background="yellow" maxUsages="1"></Label>
+                                <Label value="T4" background="yellow" maxUsages="1"></Label>
+                                <Label value="T5" background="yellow" maxUsages="1"></Label>
+                                <Label value="T6" background="yellow" maxUsages="1"></Label>
+                                <Label value="T7" background="yellow" maxUsages="1"></Label>
+                                <Label value="T8" background="yellow" maxUsages="1"></Label>
+                                <Label value="T9" background="yellow" maxUsages="1"></Label>
+                                <Label value="T10" background="yellow" maxUsages="1"></Label>
+                                <Label value="T11" background="yellow" maxUsages="1"></Label>
+                                <Label value="T12" background="yellow" maxUsages="1"></Label>
+                                <Label value="T13" background="yellow" maxUsages="1"></Label>
+                                <Label value="Max Aortic diameter dorsal" background="#520233" maxUsages="1"></Label>
+                                <Label value="Max Aortic diameter ventral" background="#520233" maxUsages="1"></Label>
+                                <Label value="carina" background="red" maxUsages="1"></Label>
+                                <Label value="Apex" background="red" maxUsages="1"></Label>
+                                <Label value="Dorsal border of CVC" background="#071852" maxUsages="1"></Label>
+                                <Label value="ventral CVC" background="#071852" maxUsages="1"></Label>
+                                <Label value="Cranial" background="red" maxUsages="1"></Label>
                               </KeyPointLabels>
                             </View>
 
@@ -88,9 +88,9 @@
                                  border-radius: 5px;'>
                                <Header style='text-align: center;' value='لیبل'/>
                                <PolygonLabels  name='polygons' toName='img' strokewidth='2' pointstyle='circle' pointsize='small' showInline='true'>
-                                   <Label value='Heart' background='#A30505' />
-                                   <Label value='CVC' background= '#071852' />
-                                   <label value = 'Aorta' background='#520233'/>
+                                   <Label value='Heart' background='#A30505' maxUsages="1" />
+                                   <Label value='CVC' background= '#071852' maxUsages="1" />
+                                   <label value = 'Aorta' background='#520233' maxUsages="1"/>
                                </PolygonLabels>
                             </View>
 
@@ -99,9 +99,9 @@
                                  border-radius: 5px;'>
                                <Header style='text-align: center;' value='وضعیت ریه'/>
                                 <RectangleLabels name="box" toName="img">
-                                   <Label value='region 1' background='#A30505' />
-                                   <Label value='region 2' background= '#071852' />
-                                   <label value = 'region 3' background='#520233'/>
+                                   <Label value='region 1' background='#A30505' maxUsages="1" />
+                                   <Label value='region 2' background= '#071852' maxUsages="1" />
+                                   <label value = 'region 3' background='#520233' maxUsages="1" />
                                 </RectangleLabels>
                             </View>
                         </View>
@@ -143,6 +143,7 @@
 <script>
 document.onkeydown = checkKey;
 var tempLen=document.getElementsByClassName("ant-tag").length;
+
 var tempI=-1;
 function checkKey(e) {
     if (e.keyCode == "39") {
@@ -153,10 +154,15 @@ function checkKey(e) {
     }
 else if (e.keyCode == "37") {
 
+
 	    tempI=tempI-1;
 		document.getElementsByClassName("ant-tag")[tempI].click();
 }
     }
+
+var tempLen=document.getElementsByClassName("ant-tag").length;
+
+
 </script>
 
 </body>

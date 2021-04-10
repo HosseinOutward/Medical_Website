@@ -290,6 +290,35 @@
             let iframe = document.getElementById('render-editor');
             let Htx = iframe.contentWindow.Htx;
             labels=Htx.completionStore.selected.serializeCompletion();
+             const keyPoints = new Set(["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10",
+                            "T11", "T12", "T13", "Max Aortic diameter dorsal" , "Max Aortic diameter ventral",
+                            "carina", "Apex", "Dorsal border of CVC", "ventral CVC", "Cranial"])
+
+            const polygon = new Set(["Heart", "CVC", "Aorta"])
+            const box = new Set(["region 1", "region 2", "region 3"])
+            var s = ""
+            var val;
+            for (index = 0; index < labels.length; index++) {
+                 val = labels[index].value
+                    if (val.hasOwnProperty("keypointlabels")) {
+                        keyPoints.delete(val.keypointlabels[0])
+                    } else if (val.hasOwnProperty("polygonlabels")) {
+                        polygon.delete(val.polygonlabels[0])
+                    } else {
+                        box.delete(val.rectanglelabels[0])
+                    }
+                }
+            s = s + "unselected points: "
+            for (let item of keyPoints) s = s + item + ","
+            s = s  + "\n"
+            s = s + "unselected polygons: "
+            for (let item of polygon) s = s + item + ","
+            s = s  + "\n"
+            s = s + "unselected regions: "
+            for (let item of box) s = s + item + ","
+
+            if (confirm(s)) {
+              // Save it!
             labels.push($("#Opinion").val());
             var apiURL='/_api/image/'+indx+'/'
             var successURL='/panel'
@@ -333,6 +362,12 @@
                 type: 'PATCH',
                 success: function(result) {window.location=successURL}
             });
+            } else {
+              // Do nothing!
+              console.log('Thing was not saved to the database.');
+            }
+
+
         });
     </script>
     <script>

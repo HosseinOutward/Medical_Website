@@ -9,10 +9,11 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from rest_framework import mixins
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework import filters
 
 
 class ImageDataAPI(viewsets.ModelViewSet):
@@ -61,11 +62,13 @@ class ImageDataAPI(viewsets.ModelViewSet):
         return super(ImageDataAPI, self).update(request, *args, **kwargs)
 
 
-class ImageListAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
+class ImageListAPI(generics.ListAPIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated & (IsBoss | IsLabeler)]
     serializer_class = ImageSerializer
     queryset=ImagePatient.objects.all().order_by('-label_data_imag')
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["real_id_imag", "owner_name_imag", "pet_name_imag"]
 
 
 class Panel(LoginRequiredMixin, CreateView):

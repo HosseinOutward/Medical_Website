@@ -2,55 +2,79 @@
 {% block title %}پنل کاربری{% endblock %}
 {% block contents %}
     <div class="col-xs-12">
-            <div class="card">
-
-                <div class="modal-body">
-                    <h2>Search</h2>
-                    <form class="form-inline">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <input type="text" style="width: 350px" name="search" value="">
-                          <span class="input-group-btn">
-                            <button class="btn btn-default">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                Search
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </form>
-                </div>
-
-                <div type="button" class="card-header">
-                    <strong class="card-title" style="text-align: center">تصاویر آپلود شده</strong>
-                    <p style="text-align: center">(آموزش مدل هوش مصنوعی)</p>
-                </div>
-
-                <!-- /.box-header -->
-                <div class="table-body table-responsive no-padding">
-                    <table id="Image_List" class="table table-hover">
-                        <tbody>
-                        <tr>
-                            <th>شماره پرونده</th>
-                            <th>عکس</th>
-                            <th>وضعیت</th>
-                            <th>لیبلینگ</th>
-                            <th>عملیات</th>
-                        </tr>
-                        <!-- /.in js -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- /.box-body -->
+        <div class="card">
+            <div class="modal-body">
+                <h2>Search</h2>
+                <form class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" style="width: 350px" name="search" value="">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Search
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul id="pagination-nav" class="pagination">
+
+            <div type="button" class="card-header">
+                <strong class="card-title" style="text-align: center">تصاویر آپلود شده</strong>
+                <p style="text-align: center">(آموزش مدل هوش مصنوعی)</p>
+            </div>
+            <!-- /.box-header -->
+            <div class="table-body table-responsive no-padding">
+                <table id="Image_List" class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th>شماره پرونده</th>
+                        <th>عکس</th>
+                        <th>وضعیت</th>
+                        <th>لیبلینگ</th>
+                        <th>عملیات</th>
+                        <th>لیبل‌ها</th>
+                    </tr>
                     <!-- /.in js -->
-                </ul>
-            </nav>
-            <!-- /.box -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+
         </div>
+        <nav aria-label="Page navigation example">
+            <ul id="pagination-nav" class="pagination">
+                <!-- /.in js -->
+            </ul>
+        </nav>
+        <!-- /.box -->
+        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="filterModalTitle">لیبل‌ها</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table id="labelsList" dir="ltr" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>نوع</th>
+                            <th>نام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 {% endblock %}
 {% block scripts %}
     <script src="/static/vendors/chart.js/dist/Chart.bundle.min.js"></script>

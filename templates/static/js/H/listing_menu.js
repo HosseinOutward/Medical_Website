@@ -42,6 +42,8 @@ function getFilters(indx) {
                             "T11", "T12", "T13", "Max Aortic diameter dorsal" , "Max Aortic diameter ventral",
                             "carina", "Apex", "Dorsal border of CVC", "ventral CVC", "Cranial", "Heart", "CVC", "Aorta", "region 1", "region 2", "region 3"]
     var labels = JSON.parse(response.responseJSON.label_data_imag);
+    if(labels==null)
+        labels=""
     var body = '';
     var data = {}
     for (var name of names)

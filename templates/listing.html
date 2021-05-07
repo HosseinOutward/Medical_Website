@@ -3,10 +3,29 @@
 {% block contents %}
     <div class="col-xs-12">
             <div class="card">
+
+                <div class="modal-body">
+                    <h2>Search</h2>
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input type="text" style="width: 350px" name="search" value="">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                Search
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+
                 <div type="button" class="card-header">
                     <strong class="card-title" style="text-align: center">تصاویر آپلود شده</strong>
                     <p style="text-align: center">(آموزش مدل هوش مصنوعی)</p>
                 </div>
+
                 <!-- /.box-header -->
                 <div class="table-body table-responsive no-padding">
                     <table id="Image_List" class="table table-hover">
@@ -17,7 +36,6 @@
                             <th>وضعیت</th>
                             <th>لیبلینگ</th>
                             <th>عملیات</th>
-                            <th>لیبل‌ها</th>
                         </tr>
                         <!-- /.in js -->
                         </tbody>

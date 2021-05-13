@@ -61,9 +61,13 @@ def load_images(initial_path, name_ext):
     from django.utils.timezone import make_aware
     from shutil import copyfile
     from os.path import join as path_join
+    from os import listdir
 
     current_objects = ImagePatient.objects.all()
     current_objects = [e.image_imag.name for e in current_objects]
+
+    current_folder = listdir(path_join(MEDIA_ROOT,
+                ImagePatient.image_imag.field.upload_to.replace("\\\\", "/")))
 
     list_files = [f for f in listdir(initial_path)
                   if isfile(join(initial_path, f))]
@@ -77,7 +81,8 @@ def load_images(initial_path, name_ext):
         if file_name.endswith('.dcm'):
             print("is DCM file")
             continue
-        if len([e for e in current_objects if file_name in e])!=0:
+        if len([e for e in current_objects if file_name in e])!=0 \
+           or file_name in current_folder:
             print("already in db")
             continue
 

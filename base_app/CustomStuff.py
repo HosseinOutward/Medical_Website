@@ -1,6 +1,7 @@
 from rest_framework import pagination
 from rest_framework.response import Response
 from collections import OrderedDict
+import json
 
 
 class CustomPagination(pagination.PageNumberPagination):
@@ -12,6 +13,32 @@ class CustomPagination(pagination.PageNumberPagination):
             ('previous', self.get_previous_link()),
             ('results', data)
         ]))
+
+
+def is_labeled(image_imag):
+    label_string = image_imag.label_data_imag
+    if label_string == None: return "No Label"
+
+    data_label = json.loads(label_string)
+    label_fields = {
+        "keypointlabels": ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12",
+                           "T13", "Max Aortic diameter dorsal", "Max Aortic diameter ventral", "carina",
+                           "Apex", "Dorsal border of CVC", "ventral CVC", "Cranial"],
+        "polygonlabels": ["Heart", "CVC", "Aorta"],
+        "rectanglelabels": ["region 1", "region 2", "region 3"]
+    }
+
+    should_be_len = 1 + sum([len(label_fields[a]) for a in label_fields.keys()])
+    if len(data_label) != should_be_len: return "Wrong Count"
+
+    for label in data_label[:-1]:
+        try:
+            label_type = label["type"]
+            label_name = label['value'][label_type][0]
+            if not label_name in label_fields[label_type]: return "Wrong Label Type"
+        except: return "Wrong Label Type"
+
+    return "Image Labeled"
 
 
 def overwriteTempDicom(image_data):

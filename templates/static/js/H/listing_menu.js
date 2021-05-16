@@ -8,17 +8,30 @@ for(i=0; i<image_list.length; i++) {
 
     html += '<td><img class="user-avatar fa-square" src="'+image_list[i].thumbnail_imag+'" alt="User Avatar"></td>'
 
-    if(image_list[i].label_data_imag != null){
-        html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span> </td>';
-        html += '<td> <a href=/labeling/'+image_list[i].pk+' type="button"\n' +
-            'class="btn btn-outline-primary float-right"\n' +
-            'style="font-size: 12px"> تغییر </a> </td>';
-    } else {
-        html += '<td> <span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span> </td>';
-        html += '<td> <a href=/labeling/'+image_list[i].pk+' type="button"\n' +
-            'class="btn btn-outline-success float-right"\n' +
-            'style="font-size: 12px"> شروع لیبل گذاری </a> </td>';
+    switch (image_list[i].has_label) {
+        case "Image Labeled":
+            html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">لیبل دار</span> </td>';
+            break;
+
+        case "No Label":
+            html += '<td> <span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span> </td>';
+            break;
+
+        case "Wrong Count":
+            html += '<td> <span class="badge badge-danger ml-2 mb-2 float-right">Wrong Count</span> </td>';
+            break;
+
+        case "Wrong Label Type":
+            html += '<td> <span class="badge badge-danger ml-2 mb-2 float-right">Wrong Label Type</span> </td>';
+            break;
     }
+
+    if(image_list[i].has_label=="No Label")
+        html += '<td> <a href=/labeling/'+image_list[i].pk+' type="button"\n ' +
+            'class="btn btn-outline-success float-right"\n style="font-size: 12px"> شروع لیبل گذاری </a> </td>';
+    else
+        html += '<td> <a href=/labeling/'+image_list[i].pk+' type="button"\n ' +
+            'class="btn btn-outline-primary float-right"\n style="font-size: 12px"> تغییر </a> </td>';
 
     html += '<td> <a href="/edit_image/'+image_list[i].pk+'/" type="submit" class="btn btn-info ">\n'
         +'<span >تغییر اطلاعات ورودی</span></a></td>';

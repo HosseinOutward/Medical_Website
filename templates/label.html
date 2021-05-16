@@ -407,30 +407,42 @@
             $("#Intrestitial_mild_3").prop("checked", label.Intrestitial_mild_3)
             $("#Intrestitial_moderate_3").prop("checked", label.Intrestitial_moderate_3)
 
-            var label = JSON.parse(label.label_data_imag)
+            label = JSON.parse(label.label_data_imag)
+
             if(label==null){ return null }
     	    $('#Opinion').val(label.splice(-1,1))
 
             let iframe = document.getElementById('render-editor');
             var canvas = iframe.contentDocument.getElementsByTagName("canvas").item(0);
             // scale points to correct pos.
-            for (i = 0; i < label.length; i++) {
-                if (label[i].value.hasOwnProperty('keypointlabels')) {
-                    label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
-                    label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
-                    label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
-                }
 
-                if (label[i].value.hasOwnProperty('rectangleLabels')) {
-                    label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
-                    label[i].value.height = label[i].value.height * canvas.offsetHeight / 100
-                    label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
-                    label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
-                }
-                if ( ! label[i].value.hasOwnProperty('polygonlabels') ){continue;}
-                for (j = 0; j < label[i].value.points.length; j++) {
-                    label[i].value.points[j][0] = label[i].value.points[j][0] * canvas.offsetWidth / 100;
-                    label[i].value.points[j][1] = label[i].value.points[j][1] * canvas.offsetHeight / 100;
+            label = label.filter(function (el) {
+                return label[i].hasOwnProperty("value");
+            });
+
+            for (i = 0; i < label.length; i++) {
+                if (label[i].hasOwnProperty("value")) {
+                    if (label[i].value.hasOwnProperty('keypointlabels')) {
+                        label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
+                        label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
+                        label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
+                    }
+
+                    if (label[i].value.hasOwnProperty('rectangleLabels')) {
+                        label[i].value.width = label[i].value.width * canvas.offsetWidth / 100
+                        label[i].value.height = label[i].value.height * canvas.offsetHeight / 100
+                        label[i].value.x = label[i].value.x * canvas.offsetWidth / 100
+                        label[i].value.y = label[i].value.y * canvas.offsetHeight / 100
+                    }
+                    if (!label[i].value.hasOwnProperty('polygonlabels')) {
+                        continue;
+                    }
+                    if (label[i].value.hasOwnProperty("points")) {
+                        for (j = 0; j < label[i].value.points.length; j++) {
+                            label[i].value.points[j][0] = label[i].value.points[j][0] * canvas.offsetWidth / 100;
+                            label[i].value.points[j][1] = label[i].value.points[j][1] * canvas.offsetHeight / 100;
+                        }
+                    }
                 }
             }
             // place data onto iframe

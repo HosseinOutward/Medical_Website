@@ -28,15 +28,15 @@ def is_labeled(image_imag):
         "rectanglelabels": ["region 1", "region 2", "region 3"]
     }
 
-    should_be_len = 1 + sum([len(label_fields[a]) for a in label_fields.keys()])
-    if len(data_label) != should_be_len: return "Wrong Count"
-
     for label in data_label[:-1]:
         try:
             label_type = label["type"]
             label_name = label['value'][label_type][0]
             if not label_name in label_fields[label_type]: return "Wrong Label Type"
         except: return "Wrong Label Type"
+
+    should_be_len = 1 + sum([len(label_fields[a]) for a in label_fields.keys()])
+    if len(data_label) != should_be_len: return "Wrong Count"
 
     return "Image Labeled"
 

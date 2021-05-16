@@ -18,7 +18,7 @@ for(i=0; i<image_list.length; i++) {
             break;
 
         case "Wrong Count":
-            html += '<td> <span class="badge badge-danger ml-2 mb-2 float-right">Wrong Count</span> </td>';
+            html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">Wrong Count</span> </td>';
             break;
 
         case "Wrong Label Type":

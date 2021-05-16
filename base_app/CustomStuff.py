@@ -36,6 +36,7 @@ def is_labeled(image_imag):
         except: return "Wrong Label Type"
 
     should_be_len = 1 + sum([len(label_fields[a]) for a in label_fields.keys()])
+    if len(data_label) != should_be_len-7: return "Some missing"
     if len(data_label) != should_be_len: return "Wrong Count"
 
     return "Image Labeled"

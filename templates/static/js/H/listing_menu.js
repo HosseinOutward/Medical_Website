@@ -17,8 +17,12 @@ for(i=0; i<image_list.length; i++) {
             html += '<td> <span class="badge badge-primary ml-2 mb-2 float-right">بدون لیبل</span> </td>';
             break;
 
+        case "Some missing":
+            html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">Some missing</span> </td>';
+            break;
+
         case "Wrong Count":
-            html += '<td> <span class="badge badge-success ml-2 mb-2 float-right">Wrong Count</span> </td>';
+            html += '<td> <span class="badge badge-danger ml-2 mb-2 float-right">Wrong Count</span> </td>';
             break;
 
         case "Wrong Label Type":

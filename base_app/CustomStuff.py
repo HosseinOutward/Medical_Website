@@ -154,21 +154,65 @@ def load_images(initial_path, name_ext):
             print(e.args)
 
 
-# from rest_framework.decorators import api_view
-# @api_view(['GET'])
-# def aasdasd(request):
-#     from rest_framework.response import Response
-#     from rest_framework import status
-#
-#     # from patient.models import ImagePatient
-#     # obj=ImagePatient.objects.first()
-#     # obj.thumbnail_imag = ""
-#     # obj.save()
-#     load_images(r"/root/97_res", "")
-#
-#     from timeit import default_timer as timer
-#     start = timer()
-#     load_images(r"C:\Users\No1\Desktop\a", "")
-#     print(timer() - start)
-#
-    # return Response(status=status.HTTP_200_OK)
+def load_paytakht_images(initial_path, name_ext):
+    from os.path import isfile, join
+    from PIL.Image import open as open_image
+    from patient.models import ImagePatient
+    from Medical_Website.settings import MEDIA_ROOT
+    from shutil import copyfile
+    from os.path import join as path_join
+    from os import listdir
+
+    current_objects = ImagePatient.objects.all()
+    current_objects = [e.image_imag.name for e in current_objects]
+
+    current_folder = listdir(path_join(MEDIA_ROOT,
+                ImagePatient.image_imag.field.upload_to.replace("\\\\", "/")))
+
+    list_files = [f for f in listdir(initial_path)
+                  if isfile(join(initial_path, f))]
+    animal_type_choices={a[1]:a[0] for a in ImagePatient.animal_type.field.choices}
+
+    print("starting to load images one by one")
+    for file_name in list_files:
+        print()
+        print(file_name)
+
+        if file_name.endswith('.dcm'):
+            print("is DCM file")
+            continue
+        if len([e for e in current_objects if file_name in e])!=0 \
+           or file_name in current_folder:
+            print("already in db")
+            continue
+
+        try:
+            upload_to_path = path_join(
+                ImagePatient.image_imag.field.upload_to.replace("\\\\", "/"),
+                name_ext+file_name)
+            path_to_save = path_join(MEDIA_ROOT, upload_to_path)
+
+            open_image(path_join(initial_path, file_name))
+            copyfile(path_join(initial_path, file_name), path_to_save)
+
+            name_parsed = file_name.split(".")[0]
+            name_parsed = name_parsed.split("_")
+
+            real_id=name_parsed[0]
+            real_counter=name_parsed[-1]
+            animal_type= name_parsed[-2]
+
+            owner_name=name_parsed[1].split(" ")
+            if len(owner_name)==2: owner_name=name_parsed[1]+" "+name_parsed[0]
+            else: owner_name=owner_name[0]
+
+            ImagePatient.objects.create(
+                image_imag=upload_to_path, owner_name_imag=owner_name,
+                pet_name_imag=None, real_id_imag=real_id,
+                animal_type=animal_type_choices[animal_type.lower()],
+                real_time_imag=None, real_id_count_imag=real_counter)
+        except Exception as e:
+            print("***error processing this file***:" + file_name)
+            print(repr(e))
+            print(e)
+            print(e.args)

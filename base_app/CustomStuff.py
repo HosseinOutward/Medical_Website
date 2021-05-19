@@ -200,19 +200,20 @@ def load_paytakht_images(initial_path, name_ext):
 
             real_id=name_parsed[0]
             real_counter=name_parsed[-1]
-            animal_type= name_parsed[-2]
+            pet_name_imag= name_parsed[-2]
 
             owner_name=name_parsed[1].split(" ")
-            if len(owner_name)==2: owner_name=name_parsed[1]+" "+name_parsed[0]
+            if len(owner_name)==2: owner_name=owner_name[1]+" "+owner_name[0]
             else: owner_name=owner_name[0]
 
             ImagePatient.objects.create(
                 image_imag=upload_to_path, owner_name_imag=owner_name,
-                pet_name_imag=None, real_id_imag=real_id,
-                animal_type=animal_type_choices[animal_type.lower()],
+                pet_name_imag=None, real_id_imag=real_id, animal_type=None,
                 real_time_imag=None, real_id_count_imag=real_counter)
         except Exception as e:
             print("***error processing this file***:" + file_name)
             print(repr(e))
             print(e)
             print(e.args)
+
+load_paytakht_images(r"C:\Users\No1\Desktop\patient_images","")

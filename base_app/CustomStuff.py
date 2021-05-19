@@ -216,4 +216,3 @@ def load_paytakht_images(initial_path, name_ext):
             print(e)
             print(e.args)
 
-load_paytakht_images(r"C:\Users\No1\Desktop\patient_images","")

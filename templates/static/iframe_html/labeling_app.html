@@ -78,6 +78,7 @@
                                 <Label value="Dorsal border of CVC" background="#071852" maxUsages="1"></Label>
                                 <Label value="ventral CVC" background="#071852" maxUsages="1"></Label>
                                 <Label value="Cranial" background="red" maxUsages="1"></Label>
+                                <Label value="trachea" background="blue" maxUsages="1"></Label>
                               </KeyPointLabels>
                             </View>
 
@@ -153,12 +154,13 @@ function checkKey(e) {
 
     }
 else if (e.keyCode == "37") {
-
-
 	    tempI=tempI-1;
 		document.getElementsByClassName("ant-tag")[tempI].click();
 }
+else if (e.keyCode == "63") {
+		document.getElementsByClassName("ant-tag")[20].click();
     }
+}
 
 var tempLen=document.getElementsByClassName("ant-tag").length;
 

@@ -173,19 +173,6 @@
                         </div>
             </div>
             <div class="col-md-12">
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="selectSm"
-                                                             class=" form-control-label">کاردیومگالی بر اساس گراف</label></div>
-                            <div class="col-12 col-md-9">
-                                <select name="cardiomegaly_graph" id="Left_atrial_enlargement" class="form-control-sm form-control">
-                                    <option value="1">cardiomegaly</option>
-                                    <option value="0" selected>No</option>
-                                    <option value="2">نامشخص</option>
-                                </select>
-                            </div>
-                        </div>
-            </div>
-            <div class="col-md-12">
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <label for="selectSm"class=" form-control-label">الگوی ریه alveolar بر اساس گراف</label>
@@ -230,6 +217,18 @@
                                                              class=" form-control-label">عارضه غیر طبیعی در قفسه سینه</label></div>
                             <div class="col-12 col-md-9">
                                 <select name="chest_abnormality" id="chest_abnormality" class="form-control-sm form-control">
+                                    <option value="1">yes</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="col-md-12">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="selectSm" class=" form-control-label">بزرگ شدگی دهلیز چپ</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="chest_abnormality" id="Left_atrial_enlargement" class="form-control-sm form-control">
                                     <option value="1">yes</option>
                                     <option value="0" selected>No</option>
                                 </select>
@@ -368,7 +367,7 @@
                     "Alveolar_moderate_3": $("#Alveolar_moderate_3").is(":checked") ? 1 : 0,
                     "Intrestitial_mild_3": $("#Intrestitial_mild_3").is(":checked") ? 1 : 0,
                     "Intrestitial_moderate_3": $("#Intrestitial_moderate_3").is(":checked") ? 1 : 0,
-
+                    "Left_atrial_enlargement": $("#Left_atrial_enlargement").is(":checked") ? 1 : 0,
 
                     "label_data_imag": JSON.stringify(labels),
                 }),
@@ -419,6 +418,7 @@
             $("#Alveolar_moderate_3").prop("checked", label.Alveolar_moderate_3)
             $("#Intrestitial_mild_3").prop("checked", label.Intrestitial_mild_3)
             $("#Intrestitial_moderate_3").prop("checked", label.Intrestitial_moderate_3)
+            $("#Left_atrial_enlargement").prop("checked", label.Left_atrial_enlargement)
 
             label = JSON.parse(label.label_data_imag)
 

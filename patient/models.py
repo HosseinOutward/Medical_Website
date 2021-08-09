@@ -14,7 +14,7 @@ col_names=[col_n for col_n in categ_file]
 class ImagePatient(models.Model):
     image_imag = models.FileField(upload_to='patient_images')
     thumbnail_imag = models.FileField(upload_to=path_join('patient_images','thumbnail'),
-                                      default=path_join('patient_images','thumbnail','thumbnail_default.jpg'))
+                            default=path_join('patient_images','thumbnail','thumbnail_default.jpg'))
     owner_name_imag = models.CharField(max_length=20, blank=True, null=True)
     pet_name_imag = models.CharField(max_length=20, blank=True, null=True)
     animal_type = models.IntegerField(blank=True, null=True)
@@ -22,6 +22,7 @@ class ImagePatient(models.Model):
     real_id_count_imag = models.IntegerField(blank=True, null=True)
     real_time_imag = models.DateTimeField(blank=True, null=True)
     label_data_imag = models.TextField(blank=True, null=True)
+    machine_label_data_imag = models.TextField(blank=True, null=True)
 
     # generating col according to values in json file
     for col_n in col_names:
@@ -34,7 +35,7 @@ class ImagePatient(models.Model):
 
     last_edited_time_imag = models.DateTimeField(null=True)
     last_edited_by_imag = models.ForeignKey(User, on_delete=models.SET_NULL,
-                            blank=True, null=True, related_name='last_edited_by_imag')
+                        blank=True, null=True, related_name='last_edited_by_imag')
 
     def get_absolute_url(self):
         return reverse('labeling', kwargs={'pk': self.pk})
@@ -45,7 +46,7 @@ class ImagePatient(models.Model):
         from Medical_Website.settings import MEDIA_ROOT
         if self.thumbnail_imag.name == "":
             upload_to_path=path_join(ImagePatient.thumbnail_imag.field.upload_to.replace("\\\\", "/"),
-                                        "thumbnail"+self.image_imag.name.split("\\")[-1].split("/")[-1])
+                                    "thumbnail"+self.image_imag.name.split("\\")[-1].split("/")[-1])
 
             img = open_image(self.image_imag.file)
             img.thumbnail((64, 64))

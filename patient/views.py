@@ -20,11 +20,9 @@ class ImageDataAPI(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get_queryset(self):
-        queryset=ImagePatient.objects.all().order_by('-label_data_imag')
-        
-        if IsBoss().has_permission(self.request, None):
-            pass
-        elif IsLabeler().has_permission(self.request, None):
+        queryset=ImagePatient.objects.all().order_by('real_time_imag').order_by('-label_data_imag')
+
+        if self.suffix.lower() == 'list' and IsLabeler().has_permission(self.request, None):
             queryset = queryset.filter(assigned_doc_imag=self.request.user)
         elif IsUploader().has_permission(self.request, None):
             queryset = queryset.filter(label_data_imag=None)
@@ -38,12 +36,10 @@ class ImageDataAPI(viewsets.ModelViewSet):
 
     def get_permissions(self):
         permission_classes = [IsAuthenticated & (IsBoss | IsLabeler | IsUploader)]
-        try: action=self.action.upper()
-        except AttributeError: action=None
-        if action == 'LIST':
-            permission_classes = [IsAuthenticated]
-        elif action == 'PUT' or action == 'PATCH':
-            permission_classes = [IsAuthenticated & (IsLabeler| IsLabeler)]
+        try: action = self.action.upper()
+        except AttributeError: action = None
+        if self.suffix == 'list' or action == 'PUT' or action == 'PATCH':
+            permission_classes = [IsAuthenticated & (IsBoss | IsLabeler)]
         return [permission() for permission in permission_classes]
 
     def create(self, request):

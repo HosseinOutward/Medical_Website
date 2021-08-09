@@ -28,18 +28,18 @@ SECRET_KEY = config["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "188.75.122.178", "5.57.38.66"]
+ALLOWED_HOSTS = ["127.0.0.1", "5.57.38.66"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    # 'django_q',
 
     'user.apps.UserConfig',
     'base_app.apps.BaseAppConfig',
     'patient.apps.PatientConfig',
-
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -157,10 +157,14 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-# # CELERY STUFF
-# CELERY_BROKER_URL = 'redis://localhost:6379'
-# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-# CELERY_ACCEPT_CONTENT = ['application/json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERIALIZER = 'json'
-# CELERY_TIMEZONE = 'Asia/Tehran'
+Q_CLUSTER = {
+    'name': 'Medical_Website_Q',
+    'workers': 1,
+    'timeout': 200,
+    'retry': 6000,
+    'redis': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0, }
+}
+
